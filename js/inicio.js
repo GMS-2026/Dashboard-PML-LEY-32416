@@ -1,33 +1,73 @@
 const TERRITORY_CONFIG = {
-  VRAEM: {
-    label: "VRAEM",
-    longLabel: "VRAEM y zonas de influencia",
-    filterField: "es_vraem",
-    filterValue: "SI",
+  GENERAL: {
+    label: "Ley N.° 32416",
+    longLabel: "Cartera general de puentes de menores luces de la Ley N.° 32416",
+    filterFields: [],
     accent: "#8f2641",
     rgb: "143, 38, 65",
     chartLine: "#991735",
-    chartLineRgb: "153, 23, 53"
+    chartLineRgb: "153, 23, 53",
+    contextMode: "coverage"
+  },
+  VRAEM: {
+    label: "VRAEM",
+    longLabel: "VRAEM y zonas de influencia",
+    filterFields: ["es_vraem"],
+    accent: "#8f2641",
+    rgb: "143, 38, 65",
+    chartLine: "#991735",
+    chartLineRgb: "153, 23, 53",
+    contextMode: "vraem"
   },
   NORVRAEM: {
     label: "NORVRAEM",
-    longLabel: "Ámbito territorial del norte",
-    filterField: "es_norvraem",
-    filterValue: "SI",
+    longLabel: "Ámbito territorial NORVRAEM",
+    filterFields: ["es_norvraem"],
     accent: "#315f78",
     rgb: "49, 95, 120",
     chartLine: "#153f5b",
-    chartLineRgb: "21, 63, 91"
+    chartLineRgb: "21, 63, 91",
+    contextMode: "vraem"
   },
   AMUVRAEM: {
     label: "AMUVRAE",
-    longLabel: "Mancomunidad del VRAE",
-    filterField: "es_amuvraem",
-    filterValue: "SI",
+    longLabel: "Ámbito territorial AMUVRAE",
+    filterFields: ["es_amuvraem"],
     accent: "#4f8b78",
     rgb: "79, 139, 120",
     chartLine: "#0c8a60",
-    chartLineRgb: "12, 138, 96"
+    chartLineRgb: "12, 138, 96",
+    contextMode: "vraem"
+  },
+  ALCALDESAS: {
+    label: "Asociación de Alcaldesas",
+    longLabel: "Municipalidades identificadas como integrantes de la Asociación de Alcaldesas",
+    filterFields: ["ES ASOCIACIÓN DE ALCALDESAS", "es_asociacion_de_alcaldesas", "es_asociacion_alcaldesas", "es_alcaldesas"],
+    accent: "#9a4560",
+    rgb: "154, 69, 96",
+    chartLine: "#9a4560",
+    chartLineRgb: "154, 69, 96",
+    contextMode: "coverage"
+  },
+  AMUDIP: {
+    label: "AMUDIP",
+    longLabel: "Municipalidades identificadas como integrantes de AMUDIP",
+    filterFields: ["ES AMUDIP", "es_amudip"],
+    accent: "#315f78",
+    rgb: "49, 95, 120",
+    chartLine: "#315f78",
+    chartLineRgb: "49, 95, 120",
+    contextMode: "coverage"
+  },
+  REMURPE: {
+    label: "REMURPE",
+    longLabel: "Municipalidades identificadas como integrantes de REMURPE",
+    filterFields: ["ES REMURPE", "es_remurpe"],
+    accent: "#4f7d6e",
+    rgb: "79, 125, 110",
+    chartLine: "#4f7d6e",
+    chartLineRgb: "79, 125, 110",
+    contextMode: "coverage"
   }
 };
 
@@ -44,6 +84,16 @@ let TOPOLOGY_FEATURES = [];
 
 function normalizeText(value) {
   return String(value ?? "").trim().toUpperCase();
+}
+
+function normalizePliegoKey(value) {
+  return String(value ?? "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim()
+    .toUpperCase()
+    .replace(/\s+/g, " ")
+    .replace(/\s*-\s*/g, " - ");
 }
 
 function normalizeCode(value, digits) {
@@ -85,6 +135,20 @@ function sumCost(rows) {
 
 function sumField(rows, field) {
   return rows.reduce((sum, row) => sum + Number(row[field] || 0), 0);
+}
+
+function numberFromAliases(row, fields) {
+  for (const field of fields) {
+    const value = row?.[field];
+    if (value === null || value === undefined || value === "") continue;
+    const number = Number(value);
+    if (Number.isFinite(number)) return number;
+  }
+  return 0;
+}
+
+function sumAliases(rows, fields) {
+  return rows.reduce((sum, row) => sum + numberFromAliases(row, fields), 0);
 }
 
 function smartTitle(value) {
@@ -140,7 +204,7 @@ function selectedTerritory() {
   } catch (_) {}
 
   const fromStorage = normalizeText(localStorage.getItem("territorio_dashboard"));
-  return TERRITORY_CONFIG[fromStorage] ? fromStorage : "VRAEM";
+  return TERRITORY_CONFIG[fromStorage] ? fromStorage : "GENERAL";
 }
 
 function currentState() {
@@ -190,8 +254,13 @@ function updateUrl(state) {
 
 function territoryRows(data, territory) {
   const config = TERRITORY_CONFIG[territory];
-  return data.filter(
-    row => normalizeText(row[config.filterField]) === config.filterValue
+  if (!config) return [];
+  if (territory === "GENERAL") return data.slice();
+
+  return data.filter(row =>
+    config.filterFields.some(field =>
+      ["SI", "SÍ", "1", "TRUE"].includes(normalizeText(row[field]))
+    )
   );
 }
 
@@ -379,13 +448,11 @@ function computeModel(rows) {
   );
 
   const allSeleccion = rows.filter(
-    row => normalizeText(row.estado_situacional) === "PROCESO DE SELECCIÓN"
+    row => normalizeText(row.estado_situacional).includes("PROCESO DE SELECCIÓN")
   );
 
   const allEett = rows.filter(
-    row => normalizeText(row.estado_situacional).includes(
-      "ELABORACIÓN DE EXPEDIENTE TÉCNICO"
-    )
+    row => normalizeText(row.estado_situacional).includes("ELABORACIÓN DE EXPEDIENTE TÉCNICO")
   );
 
   const known = new Set([...allSeleccion, ...allEett]);
@@ -395,9 +462,14 @@ function computeModel(rows) {
     row => normalizeText(row.paquete) === "GRUPO 01"
   );
 
-  const pendingRequest = withAgreement.filter(
-    row => normalizeText(row.paquete) !== "GRUPO 01"
+  const package2 = withAgreement.filter(
+    row => normalizeText(row.paquete) === "GRUPO 02"
   );
+
+  const pendingRequest = withAgreement.filter(row => {
+    const packageName = normalizeText(row.paquete);
+    return packageName !== "GRUPO 01" && packageName !== "GRUPO 02";
+  });
 
   const conditioned = withoutAgreement;
 
@@ -406,33 +478,21 @@ function computeModel(rows) {
   const fundedAmount = Math.max(0, totalCost - deficit);
 
   const provinceMap = new Map();
-
   requires.forEach(row => {
     const province = String(row.provincia || "Sin provincia").trim() || "Sin provincia";
-
     if (!provinceMap.has(province)) {
-      provinceMap.set(province, {
-        province,
-        deficit: 0,
-        cuis: new Set()
-      });
+      provinceMap.set(province, { province, deficit: 0, cuis: new Set() });
     }
-
     const item = provinceMap.get(province);
     item.deficit += Number(row.deficit || 0);
     item.cuis.add(String(row.cui || ""));
   });
 
   const rawProvinceDeficit = [...provinceMap.values()]
-    .map(item => ({
-      province: item.province,
-      deficit: item.deficit,
-      investments: item.cuis.size
-    }))
+    .map(item => ({ province: item.province, deficit: item.deficit, investments: item.cuis.size }))
     .sort((a, b) => b.deficit - a.deficit || b.investments - a.investments);
 
   let provinceDeficit = rawProvinceDeficit.slice(0, 6);
-
   if (rawProvinceDeficit.length > 6) {
     const others = rawProvinceDeficit.slice(6).reduce(
       (acc, item) => {
@@ -442,27 +502,18 @@ function computeModel(rows) {
       },
       { province: "OTROS", deficit: 0, investments: 0 }
     );
-
     provinceDeficit.push(others);
   }
 
   const provinceDistributionMap = new Map();
-
   rows.forEach(row => {
     const province = String(row.provincia || "Sin provincia").trim() || "Sin provincia";
-
-    if (!provinceDistributionMap.has(province)) {
-      provinceDistributionMap.set(province, new Set());
-    }
-
+    if (!provinceDistributionMap.has(province)) provinceDistributionMap.set(province, new Set());
     provinceDistributionMap.get(province).add(String(row.cui || ""));
   });
 
   const provinceDistribution = [...provinceDistributionMap.entries()]
-    .map(([province, cuis]) => ({
-      province,
-      investments: cuis.size
-    }))
+    .map(([province, cuis]) => ({ province, investments: cuis.size }))
     .sort((a, b) => b.investments - a.investments)
     .slice(0, 6);
 
@@ -482,10 +533,55 @@ function computeModel(rows) {
   const financialCost = sumField(requires, "costo_actualizado");
   const financialAccrued = sumField(requires, "devengado_acumulado");
   const financialPim = sumField(requires, "pim");
-  const financialDeficit = Math.max(
-    financialCost - financialAccrued - financialPim,
-    0
-  );
+  const financialDeficit = Math.max(financialCost - financialAccrued - financialPim, 0);
+
+  // La base convertida conserva los encabezados financieros originales.
+  // Se aceptan también los alias normalizados de versiones anteriores.
+  const budgetPim = sumAliases(rows, ["PIM.1", "pim_2026", "pim"]);
+  const budgetCertification = sumAliases(rows, ["CERTIFICACIÓN", "CERTIFICACION", "certificacion_2026"]);
+  const budgetCommitment = sumAliases(rows, ["COMPROMISO ANUAL", "compromiso_anual_2026"]);
+  const budgetAccrued = sumAliases(rows, ["DEVENGADO", "devengado_2026"]);
+  const budgetPaid = sumAliases(rows, ["GIRADO", "girado_2026"]);
+
+  // CANON pertenece al pliego y en el JSON puede repetirse en cada inversión.
+  // Se consolida por pliego para contabilizarlo una sola vez dentro del filtro activo.
+  const activePliegos = new Map();
+  rows.forEach(row => {
+    const pliego = String(row.pliego || "").trim();
+    const key = normalizePliegoKey(pliego);
+    if (!key) return;
+
+    if (!activePliegos.has(key)) {
+      activePliegos.set(key, { pliego, cuis: new Set(), canonValues: new Set() });
+    }
+
+    const item = activePliegos.get(key);
+    item.cuis.add(String(row.cui || ""));
+
+    const canon = numberFromAliases(row, ["CANON", "canon", "Canon"]);
+    if (Number.isFinite(canon) && canon > 0) item.canonValues.add(canon);
+  });
+
+  const canonRows = [...activePliegos.values()]
+    .map(item => {
+      const values = [...item.canonValues].sort((a, b) => a - b);
+      return {
+        pliego: item.pliego,
+        pliegoShort: shortPliego(item.pliego),
+        investments: item.cuis.size,
+        values,
+        min: values.length ? values[0] : 0,
+        max: values.length ? values[values.length - 1] : 0,
+        conflict: values.length > 1,
+        source: values.length ? "json" : "sin-dato"
+      };
+    })
+    .filter(item => item.max > 0)
+    .sort((a, b) => b.max - a.max || a.pliego.localeCompare(b.pliego, "es"));
+
+  const canonTotalMin = canonRows.reduce((sum, item) => sum + item.min, 0);
+  const canonTotalMax = canonRows.reduce((sum, item) => sum + item.max, 0);
+  const canonConflicts = canonRows.filter(item => item.conflict).length;
 
   const directCount = uniqueCount(
     rows.filter(row => normalizeText(row.ambito_vraem) === "INTERVENCIÓN DIRECTA"),
@@ -507,22 +603,19 @@ function computeModel(rows) {
     departments: uniqueCount(rows, "ubigeo_departamento"),
     provinces: uniqueCount(rows, "ubigeo_provincia"),
     districts: uniqueCount(rows, "ubigeo_distrito"),
-
     sufficient,
     requires,
     withAgreement,
     withoutAgreement,
     enTramite,
     noPresento,
-
     allSeleccion,
     allEett,
     allOther,
-
     package1,
+    package2,
     pendingRequest,
     conditioned,
-
     provinceDeficit,
     provinceDistribution,
     financialGapRows,
@@ -530,10 +623,18 @@ function computeModel(rows) {
     financialAccrued,
     financialPim,
     financialDeficit,
+    budgetPim,
+    budgetCertification,
+    budgetCommitment,
+    budgetAccrued,
+    budgetPaid,
+    canonRows,
+    canonTotalMin,
+    canonTotalMax,
+    canonConflicts,
     directCount,
     influenceCount,
     geocodedCount,
-
     totalCost,
     deficit,
     fundedAmount
@@ -629,22 +730,37 @@ function renderScope(state, model) {
   document.documentElement.style.setProperty("--scope-rgb", config.rgb);
   document.documentElement.style.setProperty("--territory-line-color", config.chartLine);
   document.documentElement.style.setProperty("--territory-line-rgb", config.chartLineRgb);
-  document.body.dataset.territory = config.label;
+  document.body.dataset.territory = state.territorio;
 
   document.getElementById("inicioTitulo").textContent = `Inicio - ${config.label}`;
-  document.getElementById("inicioSubtitulo").textContent =
-    `${config.longLabel}. Situación financiera y ruta de gestión.`;
-
+  document.getElementById("inicioSubtitulo").textContent = `${config.longLabel}. Situación financiera y ruta de gestión.`;
   document.getElementById("territoryChip").textContent = config.label;
-  document.getElementById("agreementSubtitle").textContent =
-    `Estado de los convenios en el ámbito ${config.label}`;
+  document.getElementById("agreementSubtitle").textContent = `Estado de los convenios · ${config.label}`;
 
   animateNumber(document.getElementById("geoDepartamentos"), model.departments);
   animateNumber(document.getElementById("geoProvincias"), model.provinces);
   animateNumber(document.getElementById("geoDistritos"), model.districts);
 
-  animateNumber(document.getElementById("mapDirectCount"), model.directCount);
-  animateNumber(document.getElementById("mapInfluenceCount"), model.influenceCount);
+  const metric1Label = document.getElementById("mapMetric1Label");
+  const metric2Label = document.getElementById("mapMetric2Label");
+  const metric1Icon = document.getElementById("mapMetric1Icon");
+  const metric2Icon = document.getElementById("mapMetric2Icon");
+
+  if (config.contextMode === "vraem") {
+    if (metric1Label) metric1Label.textContent = "Intervención directa";
+    if (metric2Label) metric2Label.textContent = "Zona de influencia";
+    if (metric1Icon) metric1Icon.className = "fa-solid fa-location-crosshairs";
+    if (metric2Icon) metric2Icon.className = "fa-solid fa-arrows-to-circle";
+    animateNumber(document.getElementById("mapDirectCount"), model.directCount);
+    animateNumber(document.getElementById("mapInfluenceCount"), model.influenceCount);
+  } else {
+    if (metric1Label) metric1Label.textContent = "Departamentos";
+    if (metric2Label) metric2Label.textContent = "Provincias";
+    if (metric1Icon) metric1Icon.className = "fa-solid fa-earth-americas";
+    if (metric2Icon) metric2Icon.className = "fa-solid fa-map";
+    animateNumber(document.getElementById("mapDirectCount"), model.departments);
+    animateNumber(document.getElementById("mapInfluenceCount"), model.provinces);
+  }
   animateNumber(document.getElementById("mapGeocodedCount"), model.geocodedCount);
 }
 
@@ -870,55 +986,189 @@ function renderAgreements(model) {
 }
 
 function renderResourceManagement(model) {
-  animateNumber(
-    document.getElementById("routeChartPackage1Count"),
-    model.package1.length
-  );
-
-  animateNumber(
-    document.getElementById("routeChartPendingCount"),
-    model.pendingRequest.length
-  );
-
-  animateNumber(
-    document.getElementById("routeChartConditionedCount"),
-    model.conditioned.length
-  );
-
+  const groups = [
+    ["routeChartPackage1Count", "routeChartPackage1Bar", "routeChartPackage1Pct", model.package1.length],
+    ["routeChartPackage2Count", "routeChartPackage2Bar", "routeChartPackage2Pct", model.package2.length],
+    ["routeChartPendingCount", "routeChartPendingBar", "routeChartPendingPct", model.pendingRequest.length],
+    ["routeChartConditionedCount", "routeChartConditionedBar", "routeChartConditionedPct", model.conditioned.length]
+  ];
   const total = Math.max(model.requires.length, 1);
-  const max = Math.max(
-    model.package1.length,
-    model.pendingRequest.length,
-    model.conditioned.length,
-    1
-  );
+  const max = Math.max(...groups.map(item => item[3]), 1);
 
-  setBarHeight(
-    document.getElementById("routeChartPackage1Bar"),
-    model.package1.length,
-    max
-  );
+  groups.forEach(([countId, barId, pctId, value]) => {
+    animateNumber(document.getElementById(countId), value);
+    setBarHeight(document.getElementById(barId), value, max);
+    const pctNode = document.getElementById(pctId);
+    if (pctNode) pctNode.textContent = `${percent(value, total)}%`;
+  });
+}
 
-  setBarHeight(
-    document.getElementById("routeChartPendingBar"),
-    model.pendingRequest.length,
-    max
-  );
+function renderPortfolioDetails(model) {
+  const total = document.getElementById("portfolioModalTotal");
+  const sufficient = document.getElementById("portfolioModalSufficient");
+  const requires = document.getElementById("portfolioModalRequires");
+  if (total) total.textContent = integer(model.investments);
+  if (sufficient) sufficient.textContent = integer(model.sufficient.length);
+  if (requires) requires.textContent = integer(model.requires.length);
 
-  setBarHeight(
-    document.getElementById("routeChartConditionedBar"),
-    model.conditioned.length,
-    max
-  );
+  const container = document.getElementById("portfolioRowsModal");
+  if (!container) return;
+  container.replaceChildren();
 
-  document.getElementById("routeChartPackage1Pct").textContent =
-    `${percent(model.package1.length, total)}%`;
+  const rows = [...model.rows].sort((a, b) => {
+    const ar = needsResources(a) ? 1 : 0;
+    const br = needsResources(b) ? 1 : 0;
+    return ar - br || Number(b.deficit || 0) - Number(a.deficit || 0) || String(a.cui || "").localeCompare(String(b.cui || ""));
+  });
 
-  document.getElementById("routeChartPendingPct").textContent =
-    `${percent(model.pendingRequest.length, total)}%`;
+  rows.forEach(item => {
+    const row = document.createElement("div");
+    row.className = "portfolio-table__row";
+    const location = [item.region, item.provincia, item.distrito].filter(Boolean).map(smartTitle).join(" · ");
+    const status = needsResources(item) ? "Requiere recursos" : "Totalidad de recursos";
+    const cells = [
+      String(item.cui || "-"),
+      String(item.denominacion_inversion || "-"),
+      shortPliego(item.pliego),
+      location || "-",
+      tableMoney(item.costo_actualizado),
+      tableMoney(numberFromAliases(item, ["PIM.1", "pim_2026", "pim"])),
+      tableMoney(item.deficit),
+      status
+    ];
+    cells.forEach((value, index) => {
+      const cell = document.createElement("span");
+      cell.textContent = value;
+      if (index === 1) {
+        cell.className = "portfolio-investment-name";
+        cell.title = String(item.denominacion_inversion || "");
+      }
+      if (index === 2) {
+        cell.classList.add("portfolio-pliego");
+        cell.title = String(item.pliego || "");
+      }
+      if (index === 7) {
+        cell.className = needsResources(item) ? "resource-status resource-status--risk" : "resource-status resource-status--good";
+      }
+      row.appendChild(cell);
+    });
+    container.appendChild(row);
+  });
+}
 
-  document.getElementById("routeChartConditionedPct").textContent =
-    `${percent(model.conditioned.length, total)}%`;
+function setBudgetBar(id, value, pim) {
+  const bar = document.getElementById(id);
+  if (!bar) return;
+  const pct = pim > 0 ? Math.min(100, Math.max(0, value / pim * 100)) : 0;
+  bar.style.width = "0%";
+  requestAnimationFrame(() => requestAnimationFrame(() => { bar.style.width = `${pct}%`; }));
+}
+
+function setMiniRing(id, rate) {
+  const ring = document.getElementById(id);
+  if (!ring) return;
+  const pct = Math.min(100, Math.max(0, Number(rate) || 0));
+  ring.style.setProperty("--ring-pct", `${pct * 3.6}deg`);
+}
+
+function renderBudget(model) {
+  const values = [
+    ["budgetPim", model.budgetPim],
+    ["budgetCertificationValue", model.budgetCertification],
+    ["budgetCommitmentValue", model.budgetCommitment],
+    ["budgetAccruedValue", model.budgetAccrued],
+    ["budgetPaidValue", model.budgetPaid]
+  ];
+  values.forEach(([id, value]) => animateNumber(document.getElementById(id), value, { formatter: compactMoney }));
+
+  const items = [
+    ["budgetCertificationBar", "budgetCertificationPct", model.budgetCertification],
+    ["budgetCommitmentBar", "budgetCommitmentPct", model.budgetCommitment],
+    ["budgetAccruedBar", "budgetAccruedPct", model.budgetAccrued],
+    ["budgetPaidBar", "budgetPaidPct", model.budgetPaid]
+  ];
+  items.forEach(([barId, pctId, value]) => {
+    setBudgetBar(barId, value, model.budgetPim);
+    const node = document.getElementById(pctId);
+    if (node) node.textContent = `${percent(value, model.budgetPim)}%`;
+  });
+
+  const devRate = model.budgetPim > 0 ? (model.budgetAccrued / model.budgetPim) * 100 : 0;
+  const giradoDevRate = model.budgetAccrued > 0 ? (model.budgetPaid / model.budgetAccrued) * 100 : 0;
+  const saldoDevengar = Math.max(0, model.budgetPim - model.budgetAccrued);
+  const saldoGirar = Math.max(0, model.budgetAccrued - model.budgetPaid);
+
+  const devNode = document.getElementById("devengadoRate");
+  const giradoDevNode = document.getElementById("giradoDevengadoRate");
+  const saldoDevNode = document.getElementById("saldoDevengar");
+  const saldoGirarNode = document.getElementById("saldoGirar");
+
+  if (devNode) devNode.textContent = `${Math.round(devRate)}%`;
+  if (giradoDevNode) giradoDevNode.textContent = `${Math.round(giradoDevRate)}%`;
+  if (saldoDevNode) animateNumber(saldoDevNode, saldoDevengar, { formatter: compactMoney });
+  if (saldoGirarNode) animateNumber(saldoGirarNode, saldoGirar, { formatter: compactMoney });
+
+  setBudgetBar("devengadoMeterBar", model.budgetAccrued, model.budgetPim);
+  setBudgetBar("giradoDevengadoBar", model.budgetPaid, model.budgetAccrued);
+}
+
+function canonRangeText(min, max) {
+  if (Math.abs(max - min) < 0.01) return compactMoney(max);
+  return `${compactMoney(min)} – ${compactMoney(max)}`;
+}
+
+function renderCanon(model) {
+  const total = document.getElementById("canonTotal");
+  const subtitle = document.getElementById("canonSubtitle");
+  const note = document.getElementById("canonQualityNote");
+  const modalPliegos = document.getElementById("canonModalPliegos");
+  const modalTotal = document.getElementById("canonModalTotal");
+
+  const totalText = canonRangeText(model.canonTotalMin, model.canonTotalMax);
+  if (total) total.textContent = totalText;
+  if (subtitle) subtitle.textContent = `${integer(model.canonRows.length)} pliegos en el filtro activo`;
+  if (modalPliegos) modalPliegos.textContent = integer(model.canonRows.length);
+  if (modalTotal) modalTotal.textContent = totalText;
+
+  if (note) {
+    note.classList.remove("has-warning");
+    const noteText = note.querySelector("span");
+    if (noteText) noteText.textContent = "Monto de canon asignado a cada pliego.";
+  }
+
+  const top = document.getElementById("canonTopBars");
+  if (top) {
+    top.replaceChildren();
+    const maxValue = Math.max(...model.canonRows.slice(0, 5).map(item => item.max), 1);
+    model.canonRows.slice(0, 5).forEach(item => {
+      const row = document.createElement("div");
+      row.className = "canon-top__row";
+      row.innerHTML = `<span title="${item.pliego.replace(/\"/g, '&quot;')}">${item.pliegoShort}</span><i><b style="width:${Math.max(4, item.max / maxValue * 100)}%"></b></i><strong>${tableMoney(item.max)}</strong>`;
+      top.appendChild(row);
+    });
+    if (!model.canonRows.length) {
+      const empty = document.createElement("div");
+      empty.className = "canon-empty";
+      empty.textContent = "Sin información de canon en el filtro activo.";
+      top.appendChild(empty);
+    }
+  }
+
+  const modalRows = document.getElementById("canonRowsModal");
+  if (modalRows) {
+    modalRows.replaceChildren();
+    model.canonRows.forEach(item => {
+      const row = document.createElement("div");
+      row.className = "canon-table__row";
+      const amount = canonRangeText(item.min, item.max);
+      [item.pliego, integer(item.investments), amount].forEach((value) => {
+        const cell = document.createElement("span");
+        cell.textContent = value;
+        row.appendChild(cell);
+      });
+      modalRows.appendChild(row);
+    });
+  }
 }
 
 function renderFinancialGap(model) {
@@ -1260,7 +1510,7 @@ function renderScopeMap(baseRows, model, state) {
   if (!selectedFeatures.length) return;
 
   const selectedBounds = boundsFrom(selectedFeatures);
-  const territory = state?.territorio || "VRAEM";
+  const territory = state?.territorio || "GENERAL";
   const viewportBounds = expandBounds(
     selectedBounds,
     territory === "AMUVRAEM" ? 0.16 : 0.11,
@@ -1323,9 +1573,12 @@ function renderAll(state, baseRows) {
   renderScope(state, model);
   renderKpis(model);
   renderPortfolio(model);
+  renderPortfolioDetails(model);
   renderFinancialGap(model);
   renderAgreements(model);
   renderResourceManagement(model);
+  renderBudget(model);
+  renderCanon(model);
   renderStage(model);
   renderProvinceBars(model, state);
   renderScopeMap(baseRows, model, state);
@@ -1402,11 +1655,10 @@ function bindFilters(data, initialState) {
   apply(state);
 }
 
-function bindFinancialModal() {
-  const modal = document.getElementById("financialModal");
-  const openButton = document.getElementById("expandFinancialTable");
-  const closeButton = document.getElementById("closeFinancialModal");
-
+function bindModal(modalId, openButtonId, closeButtonId, backdropSelector) {
+  const modal = document.getElementById(modalId);
+  const openButton = document.getElementById(openButtonId);
+  const closeButton = document.getElementById(closeButtonId);
   if (!modal || !openButton || !closeButton) return;
 
   const open = () => {
@@ -1415,24 +1667,25 @@ function bindFinancialModal() {
     document.body.classList.add("modal-open");
     closeButton.focus();
   };
-
   const close = () => {
     modal.classList.remove("is-open");
     modal.setAttribute("aria-hidden", "true");
-    document.body.classList.remove("modal-open");
+    if (!document.querySelector(".financial-modal.is-open")) document.body.classList.remove("modal-open");
     openButton.focus();
   };
 
   openButton.addEventListener("click", open);
   closeButton.addEventListener("click", close);
-
-  modal.querySelectorAll("[data-close-financial-modal]").forEach(node => {
-    node.addEventListener("click", close);
-  });
-
+  modal.querySelectorAll(backdropSelector).forEach(node => node.addEventListener("click", close));
   document.addEventListener("keydown", event => {
     if (event.key === "Escape" && modal.classList.contains("is-open")) close();
   });
+}
+
+function bindFinancialModal() {
+  bindModal("financialModal", "expandFinancialTable", "closeFinancialModal", "[data-close-financial-modal]");
+  bindModal("portfolioModal", "expandPortfolioTable", "closePortfolioModal", "[data-close-portfolio-modal]");
+  bindModal("canonModal", "expandCanonTable", "closeCanonModal", "[data-close-canon-modal]");
 }
 
 async function initInicio() {
@@ -1499,7 +1752,8 @@ function rowMatchesVisualFilter(row, filter = INICIO_VISUAL_FILTER) {
   if (filter.type === 'management') {
     if (!needsResources(row)) return false;
     if (filter.value === 'package1') return signedAgreement(row) && packageName === 'GRUPO 01';
-    if (filter.value === 'pending') return signedAgreement(row) && packageName !== 'GRUPO 01';
+    if (filter.value === 'package2') return signedAgreement(row) && packageName === 'GRUPO 02';
+    if (filter.value === 'pending') return signedAgreement(row) && packageName !== 'GRUPO 01' && packageName !== 'GRUPO 02';
     if (filter.value === 'conditioned') return !signedAgreement(row);
   }
   if (filter.type === 'stage') {
@@ -1621,7 +1875,8 @@ function bindInicioCrossFilters() {
   document.querySelectorAll('.agreement-list > div').forEach((el, index) => makeCrossFilterTarget(el, agreementFilters[index]));
 
   const managementFilters = [
-    { type: 'management', value: 'package1', label: 'Paquete 1' },
+    { type: 'management', value: 'package1', label: 'Paquete 1 · Grupo 01' },
+    { type: 'management', value: 'package2', label: 'Paquete 2 · Grupo 02' },
     { type: 'management', value: 'pending', label: 'Por solicitar recursos' },
     { type: 'management', value: 'conditioned', label: 'Pendientes de convenio' }
   ];
@@ -1646,9 +1901,12 @@ function renderAll(state, baseRows) {
   renderScope(state, model);
   renderKpis(model);
   renderPortfolio(model);
+  renderPortfolioDetails(model);
   renderFinancialGap(model);
   renderAgreements(model);
   renderResourceManagement(model);
+  renderBudget(model);
+  renderCanon(model);
   renderStage(model);
   renderProvinceBars(model, state);
   renderScopeMap(baseRows, model, state);

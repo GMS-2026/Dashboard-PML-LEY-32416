@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Selección de territorio | Puentes de Menores Luces</title>
+  <title>Selección de ámbito | Puentes de Menores Luces</title>
 
   <link rel="preload" as="image" href="img/portada/puente-vraem-fondo.png">
-  <link rel="prefetch" href="index.html">
+  <link rel="prefetch" href="inicio.html">
 
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
   <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/territorio.css?v=20260914-17">
+  <link rel="stylesheet" href="css/territorio.css?v=20260922-01">
 </head>
 
 <body class="territory-page">
@@ -20,26 +20,30 @@
   <div class="territory-top-accent" aria-hidden="true"></div>
 
   <main class="territory-shell" id="territoryShell">
-
     <section class="territory-frame">
 
       <!-- ===================================================
-           CABECERA: conserva foto y marca de la portada
+           CABECERA GENERAL - LEY 32416
            =================================================== -->
       <header class="territory-hero">
-
         <div class="territory-hero__copy">
-
           <img
             src="img/logos/logo-pvdes.png"
             alt="Provías Descentralizado"
             class="territory-logo"
           >
 
-          <h1>Selecciona el ámbito territorial</h1>
+          <div class="territory-hero__eyebrow">
+            <span>Ley N.° 32416</span>
+            <i></i>
+            <span>Cartera de Puentes de Menores Luces</span>
+          </div>
+
+          <h1>Selecciona el ámbito de análisis</h1>
 
           <p>
-            Elige un ámbito y continúa con el tablero filtrado desde el inicio.
+            Consulta la cartera general o ingresa a una segmentación territorial o institucional.
+            Los indicadores de esta cabecera representan el universo completo de la Ley N.° 32416.
           </p>
 
           <div class="territory-total" aria-live="polite">
@@ -54,16 +58,15 @@
             </div>
             <i></i>
             <div>
-              <strong id="totalDistritos">-</strong>
-              <span>Distritos</span>
+              <strong id="totalDepartamentos">-</strong>
+              <span>Departamentos</span>
             </div>
             <i></i>
             <div>
-              <strong id="totalProvincias">-</strong>
-              <span>Provincias</span>
+              <strong id="totalDistritos">-</strong>
+              <span>Distritos</span>
             </div>
           </div>
-
         </div>
 
         <div class="territory-hero__visual" aria-hidden="true">
@@ -71,7 +74,6 @@
           <div class="territory-hero__shade"></div>
           <div class="territory-hero__line"></div>
         </div>
-
       </header>
 
       <!-- ===================================================
@@ -79,198 +81,335 @@
            =================================================== -->
       <section class="territory-content">
 
-        <div class="territory-content__heading">
-          <div>
-            <h2>Ámbitos territoriales</h2>
+        <!-- CARTERA GENERAL -->
+        <div class="territory-section territory-section--general">
+          <div class="territory-section__heading">
+            <div>
+              <span class="territory-section__kicker">Vista integral</span>
+              <h2>Cartera general</h2>
+            </div>
+            <p>Incluye todas las inversiones registradas en la Ley N.° 32416, sin aplicar segmentación.</p>
           </div>
 
-          <p>
-            Selecciona un ámbito para continuar con la cartera filtrada.
-          </p>
+          <article class="territory-card territory-card--general territory-card--featured"
+                   data-territory="GENERAL" tabindex="0">
+            <div class="territory-card__accent"></div>
+
+            <div class="territory-featured__lead">
+              <div class="territory-featured__icon" aria-hidden="true">
+                <i class="bi bi-grid-1x2-fill"></i>
+              </div>
+
+              <div>
+                <span class="territory-card__code">00 · UNIVERSO DE ANÁLISIS</span>
+                <h3>Ley N.° 32416</h3>
+                <p>Cartera de Puentes de Menores Luces</p>
+              </div>
+            </div>
+
+            <div class="territory-featured__metrics">
+              <div>
+                <strong data-stat="inversiones">-</strong>
+                <span>IOARR</span>
+              </div>
+              <div>
+                <strong data-stat="puentes">-</strong>
+                <span>Puentes</span>
+              </div>
+              <div>
+                <strong data-stat="departamentos">-</strong>
+                <span>Departamentos</span>
+              </div>
+              <div>
+                <strong data-stat="provincias">-</strong>
+                <span>Provincias</span>
+              </div>
+              <div>
+                <strong data-stat="distritos">-</strong>
+                <span>Distritos</span>
+              </div>
+            </div>
+
+            <button type="button" class="territory-card__action territory-card__action--inline">
+              <span>Explorar cartera completa</span>
+              <i class="bi bi-arrow-right"></i>
+            </button>
+          </article>
         </div>
 
-        <div class="territory-grid">
+        <!-- ÁMBITOS TERRITORIALES -->
+        <div class="territory-section">
+          <div class="territory-section__heading">
+            <div>
+              <span class="territory-section__kicker">Segmentación geográfica</span>
+              <h2>Ámbitos territoriales</h2>
+            </div>
+            <p>La selección se realiza por pertenencia al ámbito. Las clasificaciones pueden superponerse.</p>
+          </div>
 
-          <!-- VRAEM -->
-          <article class="territory-card territory-card--vraem" data-territory="VRAEM" tabindex="0">
+          <div class="territory-grid territory-grid--maps">
 
-            <div class="territory-card__accent"></div>
+            <!-- VRAEM -->
+            <article class="territory-card territory-card--vraem" data-territory="VRAEM" tabindex="0">
+              <div class="territory-card__accent"></div>
 
-            <div class="territory-card__header">
-              <div>
-                <span class="territory-card__code">01</span>
-                <h3>VRAEM</h3>
-                <p>VRAEM y zonas de influencia</p>
+              <div class="territory-card__header">
+                <div>
+                  <span class="territory-card__code">01 · ÁMBITO TERRITORIAL</span>
+                  <h3>VRAEM</h3>
+                  <p>VRAEM y zonas de influencia</p>
+                </div>
+
+                <div class="territory-card__count">
+                  <div class="territory-card__count-item">
+                    <strong data-stat="inversiones">-</strong>
+                    <span>IOARR</span>
+                  </div>
+                  <i></i>
+                  <div class="territory-card__count-item">
+                    <strong data-stat="puentes">-</strong>
+                    <span>Puentes</span>
+                  </div>
+                </div>
               </div>
 
-              <div class="territory-card__count">
-                <div class="territory-card__count-item">
-                  <strong data-stat="inversiones">-</strong>
-                  <span>IOARR</span>
+              <div class="territory-card__map-wrap">
+                <svg class="territory-card__map" data-map="VRAEM" viewBox="0 0 320 230" aria-label="Mapa del VRAEM"></svg>
+                <div class="territory-card__map-key">
+                  <span><i class="territory-card__swatch territory-card__swatch--selected"></i>Ámbito</span>
+                  <span><i class="territory-card__swatch territory-card__swatch--context"></i>Referencia</span>
                 </div>
+              </div>
+
+              <div class="territory-card__stats">
+                <div><strong data-stat="distritos">-</strong><span>Distritos</span></div>
+                <div><strong data-stat="provincias">-</strong><span>Provincias</span></div>
+                <div><strong data-stat="departamentos">-</strong><span>Departamentos</span></div>
+              </div>
+
+              <button type="button" class="territory-card__action">
+                <span>Explorar ámbito</span><i class="bi bi-arrow-right"></i>
+              </button>
+            </article>
+
+            <!-- NORVRAEM -->
+            <article class="territory-card territory-card--norvraem" data-territory="NORVRAEM" tabindex="0">
+              <div class="territory-card__accent"></div>
+
+              <div class="territory-card__header">
+                <div>
+                  <span class="territory-card__code">02 · ÁMBITO TERRITORIAL</span>
+                  <h3>NORVRAEM</h3>
+                  <p>Ámbito territorial del norte</p>
+                </div>
+
+                <div class="territory-card__count">
+                  <div class="territory-card__count-item">
+                    <strong data-stat="inversiones">-</strong>
+                    <span>IOARR</span>
+                  </div>
+                  <i></i>
+                  <div class="territory-card__count-item">
+                    <strong data-stat="puentes">-</strong>
+                    <span>Puentes</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="territory-card__map-wrap">
+                <svg class="territory-card__map" data-map="NORVRAEM" viewBox="0 0 320 230" aria-label="Mapa del NORVRAEM"></svg>
+                <div class="territory-card__map-key">
+                  <span><i class="territory-card__swatch territory-card__swatch--selected"></i>Ámbito</span>
+                  <span><i class="territory-card__swatch territory-card__swatch--context"></i>Referencia</span>
+                </div>
+              </div>
+
+              <div class="territory-card__stats">
+                <div><strong data-stat="distritos">-</strong><span>Distritos</span></div>
+                <div><strong data-stat="provincias">-</strong><span>Provincias</span></div>
+                <div><strong data-stat="departamentos">-</strong><span>Departamentos</span></div>
+              </div>
+
+              <button type="button" class="territory-card__action">
+                <span>Explorar ámbito</span><i class="bi bi-arrow-right"></i>
+              </button>
+            </article>
+
+            <!-- AMUVRAE -->
+            <article class="territory-card territory-card--amuvraem" data-territory="AMUVRAEM" tabindex="0">
+              <div class="territory-card__accent"></div>
+
+              <div class="territory-card__header">
+                <div>
+                  <span class="territory-card__code">03 · ÁMBITO TERRITORIAL</span>
+                  <h3>AMUVRAE</h3>
+                  <p>Asociación de Municipalidades del VRAE</p>
+                </div>
+
+                <div class="territory-card__count">
+                  <div class="territory-card__count-item">
+                    <strong data-stat="inversiones">-</strong>
+                    <span>IOARR</span>
+                  </div>
+                  <i></i>
+                  <div class="territory-card__count-item">
+                    <strong data-stat="puentes">-</strong>
+                    <span>Puentes</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="territory-card__map-wrap">
+                <svg class="territory-card__map" data-map="AMUVRAEM" viewBox="0 0 320 230" aria-label="Mapa del AMUVRAE"></svg>
+                <div class="territory-card__map-key">
+                  <span><i class="territory-card__swatch territory-card__swatch--selected"></i>Ámbito</span>
+                  <span><i class="territory-card__swatch territory-card__swatch--context"></i>Referencia</span>
+                </div>
+              </div>
+
+              <div class="territory-card__stats">
+                <div><strong data-stat="distritos">-</strong><span>Distritos</span></div>
+                <div><strong data-stat="provincias">-</strong><span>Provincias</span></div>
+                <div><strong data-stat="departamentos">-</strong><span>Departamentos</span></div>
+              </div>
+
+              <button type="button" class="territory-card__action">
+                <span>Explorar ámbito</span><i class="bi bi-arrow-right"></i>
+              </button>
+            </article>
+          </div>
+        </div>
+
+        <!-- ASOCIACIONES -->
+        <div class="territory-section territory-section--associations">
+          <div class="territory-section__heading">
+            <div>
+              <span class="territory-section__kicker">Segmentación institucional</span>
+              <h2>Asociaciones municipales</h2>
+            </div>
+            <p>Estas vistas se filtran por pertenencia institucional; no representan un territorio geográfico continuo.</p>
+          </div>
+
+          <div class="territory-grid territory-grid--associations">
+
+            <!-- ALCALDESAS -->
+            <article class="territory-card territory-card--association territory-card--alcaldesas"
+                     data-territory="ALCALDESAS" tabindex="0">
+              <div class="territory-card__accent"></div>
+
+              <div class="territory-association__top">
+                <div class="territory-association__icon"><i class="bi bi-person-hearts"></i></div>
+                <div>
+                  <span class="territory-card__code">04 · ASOCIACIÓN</span>
+                  <h3>Asociación de Alcaldesas</h3>
+                  <p>Municipalidades identificadas en la base como integrantes.</p>
+                </div>
+              </div>
+
+              <div class="territory-association__primary">
+                <div><strong data-stat="inversiones">-</strong><span>IOARR</span></div>
                 <i></i>
-                <div class="territory-card__count-item">
-                  <strong data-stat="puentes">-</strong>
-                  <span>Puentes</span>
+                <div><strong data-stat="puentes">-</strong><span>Puentes</span></div>
+              </div>
+
+              <div class="territory-card__stats">
+                <div><strong data-stat="distritos">-</strong><span>Distritos</span></div>
+                <div><strong data-stat="provincias">-</strong><span>Provincias</span></div>
+                <div><strong data-stat="departamentos">-</strong><span>Departamentos</span></div>
+              </div>
+
+              <div class="territory-association__tag">
+                <i class="bi bi-diagram-3"></i><span>Cobertura institucional</span>
+              </div>
+
+              <button type="button" class="territory-card__action">
+                <span>Explorar asociación</span><i class="bi bi-arrow-right"></i>
+              </button>
+            </article>
+
+            <!-- AMUDIP -->
+            <article class="territory-card territory-card--association territory-card--amudip"
+                     data-territory="AMUDIP" tabindex="0">
+              <div class="territory-card__accent"></div>
+
+              <div class="territory-association__top">
+                <div class="territory-association__icon"><i class="bi bi-buildings"></i></div>
+                <div>
+                  <span class="territory-card__code">05 · ASOCIACIÓN</span>
+                  <h3>AMUDIP</h3>
+                  <p>Municipalidades identificadas en la base como integrantes.</p>
                 </div>
               </div>
-            </div>
 
-            <div class="territory-card__map-wrap">
-              <svg class="territory-card__map" data-map="VRAEM" viewBox="0 0 320 230" aria-label="Mapa del VRAEM"></svg>
-              <div class="territory-card__map-key">
-                <span><i class="territory-card__swatch territory-card__swatch--selected"></i>Ámbito</span>
-                <span><i class="territory-card__swatch territory-card__swatch--context"></i>Referencia</span>
-              </div>
-            </div>
-
-            <div class="territory-card__stats">
-              <div>
-                <strong data-stat="distritos">-</strong>
-                <span>Distritos</span>
-              </div>
-              <div>
-                <strong data-stat="provincias">-</strong>
-                <span>Provincias</span>
-              </div>
-              <div>
-                <strong data-stat="departamentos">-</strong>
-                <span>Departamentos</span>
-              </div>
-            </div>
-
-            <button type="button" class="territory-card__action">
-              <span>Explorar</span>
-              <i class="bi bi-arrow-right"></i>
-            </button>
-
-          </article>
-
-          <!-- NORVRAEM -->
-          <article class="territory-card territory-card--norvraem" data-territory="NORVRAEM" tabindex="0">
-
-            <div class="territory-card__accent"></div>
-
-            <div class="territory-card__header">
-              <div>
-                <span class="territory-card__code">02</span>
-                <h3>NORVRAEM</h3>
-                <p>Ámbito territorial del norte</p>
-              </div>
-
-              <div class="territory-card__count">
-                <div class="territory-card__count-item">
-                  <strong data-stat="inversiones">-</strong>
-                  <span>IOARR</span>
-                </div>
+              <div class="territory-association__primary">
+                <div><strong data-stat="inversiones">-</strong><span>IOARR</span></div>
                 <i></i>
-                <div class="territory-card__count-item">
-                  <strong data-stat="puentes">-</strong>
-                  <span>Puentes</span>
+                <div><strong data-stat="puentes">-</strong><span>Puentes</span></div>
+              </div>
+
+              <div class="territory-card__stats">
+                <div><strong data-stat="distritos">-</strong><span>Distritos</span></div>
+                <div><strong data-stat="provincias">-</strong><span>Provincias</span></div>
+                <div><strong data-stat="departamentos">-</strong><span>Departamentos</span></div>
+              </div>
+
+              <div class="territory-association__tag">
+                <i class="bi bi-diagram-3"></i><span>Cobertura institucional</span>
+              </div>
+
+              <button type="button" class="territory-card__action">
+                <span>Explorar asociación</span><i class="bi bi-arrow-right"></i>
+              </button>
+            </article>
+
+            <!-- REMURPE -->
+            <article class="territory-card territory-card--association territory-card--remurpe"
+                     data-territory="REMURPE" tabindex="0">
+              <div class="territory-card__accent"></div>
+
+              <div class="territory-association__top">
+                <div class="territory-association__icon"><i class="bi bi-geo-alt"></i></div>
+                <div>
+                  <span class="territory-card__code">06 · ASOCIACIÓN</span>
+                  <h3>REMURPE</h3>
+                  <p>Municipalidades identificadas en la base como integrantes.</p>
                 </div>
               </div>
-            </div>
 
-            <div class="territory-card__map-wrap">
-              <svg class="territory-card__map" data-map="NORVRAEM" viewBox="0 0 320 230" aria-label="Mapa del NORVRAEM"></svg>
-              <div class="territory-card__map-key">
-                <span><i class="territory-card__swatch territory-card__swatch--selected"></i>Ámbito</span>
-                <span><i class="territory-card__swatch territory-card__swatch--context"></i>Referencia</span>
-              </div>
-            </div>
-
-            <div class="territory-card__stats">
-              <div>
-                <strong data-stat="distritos">-</strong>
-                <span>Distritos</span>
-              </div>
-              <div>
-                <strong data-stat="provincias">-</strong>
-                <span>Provincias</span>
-              </div>
-              <div>
-                <strong data-stat="departamentos">-</strong>
-                <span>Departamentos</span>
-              </div>
-            </div>
-
-            <button type="button" class="territory-card__action">
-              <span>Explorar</span>
-              <i class="bi bi-arrow-right"></i>
-            </button>
-
-          </article>
-
-          <!-- AMUVRAE -->
-          <article class="territory-card territory-card--amuvraem" data-territory="AMUVRAEM" tabindex="0">
-
-            <div class="territory-card__accent"></div>
-
-            <div class="territory-card__header">
-              <div>
-                <span class="territory-card__code">03</span>
-                <h3>AMUVRAE</h3>
-                <p>Mancomunidad del VRAEM</p>
-              </div>
-
-              <div class="territory-card__count">
-                <div class="territory-card__count-item">
-                  <strong data-stat="inversiones">-</strong>
-                  <span>IOARR</span>
-                </div>
+              <div class="territory-association__primary">
+                <div><strong data-stat="inversiones">-</strong><span>IOARR</span></div>
                 <i></i>
-                <div class="territory-card__count-item">
-                  <strong data-stat="puentes">-</strong>
-                  <span>Puentes</span>
-                </div>
+                <div><strong data-stat="puentes">-</strong><span>Puentes</span></div>
               </div>
-            </div>
 
-            <div class="territory-card__map-wrap">
-              <svg class="territory-card__map" data-map="AMUVRAEM" viewBox="0 0 320 230" aria-label="Mapa del AMUVRAE"></svg>
-              <div class="territory-card__map-key">
-                <span><i class="territory-card__swatch territory-card__swatch--selected"></i>Ámbito</span>
-                <span><i class="territory-card__swatch territory-card__swatch--context"></i>Referencia</span>
+              <div class="territory-card__stats">
+                <div><strong data-stat="distritos">-</strong><span>Distritos</span></div>
+                <div><strong data-stat="provincias">-</strong><span>Provincias</span></div>
+                <div><strong data-stat="departamentos">-</strong><span>Departamentos</span></div>
               </div>
-            </div>
 
-            <div class="territory-card__stats">
-              <div>
-                <strong data-stat="distritos">-</strong>
-                <span>Distritos</span>
+              <div class="territory-association__tag">
+                <i class="bi bi-diagram-3"></i><span>Cobertura institucional</span>
               </div>
-              <div>
-                <strong data-stat="provincias">-</strong>
-                <span>Provincias</span>
-              </div>
-              <div>
-                <strong data-stat="departamentos">-</strong>
-                <span>Departamentos</span>
-              </div>
-            </div>
 
-            <button type="button" class="territory-card__action">
-              <span>Explorar</span>
-              <i class="bi bi-arrow-right"></i>
-            </button>
-
-          </article>
-
+              <button type="button" class="territory-card__action">
+                <span>Explorar asociación</span><i class="bi bi-arrow-right"></i>
+              </button>
+            </article>
+          </div>
         </div>
 
         <div class="territory-note">
           <i class="bi bi-info-circle"></i>
-          <span>
-            94 inversiones y 34 distritos únicos en total. Las cifras por ámbito no son aditivas, porque una misma inversión o distrito puede pertenecer a más de una clasificación territorial.
+          <span id="territoryNoteText">
+            Las segmentaciones no son aditivas: una misma inversión puede pertenecer a más de un ámbito o asociación.
           </span>
         </div>
 
       </section>
-
     </section>
-
   </main>
 
-  <script src="js/territorio.js?v=20260914-17"></script>
+  <script src="js/territorio.js?v=20260922-01"></script>
 </body>
 </html>

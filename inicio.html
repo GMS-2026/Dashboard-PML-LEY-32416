@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/dashboard.css?v=20260911-5">
-  <link rel="stylesheet" href="css/inicio.css?v=20260914-17">
+  <link rel="stylesheet" href="css/inicio.css?v=20260922-4">
 </head>
 <body class="inicio-page is-loading">
   <div class="page-accent"></div>
@@ -44,11 +44,11 @@
             <header class="inicio-hero reveal reveal--1">
               <div class="inicio-hero__copy">
                 <div class="inicio-hero__heading">
-                  <h1 id="inicioTitulo">Inicio - VRAEM</h1>
-                  <span class="territory-chip" id="territoryChip">VRAEM</span>
+                  <h1 id="inicioTitulo">Inicio - Ley N.° 32416</h1>
+                  <span class="territory-chip" id="territoryChip">Ley N.° 32416</span>
                 </div>
                 <p class="inicio-hero__subtitle" id="inicioSubtitulo">
-                  VRAEM y zonas de influencia. Situación financiera y ruta de gestión.
+                  Cartera general de la Ley N.° 32416. Situación financiera y ruta de gestión.
                 </p>
 
                 <div class="geo-kpis" aria-label="Cobertura geográfica">
@@ -92,9 +92,13 @@
               <label class="filter-field">
                 <span>Ámbito</span>
                 <select id="territorioSelect">
+                  <option value="GENERAL">Cartera general · Ley 32416</option>
                   <option value="VRAEM">VRAEM</option>
                   <option value="NORVRAEM">NORVRAEM</option>
                   <option value="AMUVRAEM">AMUVRAE</option>
+                  <option value="ALCALDESAS">Asociación de Alcaldesas</option>
+                  <option value="AMUDIP">AMUDIP</option>
+                  <option value="REMURPE">REMURPE</option>
                 </select>
               </label>
 
@@ -182,7 +186,7 @@
                     <h2>Situación de la cartera seleccionada</h2>
                     <p>Estado y requerimientos de la cartera de inversiones IOARR</p>
                   </div>
-                  <a class="card-action" data-drill="mapa" href="mapa.html">Ver más <i class="bi bi-arrow-right"></i></a>
+                  <button class="card-action card-action--expand" id="expandPortfolioTable" type="button">Expandir <i class="bi bi-arrows-fullscreen"></i></button>
                 </header>
 
                 <div class="portfolio-content">
@@ -284,7 +288,7 @@
                   <span class="exec-card__head-icon exec-card__head-icon--blue"><i class="ri-file-list-3-line"></i></span>
                   <div class="exec-card__titles">
                     <h2>Situación general de los convenios</h2>
-                    <p id="agreementSubtitle">Estado de los convenios en el ámbito VRAEM</p>
+                    <p id="agreementSubtitle">Estado de los convenios en la cartera seleccionada</p>
                   </div>
                   <a class="card-action" data-drill="convenios" href="convenios.html">Ver más <i class="bi bi-arrow-right"></i></a>
                 </header>
@@ -340,7 +344,12 @@
                   <div class="prep-item prep-item--package">
                     <strong id="routeChartPackage1Count">-</strong>
                     <div class="prep-bar"><i id="routeChartPackage1Bar"></i><span id="routeChartPackage1Pct">-</span></div>
-                    <small>Paquete 1</small><em>Requerimiento realizado</em>
+                    <small>Paquete 1</small><em>Grupo 01</em>
+                  </div>
+                  <div class="prep-item prep-item--package2">
+                    <strong id="routeChartPackage2Count">-</strong>
+                    <div class="prep-bar"><i id="routeChartPackage2Bar"></i><span id="routeChartPackage2Pct">-</span></div>
+                    <small>Paquete 2</small><em>Grupo 02</em>
                   </div>
                   <div class="prep-item prep-item--pending">
                     <strong id="routeChartPendingCount">-</strong>
@@ -411,10 +420,76 @@
                 </div>
 
                 <div class="map-geo-footer map-geo-footer--context">
-                  <div><i class="fa-solid fa-location-crosshairs"></i><strong id="mapDirectCount">-</strong><span>Intervención directa</span></div>
-                  <div><i class="fa-solid fa-arrows-to-circle"></i><strong id="mapInfluenceCount">-</strong><span>Zona de influencia</span></div>
+                  <div><i class="fa-solid fa-location-crosshairs" id="mapMetric1Icon"></i><strong id="mapDirectCount">-</strong><span id="mapMetric1Label">Departamentos</span></div>
+                  <div><i class="fa-solid fa-arrows-to-circle" id="mapMetric2Icon"></i><strong id="mapInfluenceCount">-</strong><span id="mapMetric2Label">Provincias</span></div>
                   <div><i class="fa-solid fa-map-location-dot"></i><strong id="mapGeocodedCount">-</strong><span>Georreferenciadas</span></div>
                 </div>
+              </article>
+            </section>
+
+            <!-- FILA FINANCIERA -->
+            <section class="financial-grid reveal reveal--6" aria-label="Indicadores financieros 2026">
+              <article class="analytics-card analytics-card--budget">
+                <header class="analytics-card__head">
+                  <span class="analytics-card__icon analytics-card__icon--blue"><i class="ri-funds-line"></i></span>
+                  <div><h3>Ejecución presupuestal 2026</h3><p>Avance de la ejecución respecto al PIM 2026</p></div>
+                  <div class="budget-pim-chip"><span>PIM</span><strong id="budgetPim">-</strong></div>
+                </header>
+                <div class="budget-chart">
+                  <div class="budget-line"><div><span>Certificación</span><strong id="budgetCertificationValue">-</strong></div><div class="budget-track"><i id="budgetCertificationBar"></i></div><em id="budgetCertificationPct">-</em></div>
+                  <div class="budget-line"><div><span>Compromiso anual</span><strong id="budgetCommitmentValue">-</strong></div><div class="budget-track"><i id="budgetCommitmentBar"></i></div><em id="budgetCommitmentPct">-</em></div>
+                  <div class="budget-line"><div><span>Devengado</span><strong id="budgetAccruedValue">-</strong></div><div class="budget-track"><i id="budgetAccruedBar"></i></div><em id="budgetAccruedPct">-</em></div>
+                  <div class="budget-line"><div><span>Girado</span><strong id="budgetPaidValue">-</strong></div><div class="budget-track"><i id="budgetPaidBar"></i></div><em id="budgetPaidPct">-</em></div>
+                </div>
+              </article>
+
+              <article class="analytics-card analytics-card--execution">
+                <header class="analytics-card__head">
+                  <span class="analytics-card__icon analytics-card__icon--wine"><i class="ri-speed-up-line"></i></span>
+                  <div><h3>Indicadores de ejecución</h3><p>Eficiencia del devengado y conversión a girado</p></div>
+                </header>
+                <div class="execution-meter-layout">
+                  <section class="execution-meter-main" aria-label="Medidor de ejecución devengada">
+                    <div class="execution-meter-heading">
+                      <div><span>Ejecución devengada</span><small>Devengado / PIM</small></div>
+                      <strong id="devengadoRate">-</strong>
+                    </div>
+                    <div class="execution-meter-track" aria-hidden="true">
+                      <i id="devengadoMeterBar"></i>
+                      <span class="execution-meter-marker execution-meter-marker--25"></span>
+                      <span class="execution-meter-marker execution-meter-marker--50"></span>
+                      <span class="execution-meter-marker execution-meter-marker--75"></span>
+                    </div>
+                    <div class="execution-meter-scale"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div>
+                    <div class="execution-meter-foot"><span>Saldo por devengar</span><strong id="saldoDevengar">-</strong></div>
+                  </section>
+                  <section class="execution-conversion" aria-label="Conversión de devengado a girado">
+                    <div class="execution-conversion__top">
+                      <span>Girado / Devengado</span>
+                      <strong id="giradoDevengadoRate">-</strong>
+                    </div>
+                    <div class="execution-conversion__track"><i id="giradoDevengadoBar"></i></div>
+                    <p>Proporción del devengado que ya fue girada.</p>
+                    <div class="execution-conversion__foot"><span>Saldo por girar</span><strong id="saldoGirar">-</strong></div>
+                  </section>
+                </div>
+              </article>
+
+              <article class="analytics-card analytics-card--canon">
+                <header class="analytics-card__head">
+                  <span class="analytics-card__icon"><i class="ri-government-line"></i></span>
+                  <div><h3>Canon por pliego</h3><p>Distribución del canon entre los pliegos del filtro</p></div>
+                  <button class="card-action card-action--expand" id="expandCanonTable" type="button">Detalle <i class="bi bi-arrows-fullscreen"></i></button>
+                </header>
+                <div class="canon-summary">
+                  <div class="canon-total">
+                    <span>Canon registrado</span>
+                    <strong id="canonTotal">-</strong>
+                    <small id="canonSubtitle">-</small>
+                  </div>
+                  <div class="canon-top" id="canonTopBars"></div>
+                </div>
+                <div class="canon-note" id="canonQualityNote"><i class="bi bi-info-circle"></i><span>Monto de canon asignado a cada pliego.</span></div>
               </article>
             </section>
 
@@ -425,6 +500,31 @@
     </div>
   </div>
 
+
+  <div class="financial-modal portfolio-modal" id="portfolioModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="portfolioModalTitle">
+    <div class="financial-modal__backdrop" data-close-portfolio-modal></div>
+    <section class="financial-modal__panel portfolio-modal__panel">
+      <header class="financial-modal__head">
+        <div>
+          <span class="financial-modal__eyebrow">Situación de la cartera</span>
+          <h2 id="portfolioModalTitle">Detalle de inversiones</h2>
+          <p id="portfolioModalSubtitle">Listado actualizado según los filtros activos.</p>
+        </div>
+        <button class="financial-modal__close" id="closePortfolioModal" type="button" aria-label="Cerrar detalle de cartera"><i class="bi bi-x-lg"></i></button>
+      </header>
+      <div class="portfolio-modal__summary">
+        <div class="portfolio-modal__kpi portfolio-modal__kpi--good"><span>Totalidad de recursos</span><strong id="portfolioModalSufficient">-</strong></div>
+        <div class="portfolio-modal__kpi portfolio-modal__kpi--risk"><span>Requieren recursos</span><strong id="portfolioModalRequires">-</strong></div>
+        <div class="portfolio-modal__kpi"><span>Total IOARR</span><strong id="portfolioModalTotal">-</strong></div>
+      </div>
+      <div class="portfolio-modal__table" role="table" aria-label="Detalle de la cartera filtrada">
+        <div class="portfolio-table__head" role="row">
+          <span>CUI</span><span>Nombre de la inversión</span><span>Pliego</span><span>Ubicación</span><span>Costo actualizado</span><span>PIM 2026</span><span>Déficit</span><span>Situación de recursos</span>
+        </div>
+        <div class="portfolio-table__body" id="portfolioRowsModal"></div>
+      </div>
+    </section>
+  </div>
 
   <div class="financial-modal" id="financialModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="financialModalTitle">
     <div class="financial-modal__backdrop" data-close-financial-modal></div>
@@ -472,6 +572,28 @@
     </section>
   </div>
 
-  <script src="js/inicio.js?v=20260914-19"></script>
+  <div class="financial-modal canon-modal" id="canonModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="canonModalTitle">
+    <div class="financial-modal__backdrop" data-close-canon-modal></div>
+    <section class="financial-modal__panel canon-modal__panel">
+      <header class="financial-modal__head">
+        <div>
+          <span class="financial-modal__eyebrow">Detalle por pliego</span>
+          <h2 id="canonModalTitle">Canon registrado</h2>
+          <p>El canon pertenece al pliego; los registros repetidos por CUI se consolidan una sola vez.</p>
+        </div>
+        <button class="financial-modal__close" id="closeCanonModal" type="button" aria-label="Cerrar detalle de canon"><i class="bi bi-x-lg"></i></button>
+      </header>
+      <div class="canon-modal__summary">
+        <div><span>Pliegos</span><strong id="canonModalPliegos">-</strong></div>
+        <div><span>Canon consolidado</span><strong id="canonModalTotal">-</strong></div>
+      </div>
+      <div class="canon-modal__table" role="table" aria-label="Canon por pliego">
+        <div class="canon-table__head" role="row"><span>Pliego</span><span>IOARR del filtro</span><span>Canon registrado</span></div>
+        <div class="canon-table__body" id="canonRowsModal"></div>
+      </div>
+    </section>
+  </div>
+
+  <script src="js/inicio.js?v=20260922-2"></script>
 </body>
 </html>

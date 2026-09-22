@@ -2,35 +2,72 @@ const TOPOLOGY_SOURCE_URL =
   "https://raw.githubusercontent.com/Rodasluis/Peru-maps/main/salida/distrito_simplificado.geojson";
 
 const TERRITORY_CONFIG = {
+  GENERAL: {
+    label: "Ley N.° 32416",
+    filterFields: [],
+    filterValue: "SI",
+    color: "#8f1733",
+    mapEnabled: false
+  },
   VRAEM: {
     label: "VRAEM",
-    filterField: "es_vraem",
+    filterFields: ["es_vraem"],
     filterValue: "SI",
     color: "#991735",
-    legendSide: "right"
+    legendSide: "right",
+    mapEnabled: true
   },
   NORVRAEM: {
     label: "NORVRAEM",
-    filterField: "es_norvraem",
+    filterFields: ["es_norvraem"],
     filterValue: "SI",
     color: "#153f5b",
-    legendSide: "right"
+    legendSide: "right",
+    mapEnabled: true
   },
   AMUVRAEM: {
     label: "AMUVRAE",
-    filterField: "es_amuvraem",
+    filterFields: ["es_amuvraem"],
     filterValue: "SI",
     color: "#0c8a60",
-    legendSide: "right"
+    legendSide: "right",
+    mapEnabled: true
+  },
+  ALCALDESAS: {
+    label: "Asociación de Alcaldesas",
+    /* Se admiten alias para mantener compatibilidad con distintas
+       reglas de normalización del convertidor Excel → JSON. */
+    filterFields: [
+      "ES ASOCIACIÓN DE ALCALDESAS",
+      "es_asociacion_de_alcaldesas",
+      "es_asociacion_alcaldesas",
+      "es_alcaldesas"
+    ],
+    filterValue: "SI",
+    color: "#9a4560",
+    mapEnabled: false
+  },
+  AMUDIP: {
+    label: "AMUDIP",
+    filterFields: ["ES AMUDIP", "es_amudip"],
+    filterValue: "SI",
+    color: "#315f78",
+    mapEnabled: false
+  },
+  REMURPE: {
+    label: "REMURPE",
+    filterFields: ["ES REMURPE", "es_remurpe"],
+    filterValue: "SI",
+    color: "#4f7d6e",
+    mapEnabled: false
   }
 };
 
-/*
-  Total único validado en la tabla maestra del proyecto.
-  Los ámbitos no son excluyentes; por ello sus conteos pueden superponerse.
-*/
-const TOTAL_DISTRITOS_UNICOS = 34;
-const TERRITORY_VERSION = "v1.1-topology";
+const MAP_TERRITORIES = Object.keys(TERRITORY_CONFIG).filter(
+  territory => TERRITORY_CONFIG[territory].mapEnabled
+);
+
+const TERRITORY_VERSION = "v2.0-ley32416";
 const SVG_NS = "http://www.w3.org/2000/svg";
 const IS_PREWARM = window.location.hash === "#prewarm";
 
@@ -88,9 +125,15 @@ function summarize(rows) {
 
 function rowsForTerritory(data, territory) {
   const config = TERRITORY_CONFIG[territory];
+  if (!config) return [];
+
+  /* GENERAL es el universo completo de la Ley 32416. */
+  if (territory === "GENERAL") return data.slice();
 
   return data.filter(row =>
-    normalizeText(row[config.filterField]) === config.filterValue
+    config.filterFields.some(field =>
+      ["SI", "SÍ", "1", "TRUE"].includes(normalizeText(row[field]))
+    )
   );
 }
 
@@ -620,10 +663,6 @@ async function initTerritoryPage() {
 
   wireCards();
 
-  console.info(
-    `[Territorio ${TERRITORY_VERSION}] Total único validado: ${TOTAL_DISTRITOS_UNICOS} distritos por UBIGEO.`
-  );
-
   try {
     const [dataResponse, fallbackDistrictResponse] = await Promise.all([
       fetch("data/puentes.json", { cache: "no-store" }),
@@ -649,10 +688,22 @@ async function initTerritoryPage() {
 
     const totalSummary = summarize(data);
 
+    /* KPI principales: siempre calculados con TODA la base cargada,
+       nunca con VRAEM ni con otro segmento. */
     animateNumber(document.getElementById("totalInversiones"), totalSummary.inversiones, 720, 120);
-    animateNumber(document.getElementById("totalPuentes"), totalSummary.puentes, 720, 220);
-    animateNumber(document.getElementById("totalDistritos"), TOTAL_DISTRITOS_UNICOS, 720, 320);
-    animateNumber(document.getElementById("totalProvincias"), totalSummary.provincias, 720, 420);
+    animateNumber(document.getElementById("totalPuentes"), totalSummary.puentes, 720, 200);
+    animateNumber(document.getElementById("totalDepartamentos"), totalSummary.departamentos, 720, 280);
+    animateNumber(document.getElementById("totalDistritos"), totalSummary.distritos, 720, 360);
+
+    const note = document.getElementById("territoryNoteText");
+    if (note) {
+      note.textContent =
+        `La cartera general contiene ${totalSummary.inversiones.toLocaleString("es-PE")} IOARR en ` +
+        `${totalSummary.departamentos.toLocaleString("es-PE")} departamentos, ` +
+        `${totalSummary.provincias.toLocaleString("es-PE")} provincias y ` +
+        `${totalSummary.distritos.toLocaleString("es-PE")} distritos. ` +
+        `Las segmentaciones no son aditivas: una inversión puede pertenecer a más de un ámbito o asociación.`;
+    }
 
     const territoryRows = {};
 
@@ -668,12 +719,22 @@ async function initTerritoryPage() {
       requestAnimationFrame(() => {
         card?.classList.add("is-data-ready");
       });
+
+      console.info(
+        `[Territorio ${TERRITORY_VERSION}] ${territory}: ` +
+        `${summary.inversiones} IOARR, ${summary.puentes} puentes, ` +
+        `${summary.departamentos} departamentos, ${summary.provincias} provincias, ${summary.distritos} distritos.`
+      );
     });
 
+    /* Solo los ámbitos geográficos usan cartografía. Las asociaciones
+       se presentan como segmentaciones institucionales. */
     const topologyFeatures = await loadTopologyFeatures(fallbackDistrictGeo);
 
-    Object.keys(TERRITORY_CONFIG).forEach(territory => {
+    MAP_TERRITORIES.forEach(territory => {
       const svg = document.querySelector(`[data-map="${territory}"]`);
+      if (!svg) return;
+
       renderMiniMap(
         svg,
         territory,

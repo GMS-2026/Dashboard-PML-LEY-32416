@@ -948,3 +948,17 @@ body.is-photo-morphing .cover__stage > .cover__photo {
     transition-duration: .01ms !important;
   }
 }
+
+/* ============================================================
+   2026-09-22 · Ajuste de escala del título Ley N.° 32416
+   ============================================================ */
+.cover__title-vraem{
+  font-size:clamp(62px,8vw,128px);
+  letter-spacing:-.035em;
+}
+
+@media (max-width:640px){
+  .cover__title-vraem{
+    font-size:clamp(54px,18vw,88px);
+  }
+}
