@@ -79,6 +79,9 @@ const SVG_NS = "http://www.w3.org/2000/svg";
 const DONUT_RADIUS = 57;
 const DONUT_CIRCUMFERENCE = 2 * Math.PI * DONUT_RADIUS;
 
+let CANON_MODAL_FILTER = "all";
+let CANON_MODAL_MODEL = null;
+
 let DISTRICT_GEO = null;
 let TOPOLOGY_FEATURES = [];
 
@@ -379,6 +382,14 @@ function tableMoney(value) {
   return number.toLocaleString("es-PE", { maximumFractionDigits: 0 });
 }
 
+function fullSoles(value) {
+  const number = Number(value || 0);
+  return `S/. ${number.toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  })}`;
+}
+
 function integer(value) {
   return Number(value || 0).toLocaleString("es-PE");
 }
@@ -544,7 +555,7 @@ function computeModel(rows) {
   const budgetPaid = sumAliases(rows, ["GIRADO", "girado_2026"]);
 
   // CANON pertenece al pliego y en el JSON puede repetirse en cada inversión.
-  // Se consolida por pliego para contabilizarlo una sola vez dentro del filtro activo.
+  // Se consolida por pliego y se conservan también los pliegos sin monto para el detalle expandido.
   const activePliegos = new Map();
   rows.forEach(row => {
     const pliego = String(row.pliego || "").trim();
@@ -562,26 +573,33 @@ function computeModel(rows) {
     if (Number.isFinite(canon) && canon > 0) item.canonValues.add(canon);
   });
 
-  const canonRows = [...activePliegos.values()]
+  const canonAllRows = [...activePliegos.values()]
     .map(item => {
       const values = [...item.canonValues].sort((a, b) => a - b);
+      const amount = values.length ? values[values.length - 1] : 0;
       return {
         pliego: item.pliego,
         pliegoShort: shortPliego(item.pliego),
         investments: item.cuis.size,
         values,
-        min: values.length ? values[0] : 0,
-        max: values.length ? values[values.length - 1] : 0,
-        conflict: values.length > 1,
-        source: values.length ? "json" : "sin-dato"
+        amount,
+        min: amount,
+        max: amount,
+        hasCanon: amount > 0
       };
     })
-    .filter(item => item.max > 0)
-    .sort((a, b) => b.max - a.max || a.pliego.localeCompare(b.pliego, "es"));
+    .sort((a, b) => {
+      if (a.hasCanon !== b.hasCanon) return a.hasCanon ? -1 : 1;
+      if (a.hasCanon && b.hasCanon) return b.amount - a.amount;
+      return a.pliego.localeCompare(b.pliego, "es");
+    });
 
-  const canonTotalMin = canonRows.reduce((sum, item) => sum + item.min, 0);
-  const canonTotalMax = canonRows.reduce((sum, item) => sum + item.max, 0);
-  const canonConflicts = canonRows.filter(item => item.conflict).length;
+  const canonRows = canonAllRows.filter(item => item.hasCanon);
+  const canonMissingRows = canonAllRows.filter(item => !item.hasCanon);
+  const canonTotal = canonRows.reduce((sum, item) => sum + item.amount, 0);
+  const canonTotalMin = canonTotal;
+  const canonTotalMax = canonTotal;
+  const canonConflicts = 0;
 
   const directCount = uniqueCount(
     rows.filter(row => normalizeText(row.ambito_vraem) === "INTERVENCIÓN DIRECTA"),
@@ -628,7 +646,9 @@ function computeModel(rows) {
     budgetCommitment,
     budgetAccrued,
     budgetPaid,
+    canonAllRows,
     canonRows,
+    canonMissingRows,
     canonTotalMin,
     canonTotalMax,
     canonConflicts,
@@ -1090,7 +1110,12 @@ function renderBudget(model) {
   items.forEach(([barId, pctId, value]) => {
     setBudgetBar(barId, value, model.budgetPim);
     const node = document.getElementById(pctId);
-    if (node) node.textContent = `${percent(value, model.budgetPim)}%`;
+    if (node) {
+      animateNumber(node, percent(value, model.budgetPim), {
+        duration: 520,
+        formatter: current => `${Math.round(current)}%`
+      });
+    }
   });
 
   const devRate = model.budgetPim > 0 ? (model.budgetAccrued / model.budgetPim) * 100 : 0;
@@ -1103,8 +1128,12 @@ function renderBudget(model) {
   const saldoDevNode = document.getElementById("saldoDevengar");
   const saldoGirarNode = document.getElementById("saldoGirar");
 
-  if (devNode) devNode.textContent = `${Math.round(devRate)}%`;
-  if (giradoDevNode) giradoDevNode.textContent = `${Math.round(giradoDevRate)}%`;
+  if (devNode) {
+    animateNumber(devNode, devRate, { duration: 560, formatter: current => `${Math.round(current)}%` });
+  }
+  if (giradoDevNode) {
+    animateNumber(giradoDevNode, giradoDevRate, { duration: 560, formatter: current => `${Math.round(current)}%` });
+  }
   if (saldoDevNode) animateNumber(saldoDevNode, saldoDevengar, { formatter: compactMoney });
   if (saldoGirarNode) animateNumber(saldoGirarNode, saldoGirar, { formatter: compactMoney });
 
@@ -1117,18 +1146,88 @@ function canonRangeText(min, max) {
   return `${compactMoney(min)} – ${compactMoney(max)}`;
 }
 
+function canonRowsForModal(model) {
+  if (!model) return [];
+  if (CANON_MODAL_FILTER === "with") return model.canonRows || [];
+  if (CANON_MODAL_FILTER === "without") return model.canonMissingRows || [];
+  return model.canonAllRows || [];
+}
+
+function updateCanonModalFilterState() {
+  document.querySelectorAll("[data-canon-modal-filter]").forEach(button => {
+    const active = button.dataset.canonModalFilter === CANON_MODAL_FILTER;
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-pressed", active ? "true" : "false");
+  });
+}
+
+function renderCanonModalRows(model) {
+  const modalRows = document.getElementById("canonRowsModal");
+  if (!modalRows || !model) return;
+
+  modalRows.replaceChildren();
+  const rows = canonRowsForModal(model);
+
+  if (!rows.length) {
+    const empty = document.createElement("div");
+    empty.className = "canon-table__empty";
+    empty.textContent = CANON_MODAL_FILTER === "without"
+      ? "Todos los pliegos del filtro activo tienen canon asignado."
+      : CANON_MODAL_FILTER === "with"
+        ? "No hay pliegos con canon asignado en el filtro activo."
+        : "No hay pliegos disponibles en el filtro activo.";
+    modalRows.appendChild(empty);
+    updateCanonModalFilterState();
+    return;
+  }
+
+  rows.forEach(item => {
+    const row = document.createElement("div");
+    row.className = "canon-table__row";
+
+    const pliego = document.createElement("span");
+    pliego.textContent = item.pliego;
+    pliego.title = item.pliego;
+
+    const investments = document.createElement("span");
+    investments.textContent = integer(item.investments);
+
+    const status = document.createElement("span");
+    status.className = `canon-status ${item.hasCanon ? "canon-status--with" : "canon-status--without"}`;
+    status.textContent = item.hasCanon ? "Con canon" : "Sin canon";
+
+    const amount = document.createElement("span");
+    amount.className = "canon-table__amount";
+    amount.textContent = fullSoles(item.amount);
+
+    row.append(pliego, investments, status, amount);
+    modalRows.appendChild(row);
+  });
+
+  updateCanonModalFilterState();
+}
+
 function renderCanon(model) {
+  CANON_MODAL_MODEL = model;
+
   const total = document.getElementById("canonTotal");
   const subtitle = document.getElementById("canonSubtitle");
   const note = document.getElementById("canonQualityNote");
   const modalPliegos = document.getElementById("canonModalPliegos");
+  const modalWithCanon = document.getElementById("canonModalWithCanon");
+  const modalWithoutCanon = document.getElementById("canonModalWithoutCanon");
   const modalTotal = document.getElementById("canonModalTotal");
 
-  const totalText = canonRangeText(model.canonTotalMin, model.canonTotalMax);
-  if (total) total.textContent = totalText;
-  if (subtitle) subtitle.textContent = `${integer(model.canonRows.length)} pliegos en el filtro activo`;
-  if (modalPliegos) modalPliegos.textContent = integer(model.canonRows.length);
-  if (modalTotal) modalTotal.textContent = totalText;
+  if (total) {
+    animateNumber(total, model.canonTotalMax, { duration: 650, formatter: compactMoney });
+  }
+  if (subtitle) {
+    subtitle.textContent = `${integer(model.canonRows.length)} con canon · ${integer(model.canonMissingRows.length)} sin canon`;
+  }
+  if (modalPliegos) animateNumber(modalPliegos, model.canonAllRows.length);
+  if (modalWithCanon) animateNumber(modalWithCanon, model.canonRows.length);
+  if (modalWithoutCanon) animateNumber(modalWithoutCanon, model.canonMissingRows.length);
+  if (modalTotal) animateNumber(modalTotal, model.canonTotalMax, { duration: 650, formatter: compactMoney });
 
   if (note) {
     note.classList.remove("has-warning");
@@ -1139,13 +1238,31 @@ function renderCanon(model) {
   const top = document.getElementById("canonTopBars");
   if (top) {
     top.replaceChildren();
-    const maxValue = Math.max(...model.canonRows.slice(0, 5).map(item => item.max), 1);
-    model.canonRows.slice(0, 5).forEach(item => {
+    const maxValue = Math.max(...model.canonRows.slice(0, 5).map(item => item.amount), 1);
+    model.canonRows.slice(0, 5).forEach((item, index) => {
       const row = document.createElement("div");
       row.className = "canon-top__row";
-      row.innerHTML = `<span title="${item.pliego.replace(/\"/g, '&quot;')}">${item.pliegoShort}</span><i><b style="width:${Math.max(4, item.max / maxValue * 100)}%"></b></i><strong>${tableMoney(item.max)}</strong>`;
+
+      const label = document.createElement("span");
+      label.title = item.pliego;
+      label.textContent = item.pliegoShort;
+
+      const track = document.createElement("i");
+      const fill = document.createElement("b");
+      fill.style.width = "0%";
+      track.appendChild(fill);
+
+      const amount = document.createElement("strong");
+      amount.textContent = tableMoney(item.amount);
+
+      row.append(label, track, amount);
       top.appendChild(row);
+
+      window.setTimeout(() => {
+        fill.style.width = `${Math.max(4, item.amount / maxValue * 100)}%`;
+      }, 70 + index * 55);
     });
+
     if (!model.canonRows.length) {
       const empty = document.createElement("div");
       empty.className = "canon-empty";
@@ -1154,21 +1271,7 @@ function renderCanon(model) {
     }
   }
 
-  const modalRows = document.getElementById("canonRowsModal");
-  if (modalRows) {
-    modalRows.replaceChildren();
-    model.canonRows.forEach(item => {
-      const row = document.createElement("div");
-      row.className = "canon-table__row";
-      const amount = canonRangeText(item.min, item.max);
-      [item.pliego, integer(item.investments), amount].forEach((value) => {
-        const cell = document.createElement("span");
-        cell.textContent = value;
-        row.appendChild(cell);
-      });
-      modalRows.appendChild(row);
-    });
-  }
+  renderCanonModalRows(model);
 }
 
 function renderFinancialGap(model) {
@@ -1567,6 +1670,16 @@ function renderScopeMap(baseRows, model, state) {
   });
 }
 
+function triggerFinancialMotion() {
+  document.querySelectorAll(".financial-grid > .analytics-card").forEach((card, index) => {
+    card.classList.remove("is-data-refreshing");
+    // Forzar reflow permite que la animación se repita con cada cambio de filtro.
+    void card.offsetWidth;
+    window.setTimeout(() => card.classList.add("is-data-refreshing"), index * 45);
+    window.setTimeout(() => card.classList.remove("is-data-refreshing"), 620 + index * 45);
+  });
+}
+
 function renderAll(state, baseRows) {
   const model = computeModel(filteredRows(baseRows, state));
 
@@ -1579,6 +1692,7 @@ function renderAll(state, baseRows) {
   renderResourceManagement(model);
   renderBudget(model);
   renderCanon(model);
+  triggerFinancialMotion();
   renderStage(model);
   renderProvinceBars(model, state);
   renderScopeMap(baseRows, model, state);
@@ -1682,10 +1796,28 @@ function bindModal(modalId, openButtonId, closeButtonId, backdropSelector) {
   });
 }
 
+function bindCanonModalFilters() {
+  document.querySelectorAll("[data-canon-modal-filter]").forEach(button => {
+    button.addEventListener("click", () => {
+      CANON_MODAL_FILTER = button.dataset.canonModalFilter || "all";
+      if (CANON_MODAL_MODEL) renderCanonModalRows(CANON_MODAL_MODEL);
+    });
+  });
+
+  const openButton = document.getElementById("expandCanonTable");
+  if (openButton) {
+    openButton.addEventListener("click", () => {
+      CANON_MODAL_FILTER = "all";
+      if (CANON_MODAL_MODEL) renderCanonModalRows(CANON_MODAL_MODEL);
+    });
+  }
+}
+
 function bindFinancialModal() {
   bindModal("financialModal", "expandFinancialTable", "closeFinancialModal", "[data-close-financial-modal]");
   bindModal("portfolioModal", "expandPortfolioTable", "closePortfolioModal", "[data-close-portfolio-modal]");
   bindModal("canonModal", "expandCanonTable", "closeCanonModal", "[data-close-canon-modal]");
+  bindCanonModalFilters();
 }
 
 async function initInicio() {

@@ -579,16 +579,26 @@
         <div>
           <span class="financial-modal__eyebrow">Detalle por pliego</span>
           <h2 id="canonModalTitle">Canon registrado</h2>
-          <p>El canon pertenece al pliego; los registros repetidos por CUI se consolidan una sola vez.</p>
+          <p>Consulta los pliegos con y sin canon dentro del filtro activo; el monto se consolida una sola vez por pliego.</p>
         </div>
         <button class="financial-modal__close" id="closeCanonModal" type="button" aria-label="Cerrar detalle de canon"><i class="bi bi-x-lg"></i></button>
       </header>
-      <div class="canon-modal__summary">
-        <div><span>Pliegos</span><strong id="canonModalPliegos">-</strong></div>
-        <div><span>Canon consolidado</span><strong id="canonModalTotal">-</strong></div>
+      <div class="canon-modal__summary canon-modal__filters" aria-label="Filtros del detalle de canon">
+        <button class="canon-modal-kpi is-active" type="button" data-canon-modal-filter="all" aria-pressed="true">
+          <span>Todos los pliegos</span><strong id="canonModalPliegos">-</strong><small>Ver cartera completa</small>
+        </button>
+        <button class="canon-modal-kpi" type="button" data-canon-modal-filter="with" aria-pressed="false">
+          <span>Con canon</span><strong id="canonModalWithCanon">-</strong><small>Pliegos con monto asignado</small>
+        </button>
+        <button class="canon-modal-kpi canon-modal-kpi--missing" type="button" data-canon-modal-filter="without" aria-pressed="false">
+          <span>Sin canon</span><strong id="canonModalWithoutCanon">-</strong><small>Identificar pliegos pendientes</small>
+        </button>
+        <div class="canon-modal-kpi canon-modal-kpi--amount">
+          <span>Canon consolidado</span><strong id="canonModalTotal">-</strong><small>Sin duplicar por inversión</small>
+        </div>
       </div>
       <div class="canon-modal__table" role="table" aria-label="Canon por pliego">
-        <div class="canon-table__head" role="row"><span>Pliego</span><span>IOARR del filtro</span><span>Canon registrado</span></div>
+        <div class="canon-table__head" role="row"><span>Pliego</span><span>IOARR del filtro</span><span>Estado</span><span>Canon asignado (S/.)</span></div>
         <div class="canon-table__body" id="canonRowsModal"></div>
       </div>
     </section>

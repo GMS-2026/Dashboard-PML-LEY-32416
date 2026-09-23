@@ -4934,3 +4934,149 @@ body.inicio-page .inicio-main{height:auto!important;overflow:visible!important}
   .canon-total strong{font-size:20px!important}
   .canon-top__row{grid-template-columns:88px minmax(0,1fr) 60px!important}
 }
+
+/* ============================================================
+   2026-09-23 · Canon completo + filtros del modal + movimiento financiero
+   ============================================================ */
+
+/* KPIs del modal Canon funcionan además como filtros. */
+.canon-modal__summary.canon-modal__filters{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr)) minmax(220px,1.25fr)!important;
+  gap:10px!important;
+  margin-bottom:12px!important;
+}
+.canon-modal-kpi{
+  min-width:0;
+  min-height:82px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+  gap:3px;
+  padding:12px 14px;
+  border:1px solid #dce5ea;
+  border-radius:12px;
+  background:#fff;
+  color:#29465b;
+  text-align:left;
+  font:inherit;
+  cursor:pointer;
+  box-shadow:0 3px 10px rgba(28,54,73,.045);
+  transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease,background .16s ease;
+}
+.canon-modal-kpi:hover{
+  transform:translateY(-1px);
+  border-color:#9ebdac;
+  box-shadow:0 6px 15px rgba(28,54,73,.08);
+}
+.canon-modal-kpi>span{
+  color:#657987;
+  font-size:10px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.03em;
+}
+.canon-modal-kpi>strong{
+  color:#2c5268;
+  font-size:24px;
+  line-height:1;
+  font-weight:950;
+}
+.canon-modal-kpi>small{
+  color:#82909a;
+  font-size:9px;
+  font-weight:750;
+}
+.canon-modal-kpi.is-active{
+  border-color:#4f8b72;
+  background:#f7fbf9;
+  box-shadow:inset 4px 0 0 #4f8b72,0 5px 14px rgba(58,115,91,.08);
+}
+.canon-modal-kpi--missing.is-active{
+  border-color:#a72f50;
+  background:#fff9fb;
+  box-shadow:inset 4px 0 0 #a72f50,0 5px 14px rgba(167,47,80,.07);
+}
+.canon-modal-kpi--missing.is-active>strong{color:#9d2949}
+.canon-modal-kpi--amount{
+  cursor:default;
+  border-color:#cfe0d7;
+  background:#fbfdfc;
+}
+.canon-modal-kpi--amount:hover{transform:none;box-shadow:0 3px 10px rgba(28,54,73,.045)}
+.canon-modal-kpi--amount>strong{
+  color:#397b64;
+  font-size:20px;
+  white-space:nowrap;
+}
+
+/* Tabla expandida: incluye estado y moneda completa en soles. */
+.canon-table__head,
+.canon-table__row{
+  grid-template-columns:minmax(330px,1.8fr) 115px 125px 205px!important;
+}
+.canon-table__row>span:first-child{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.canon-table__amount{
+  text-align:right;
+  white-space:nowrap;
+  font-variant-numeric:tabular-nums;
+  font-weight:900!important;
+  color:#2e5369!important;
+}
+.canon-status{
+  display:inline-flex!important;
+  width:max-content;
+  align-items:center;
+  justify-content:center;
+  padding:4px 8px;
+  border-radius:999px;
+  font-size:8.8px!important;
+  font-weight:900!important;
+  white-space:nowrap;
+}
+.canon-status--with{
+  color:#397b64!important;
+  background:#edf7f2;
+  border:1px solid #cfe6da;
+}
+.canon-status--without{
+  color:#9d2949!important;
+  background:#fff1f5;
+  border:1px solid #efd2dc;
+}
+.canon-table__empty{
+  min-height:180px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  color:#71818d;
+  font-size:11px;
+  font-weight:800;
+  text-align:center;
+}
+
+/* La tercera línea deja de aparecer estática: números, barras y tarjetas reaccionan a cada filtro. */
+.financial-grid > .analytics-card.is-data-refreshing{
+  animation:financialCardRefresh .52s cubic-bezier(.2,.82,.2,1);
+}
+@keyframes financialCardRefresh{
+  0%{transform:translateY(5px);opacity:.72;box-shadow:0 3px 10px rgba(24,49,67,.035)}
+  55%{transform:translateY(-1px);opacity:1}
+  100%{transform:translateY(0);opacity:1}
+}
+.canon-top__row>i>b{
+  width:0;
+  transition:width .72s cubic-bezier(.2,.82,.2,1)!important;
+}
+
+@media (max-width:1260px){
+  .canon-modal__summary.canon-modal__filters{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
