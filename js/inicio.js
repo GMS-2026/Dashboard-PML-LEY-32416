@@ -80,7 +80,11 @@ const DONUT_RADIUS = 57;
 const DONUT_CIRCUMFERENCE = 2 * Math.PI * DONUT_RADIUS;
 
 let CANON_MODAL_FILTER = "all";
+let CANON_MODAL_QUERY = "";
 let CANON_MODAL_MODEL = null;
+let PORTFOLIO_MODAL_FILTER = "all";
+let PORTFOLIO_MODAL_QUERY = "";
+let FINANCIAL_MODAL_QUERY = "";
 
 let DISTRICT_GEO = null;
 let TOPOLOGY_FEATURES = [];
@@ -225,7 +229,8 @@ function currentState() {
     territorio,
     departamento: params.get("departamento") ?? (sameTerritory ? saved.departamento || "" : ""),
     provincia: params.get("provincia") ?? (sameTerritory ? saved.provincia || "" : ""),
-    distrito: params.get("distrito") ?? (sameTerritory ? saved.distrito || "" : "")
+    distrito: params.get("distrito") ?? (sameTerritory ? saved.distrito || "" : ""),
+    buscar: params.get("buscar") ?? (sameTerritory ? saved.buscar || "" : "")
   };
 }
 
@@ -241,6 +246,7 @@ function queryFromState(state, extra = {}) {
   if (state.departamento) params.set("departamento", state.departamento);
   if (state.provincia) params.set("provincia", state.provincia);
   if (state.distrito) params.set("distrito", state.distrito);
+  if (state.buscar) params.set("buscar", state.buscar);
 
   Object.entries(extra).forEach(([key, value]) => {
     if (value !== null && value !== undefined && String(value) !== "") {
@@ -268,10 +274,17 @@ function territoryRows(data, territory) {
 }
 
 function filteredRows(rows, state) {
+  const search = normalizeModalQuery(state?.buscar || "");
   return rows.filter(row => {
     if (state.departamento && String(row.region || "") !== state.departamento) return false;
     if (state.provincia && String(row.provincia || "") !== state.provincia) return false;
     if (state.distrito && String(row.distrito || "") !== state.distrito) return false;
+    if (search) {
+      const cui = normalizeModalQuery(row.cui || "");
+      const pliego = normalizeModalQuery(row.pliego || "");
+      const pliegoShort = normalizeModalQuery(shortPliego(row.pliego || ""));
+      if (!cui.includes(search) && !pliego.includes(search) && !pliegoShort.includes(search)) return false;
+    }
     return true;
   });
 }
@@ -581,6 +594,7 @@ function computeModel(rows) {
         pliego: item.pliego,
         pliegoShort: shortPliego(item.pliego),
         investments: item.cuis.size,
+        cuis: [...item.cuis],
         values,
         amount,
         min: amount,
@@ -1023,6 +1037,45 @@ function renderResourceManagement(model) {
   });
 }
 
+function normalizeModalQuery(value) {
+  return normalizeText(value).normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+function closeExpandedModal(closeButtonId) {
+  const button = document.getElementById(closeButtonId);
+  if (button) button.click();
+}
+
+function selectExpandedFilter(filter, closeButtonId) {
+  closeExpandedModal(closeButtonId);
+  INICIO_VISUAL_FILTER = filter;
+  if (INICIO_RUNTIME) renderAll(INICIO_RUNTIME.state, INICIO_RUNTIME.baseRows);
+}
+
+function updatePortfolioModalFilterState() {
+  document.querySelectorAll("[data-portfolio-modal-filter]").forEach(button => {
+    const active = button.dataset.portfolioModalFilter === PORTFOLIO_MODAL_FILTER;
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-pressed", active ? "true" : "false");
+  });
+}
+
+function portfolioRowsForModal(model) {
+  let rows = [...(model?.rows || [])];
+  if (PORTFOLIO_MODAL_FILTER === "sufficient") rows = rows.filter(row => !needsResources(row));
+  if (PORTFOLIO_MODAL_FILTER === "requires") rows = rows.filter(needsResources);
+
+  const query = normalizeModalQuery(PORTFOLIO_MODAL_QUERY);
+  if (query) {
+    rows = rows.filter(row => {
+      const cui = normalizeModalQuery(row.cui);
+      const pliego = normalizeModalQuery(row.pliego);
+      return cui.includes(query) || pliego.includes(query);
+    });
+  }
+  return rows;
+}
+
 function renderPortfolioDetails(model) {
   const total = document.getElementById("portfolioModalTotal");
   const sufficient = document.getElementById("portfolioModalSufficient");
@@ -1035,15 +1088,30 @@ function renderPortfolioDetails(model) {
   if (!container) return;
   container.replaceChildren();
 
-  const rows = [...model.rows].sort((a, b) => {
+  const rows = portfolioRowsForModal(model).sort((a, b) => {
     const ar = needsResources(a) ? 1 : 0;
     const br = needsResources(b) ? 1 : 0;
     return ar - br || Number(b.deficit || 0) - Number(a.deficit || 0) || String(a.cui || "").localeCompare(String(b.cui || ""));
   });
 
+  const count = document.getElementById("portfolioModalResultCount");
+  if (count) count.textContent = `${integer(rows.length)} resultado${rows.length === 1 ? "" : "s"}`;
+
+  if (!rows.length) {
+    const empty = document.createElement("div");
+    empty.className = "modal-table-empty";
+    empty.textContent = PORTFOLIO_MODAL_QUERY ? "No se encontraron inversiones para la búsqueda." : "No hay inversiones para el filtro seleccionado.";
+    container.appendChild(empty);
+    updatePortfolioModalFilterState();
+    return;
+  }
+
   rows.forEach(item => {
     const row = document.createElement("div");
-    row.className = "portfolio-table__row";
+    row.className = "portfolio-table__row modal-selectable-row";
+    row.setAttribute("role", "button");
+    row.setAttribute("tabindex", "0");
+    row.title = `Seleccionar CUI ${item.cui || ""} y aplicar al dashboard`;
     const location = [item.region, item.provincia, item.distrito].filter(Boolean).map(smartTitle).join(" · ");
     const status = needsResources(item) ? "Requiere recursos" : "Totalidad de recursos";
     const cells = [
@@ -1072,8 +1140,18 @@ function renderPortfolioDetails(model) {
       }
       row.appendChild(cell);
     });
+
+    const select = event => {
+      if (event.type === "keydown" && event.key !== "Enter" && event.key !== " ") return;
+      if (event.type === "keydown") event.preventDefault();
+      selectExpandedFilter({ type: "cui", value: String(item.cui || ""), label: `CUI ${item.cui || ""}` }, "closePortfolioModal");
+    };
+    row.addEventListener("click", select);
+    row.addEventListener("keydown", select);
     container.appendChild(row);
   });
+
+  updatePortfolioModalFilterState();
 }
 
 function setBudgetBar(id, value, pim) {
@@ -1148,9 +1226,21 @@ function canonRangeText(min, max) {
 
 function canonRowsForModal(model) {
   if (!model) return [];
-  if (CANON_MODAL_FILTER === "with") return model.canonRows || [];
-  if (CANON_MODAL_FILTER === "without") return model.canonMissingRows || [];
-  return model.canonAllRows || [];
+  let rows = CANON_MODAL_FILTER === "with"
+    ? [...(model.canonRows || [])]
+    : CANON_MODAL_FILTER === "without"
+      ? [...(model.canonMissingRows || [])]
+      : [...(model.canonAllRows || [])];
+
+  const query = normalizeModalQuery(CANON_MODAL_QUERY);
+  if (query) {
+    rows = rows.filter(item => {
+      const pliego = normalizeModalQuery(item.pliego);
+      const cuis = (item.cuis || []).some(cui => normalizeModalQuery(cui).includes(query));
+      return pliego.includes(query) || cuis;
+    });
+  }
+  return rows;
 }
 
 function updateCanonModalFilterState() {
@@ -1167,15 +1257,19 @@ function renderCanonModalRows(model) {
 
   modalRows.replaceChildren();
   const rows = canonRowsForModal(model);
+  const count = document.getElementById("canonModalResultCount");
+  if (count) count.textContent = `${integer(rows.length)} pliego${rows.length === 1 ? "" : "s"}`;
 
   if (!rows.length) {
     const empty = document.createElement("div");
     empty.className = "canon-table__empty";
-    empty.textContent = CANON_MODAL_FILTER === "without"
-      ? "Todos los pliegos del filtro activo tienen canon asignado."
-      : CANON_MODAL_FILTER === "with"
-        ? "No hay pliegos con canon asignado en el filtro activo."
-        : "No hay pliegos disponibles en el filtro activo.";
+    empty.textContent = CANON_MODAL_QUERY
+      ? "No se encontraron pliegos para la búsqueda."
+      : CANON_MODAL_FILTER === "without"
+        ? "Todos los pliegos del filtro activo tienen canon asignado."
+        : CANON_MODAL_FILTER === "with"
+          ? "No hay pliegos con canon asignado en el filtro activo."
+          : "No hay pliegos disponibles en el filtro activo.";
     modalRows.appendChild(empty);
     updateCanonModalFilterState();
     return;
@@ -1183,7 +1277,10 @@ function renderCanonModalRows(model) {
 
   rows.forEach(item => {
     const row = document.createElement("div");
-    row.className = "canon-table__row";
+    row.className = "canon-table__row modal-selectable-row";
+    row.setAttribute("role", "button");
+    row.setAttribute("tabindex", "0");
+    row.title = `Seleccionar ${item.pliego} y aplicar al dashboard`;
 
     const pliego = document.createElement("span");
     pliego.textContent = item.pliego;
@@ -1192,15 +1289,26 @@ function renderCanonModalRows(model) {
     const investments = document.createElement("span");
     investments.textContent = integer(item.investments);
 
-    const status = document.createElement("span");
+    const statusCell = document.createElement("span");
+    statusCell.className = "canon-status-cell";
+    const status = document.createElement("b");
     status.className = `canon-status ${item.hasCanon ? "canon-status--with" : "canon-status--without"}`;
     status.textContent = item.hasCanon ? "Con canon" : "Sin canon";
+    statusCell.appendChild(status);
 
     const amount = document.createElement("span");
     amount.className = "canon-table__amount";
     amount.textContent = fullSoles(item.amount);
 
-    row.append(pliego, investments, status, amount);
+    row.append(pliego, investments, statusCell, amount);
+
+    const select = event => {
+      if (event.type === "keydown" && event.key !== "Enter" && event.key !== " ") return;
+      if (event.type === "keydown") event.preventDefault();
+      selectExpandedFilter({ type: "pliego", value: normalizePliegoKey(item.pliego), label: shortPliego(item.pliego) }, "closeCanonModal");
+    };
+    row.addEventListener("click", select);
+    row.addEventListener("keydown", select);
     modalRows.appendChild(row);
   });
 
@@ -1274,6 +1382,59 @@ function renderCanon(model) {
   renderCanonModalRows(model);
 }
 
+function financialRowsForModal(model) {
+  let rows = [...(model?.financialGapRows || [])];
+  const query = normalizeModalQuery(FINANCIAL_MODAL_QUERY);
+  if (query) {
+    rows = rows.filter(item => normalizeModalQuery(item.cui).includes(query) || normalizeModalQuery(item.pliegoFull).includes(query));
+  }
+  return rows;
+}
+
+function appendFinancialRows(container, rows, selectable = false) {
+  container.replaceChildren();
+  if (!rows.length) {
+    const empty = document.createElement("div");
+    empty.className = "financial-empty";
+    empty.textContent = FINANCIAL_MODAL_QUERY && selectable
+      ? "No se encontraron inversiones para la búsqueda."
+      : "Sin inversiones con déficit financiero en el filtro activo.";
+    container.appendChild(empty);
+    return;
+  }
+
+  rows.forEach(item => {
+    const row = document.createElement("div");
+    row.className = `financial-row${selectable ? " modal-selectable-row" : ""}`;
+    row.setAttribute("role", selectable ? "button" : "row");
+    if (selectable) {
+      row.setAttribute("tabindex", "0");
+      row.title = `Seleccionar CUI ${item.cui} y aplicar al dashboard`;
+    }
+
+    const values = [item.cui, item.pliego, tableMoney(item.cost), tableMoney(item.accrued), tableMoney(item.pim), tableMoney(item.deficit)];
+    values.forEach((value, index) => {
+      const cell = document.createElement("span");
+      cell.setAttribute("role", "cell");
+      cell.textContent = value;
+      if (index === 0) cell.title = `CUI ${value}`;
+      if (index === 1) cell.title = item.pliegoFull;
+      row.appendChild(cell);
+    });
+
+    if (selectable) {
+      const select = event => {
+        if (event.type === "keydown" && event.key !== "Enter" && event.key !== " ") return;
+        if (event.type === "keydown") event.preventDefault();
+        selectExpandedFilter({ type: "cui", value: String(item.cui || ""), label: `CUI ${item.cui || ""}` }, "closeFinancialModal");
+      };
+      row.addEventListener("click", select);
+      row.addEventListener("keydown", select);
+    }
+    container.appendChild(row);
+  });
+}
+
 function renderFinancialGap(model) {
   const financialTotals = [
     { ids: ["financialTotalCost", "financialModalTotalCost"], value: model.financialCost },
@@ -1283,59 +1444,17 @@ function renderFinancialGap(model) {
   ];
 
   financialTotals.forEach(item => {
-    item.ids.forEach(id => {
-      animateNumber(
-        document.getElementById(id),
-        item.value,
-        { formatter: compactMoney }
-      );
-    });
+    item.ids.forEach(id => animateNumber(document.getElementById(id), item.value, { formatter: compactMoney }));
   });
 
-  const targets = [
-    document.getElementById("financialGapRows"),
-    document.getElementById("financialGapRowsModal")
-  ].filter(Boolean);
+  const compact = document.getElementById("financialGapRows");
+  if (compact) appendFinancialRows(compact, model.financialGapRows, false);
 
-  targets.forEach(container => {
-    container.replaceChildren();
-
-    if (!model.financialGapRows.length) {
-      const empty = document.createElement("div");
-      empty.className = "financial-empty";
-      empty.textContent = "Sin inversiones con déficit financiero en el filtro activo.";
-      container.appendChild(empty);
-      return;
-    }
-
-    model.financialGapRows.forEach(item => {
-      const row = document.createElement("div");
-      row.className = "financial-row";
-      row.setAttribute("role", "row");
-
-      const values = [
-        item.cui,
-        item.pliego,
-        tableMoney(item.cost),
-        tableMoney(item.accrued),
-        tableMoney(item.pim),
-        tableMoney(item.deficit)
-      ];
-
-      values.forEach((value, index) => {
-        const cell = document.createElement("span");
-        cell.setAttribute("role", "cell");
-        cell.textContent = value;
-
-        if (index === 0) cell.title = `CUI ${value}`;
-        if (index === 1) cell.title = item.pliegoFull;
-
-        row.appendChild(cell);
-      });
-
-      container.appendChild(row);
-    });
-  });
+  const modal = document.getElementById("financialGapRowsModal");
+  const modalRows = financialRowsForModal(model);
+  if (modal) appendFinancialRows(modal, modalRows, true);
+  const count = document.getElementById("financialModalResultCount");
+  if (count) count.textContent = `${integer(modalRows.length)} resultado${modalRows.length === 1 ? "" : "s"}`;
 }
 
 function groupedGap(rows, field) {
@@ -1701,6 +1820,161 @@ function renderAll(state, baseRows) {
   document.body.classList.remove("is-loading");
 }
 
+
+function globalSearchRows(baseRows, state) {
+  return baseRows.filter(row => {
+    if (state.departamento && String(row.region || "") !== state.departamento) return false;
+    if (state.provincia && String(row.provincia || "") !== state.provincia) return false;
+    if (state.distrito && String(row.distrito || "") !== state.distrito) return false;
+    return true;
+  });
+}
+
+function globalSearchChoices(rows) {
+  const pliegoMap = new Map();
+  const cuiMap = new Map();
+
+  rows.forEach(row => {
+    const cui = String(row.cui || "").trim();
+    const pliego = String(row.pliego || "").trim();
+    const location = [row.region, row.provincia, row.distrito].filter(Boolean).join(" · ");
+
+    if (pliego) {
+      const key = normalizePliegoKey(pliego);
+      if (!pliegoMap.has(key)) {
+        pliegoMap.set(key, { type: "PLIEGO", value: pliego, label: shortPliego(pliego), full: pliego, count: 0, locations: new Set() });
+      }
+      const item = pliegoMap.get(key);
+      item.count += 1;
+      if (location) item.locations.add(location);
+    }
+
+    if (cui && !cuiMap.has(cui)) {
+      cuiMap.set(cui, { type: "CUI", value: cui, label: cui, full: pliego || "Sin pliego", location });
+    }
+  });
+
+  const pliegos = [...pliegoMap.values()]
+    .map(item => ({ ...item, location: [...item.locations][0] || "", locations: undefined }))
+    .sort((a, b) => a.label.localeCompare(b.label, "es", { sensitivity: "base" }));
+  const cuis = [...cuiMap.values()].sort((a, b) => a.label.localeCompare(b.label, "es", { numeric: true }));
+  return [...pliegos, ...cuis];
+}
+
+function setupGlobalSearchCombo({ input, toggle, dropdown, list, meta, getRows, onSelect }) {
+  if (!input || !dropdown || !list) return { refresh() {}, close() {} };
+  let choices = [];
+  let activeIndex = -1;
+
+  const normalize = value => normalizeModalQuery(value || "");
+  const visibleChoices = () => {
+    const q = normalize(input.value);
+    const matches = q
+      ? choices.filter(item => {
+          const haystack = normalize([item.label, item.full, item.value, item.location].filter(Boolean).join(" "));
+          return haystack.includes(q);
+        })
+      : choices;
+    return matches.slice(0, 180);
+  };
+
+  const setOpen = open => {
+    dropdown.hidden = !open;
+    input.setAttribute("aria-expanded", open ? "true" : "false");
+    if (toggle) toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    if (!open) activeIndex = -1;
+  };
+
+  const render = () => {
+    const rows = getRows();
+    choices = globalSearchChoices(rows);
+    const shown = visibleChoices();
+    list.replaceChildren();
+    activeIndex = -1;
+
+    if (meta) {
+      const totalPliegos = choices.filter(item => item.type === "PLIEGO").length;
+      const totalCuis = choices.length - totalPliegos;
+      meta.textContent = `${totalPliegos} pliegos · ${totalCuis} CUI disponibles`;
+    }
+
+    if (!shown.length) {
+      const empty = document.createElement("div");
+      empty.className = "filter-search-empty";
+      empty.textContent = "Sin coincidencias para el filtro actual.";
+      list.appendChild(empty);
+      return;
+    }
+
+    shown.forEach((item, index) => {
+      const option = document.createElement("button");
+      option.type = "button";
+      option.className = "filter-search-option";
+      option.dataset.index = String(index);
+      option.setAttribute("role", "option");
+      option.setAttribute("aria-selected", "false");
+
+      const badge = document.createElement("span");
+      badge.className = `filter-search-option__badge filter-search-option__badge--${item.type.toLowerCase()}`;
+      badge.textContent = item.type;
+
+      const copy = document.createElement("span");
+      copy.className = "filter-search-option__copy";
+      const strong = document.createElement("strong");
+      strong.textContent = item.label;
+      const small = document.createElement("small");
+      small.textContent = item.type === "PLIEGO"
+        ? `${item.count} IOARR${item.location ? ` · ${item.location}` : ""}`
+        : `${shortPliego(item.full)}${item.location ? ` · ${item.location}` : ""}`;
+      copy.append(strong, small);
+      option.append(badge, copy);
+
+      option.addEventListener("mousedown", event => event.preventDefault());
+      option.addEventListener("click", () => {
+        input.value = item.value;
+        setOpen(false);
+        onSelect(item.value);
+      });
+      list.appendChild(option);
+    });
+  };
+
+  const moveActive = direction => {
+    const options = [...list.querySelectorAll(".filter-search-option")];
+    if (!options.length) return;
+    activeIndex = Math.max(0, Math.min(options.length - 1, activeIndex + direction));
+    options.forEach((option, index) => {
+      const active = index === activeIndex;
+      option.classList.toggle("is-active", active);
+      option.setAttribute("aria-selected", active ? "true" : "false");
+      if (active) option.scrollIntoView({ block: "nearest" });
+    });
+  };
+
+  input.addEventListener("focus", () => { render(); setOpen(true); });
+  input.addEventListener("click", () => { render(); setOpen(true); });
+  input.addEventListener("input", () => { render(); setOpen(true); });
+  input.addEventListener("keydown", event => {
+    if (event.key === "ArrowDown") { event.preventDefault(); if (dropdown.hidden) { render(); setOpen(true); } moveActive(1); }
+    if (event.key === "ArrowUp") { event.preventDefault(); moveActive(-1); }
+    if (event.key === "Enter" && activeIndex >= 0) {
+      const option = list.querySelector(`.filter-search-option[data-index="${activeIndex}"]`);
+      if (option) { event.preventDefault(); option.click(); }
+    }
+    if (event.key === "Escape") setOpen(false);
+  });
+  if (toggle) toggle.addEventListener("click", () => { if (dropdown.hidden) { render(); setOpen(true); input.focus(); } else setOpen(false); });
+
+  document.addEventListener("pointerdown", event => {
+    if (!dropdown.hidden && !event.target.closest("#globalSearchCombo")) setOpen(false);
+  });
+
+  return {
+    refresh() { if (!dropdown.hidden) render(); },
+    close() { setOpen(false); }
+  };
+}
+
 function bindFilters(data, initialState) {
   const territorioSelect = document.getElementById("territorioSelect");
   const departamentoSelect = document.getElementById("departamentoSelect");
@@ -1796,7 +2070,7 @@ function bindModal(modalId, openButtonId, closeButtonId, backdropSelector) {
   });
 }
 
-function bindCanonModalFilters() {
+function bindExpandedTableControls() {
   document.querySelectorAll("[data-canon-modal-filter]").forEach(button => {
     button.addEventListener("click", () => {
       CANON_MODAL_FILTER = button.dataset.canonModalFilter || "all";
@@ -1804,20 +2078,78 @@ function bindCanonModalFilters() {
     });
   });
 
-  const openButton = document.getElementById("expandCanonTable");
-  if (openButton) {
-    openButton.addEventListener("click", () => {
-      CANON_MODAL_FILTER = "all";
-      if (CANON_MODAL_MODEL) renderCanonModalRows(CANON_MODAL_MODEL);
+  document.querySelectorAll("[data-portfolio-modal-filter]").forEach(button => {
+    button.addEventListener("click", () => {
+      PORTFOLIO_MODAL_FILTER = button.dataset.portfolioModalFilter || "all";
+      if (INICIO_RUNTIME) {
+        const model = computeModel(visualFilterRows(filteredRows(INICIO_RUNTIME.baseRows, INICIO_RUNTIME.state)));
+        renderPortfolioDetails(model);
+      }
     });
-  }
+  });
+
+  const portfolioSearch = document.getElementById("portfolioModalSearch");
+  if (portfolioSearch) portfolioSearch.addEventListener("input", () => {
+    PORTFOLIO_MODAL_QUERY = portfolioSearch.value || "";
+    if (INICIO_RUNTIME) {
+      const model = computeModel(visualFilterRows(filteredRows(INICIO_RUNTIME.baseRows, INICIO_RUNTIME.state)));
+      renderPortfolioDetails(model);
+    }
+  });
+
+  const financialSearch = document.getElementById("financialModalSearch");
+  if (financialSearch) financialSearch.addEventListener("input", () => {
+    FINANCIAL_MODAL_QUERY = financialSearch.value || "";
+    if (INICIO_RUNTIME) {
+      const model = computeModel(visualFilterRows(filteredRows(INICIO_RUNTIME.baseRows, INICIO_RUNTIME.state)));
+      renderFinancialGap(model);
+    }
+  });
+
+  const canonSearch = document.getElementById("canonModalSearch");
+  if (canonSearch) canonSearch.addEventListener("input", () => {
+    CANON_MODAL_QUERY = canonSearch.value || "";
+    if (CANON_MODAL_MODEL) renderCanonModalRows(CANON_MODAL_MODEL);
+  });
+
+  const canonOpen = document.getElementById("expandCanonTable");
+  if (canonOpen) canonOpen.addEventListener("click", () => {
+    CANON_MODAL_FILTER = "all";
+    CANON_MODAL_QUERY = "";
+    const input = document.getElementById("canonModalSearch");
+    if (input) input.value = "";
+    if (CANON_MODAL_MODEL) renderCanonModalRows(CANON_MODAL_MODEL);
+  });
+
+  const portfolioOpen = document.getElementById("expandPortfolioTable");
+  if (portfolioOpen) portfolioOpen.addEventListener("click", () => {
+    PORTFOLIO_MODAL_FILTER = "all";
+    PORTFOLIO_MODAL_QUERY = "";
+    const input = document.getElementById("portfolioModalSearch");
+    if (input) input.value = "";
+    if (INICIO_RUNTIME) {
+      const model = computeModel(visualFilterRows(filteredRows(INICIO_RUNTIME.baseRows, INICIO_RUNTIME.state)));
+      renderPortfolioDetails(model);
+    }
+  });
+
+  const financialOpen = document.getElementById("expandFinancialTable");
+  if (financialOpen) financialOpen.addEventListener("click", () => {
+    FINANCIAL_MODAL_QUERY = "";
+    const input = document.getElementById("financialModalSearch");
+    if (input) input.value = "";
+    if (INICIO_RUNTIME) {
+      const model = computeModel(visualFilterRows(filteredRows(INICIO_RUNTIME.baseRows, INICIO_RUNTIME.state)));
+      renderFinancialGap(model);
+    }
+  });
 }
 
 function bindFinancialModal() {
   bindModal("financialModal", "expandFinancialTable", "closeFinancialModal", "[data-close-financial-modal]");
   bindModal("portfolioModal", "expandPortfolioTable", "closePortfolioModal", "[data-close-portfolio-modal]");
   bindModal("canonModal", "expandCanonTable", "closeCanonModal", "[data-close-canon-modal]");
-  bindCanonModalFilters();
+  bindExpandedTableControls();
 }
 
 async function initInicio() {
@@ -1872,6 +2204,12 @@ function rowMatchesVisualFilter(row, filter = INICIO_VISUAL_FILTER) {
   const situation = normalizeText(row.estado_situacional);
   const packageName = normalizeText(row.paquete);
 
+  if (filter.type === 'cui') {
+    return String(row.cui || '') === String(filter.value || '');
+  }
+  if (filter.type === 'pliego') {
+    return normalizePliegoKey(row.pliego) === normalizePliegoKey(filter.value);
+  }
   if (filter.type === 'resources') {
     return filter.value === 'sufficient' ? !needsResources(row) : needsResources(row);
   }
@@ -2125,10 +2463,16 @@ function bindFilters(data, initialState) {
   const departamentoSelect = document.getElementById('departamentoSelect');
   const provinciaSelect = document.getElementById('provinciaSelect');
   const distritoSelect = document.getElementById('distritoSelect');
+  const globalSearchInput = document.getElementById('globalSearchInput');
+  const globalSearchToggle = document.getElementById('globalSearchToggle');
+  const globalSearchDropdown = document.getElementById('globalSearchDropdown');
+  const globalSearchList = document.getElementById('globalSearchList');
+  const globalSearchMeta = document.getElementById('globalSearchMeta');
   const resetButton = document.getElementById('resetFilters');
 
   let state = { ...initialState };
   let baseRows = territoryRows(data, state.territorio);
+  let globalSearchCombo = null;
 
   function apply(nextState, { preserveVisual = false } = {}) {
     state = { ...nextState };
@@ -2138,17 +2482,53 @@ function bindFilters(data, initialState) {
     persistState(state);
     updateUrl(state);
     territorioSelect.value = state.territorio;
+    if (globalSearchInput && globalSearchInput.value !== (state.buscar || '')) {
+      globalSearchInput.value = state.buscar || '';
+    }
     refreshFilterOptions(baseRows, state);
+    if (globalSearchCombo) globalSearchCombo.refresh();
 
     INICIO_RUNTIME = { state, baseRows, apply };
     renderAll(state, baseRows);
   }
 
-  territorioSelect.addEventListener('change', () => apply({ territorio: territorioSelect.value, departamento: '', provincia: '', distrito: '' }));
+  territorioSelect.addEventListener('change', () => apply({ territorio: territorioSelect.value, departamento: '', provincia: '', distrito: '', buscar: state.buscar || '' }));
   departamentoSelect.addEventListener('change', () => apply({ ...state, departamento: departamentoSelect.value, provincia: '', distrito: '' }));
   provinciaSelect.addEventListener('change', () => apply({ ...state, provincia: provinciaSelect.value, distrito: '' }));
   distritoSelect.addEventListener('change', () => apply({ ...state, distrito: distritoSelect.value }));
-  resetButton.addEventListener('click', () => apply({ territorio: state.territorio, departamento: '', provincia: '', distrito: '' }));
+
+  globalSearchCombo = setupGlobalSearchCombo({
+    input: globalSearchInput,
+    toggle: globalSearchToggle,
+    dropdown: globalSearchDropdown,
+    list: globalSearchList,
+    meta: globalSearchMeta,
+    getRows: () => globalSearchRows(baseRows, state),
+    onSelect: value => apply({ ...state, buscar: value }, { preserveVisual: true })
+  });
+
+  let globalSearchTimer = null;
+  if (globalSearchInput) {
+    const commitGlobalSearch = () => {
+      window.clearTimeout(globalSearchTimer);
+      apply({ ...state, buscar: globalSearchInput.value.trim() }, { preserveVisual: true });
+    };
+    globalSearchInput.addEventListener('input', () => {
+      window.clearTimeout(globalSearchTimer);
+      globalSearchTimer = window.setTimeout(commitGlobalSearch, 180);
+    });
+    globalSearchInput.addEventListener('keydown', event => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        commitGlobalSearch();
+      }
+      if (event.key === 'Escape') {
+        globalSearchCombo?.close();
+      }
+    });
+  }
+
+  resetButton.addEventListener('click', () => apply({ territorio: state.territorio, departamento: '', provincia: '', distrito: '', buscar: '' }));
 
   apply(state, { preserveVisual: true });
   bindInicioCrossFilters();

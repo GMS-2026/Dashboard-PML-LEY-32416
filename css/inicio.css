@@ -5080,3 +5080,889 @@ body.inicio-page .inicio-main{height:auto!important;overflow:visible!important}
     grid-template-columns:repeat(2,minmax(0,1fr))!important;
   }
 }
+
+/* ============================================================
+   2026-09-23 · Modales como selector/filtro + búsqueda
+   ============================================================ */
+
+/* Barra de búsqueda compartida para las vistas expandidas. */
+.modal-table-toolbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:10px 14px 0;
+  flex:0 0 auto;
+}
+.modal-table-search{
+  width:min(430px,62%);
+  height:36px;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:0 12px;
+  border:1px solid #d9e3e9;
+  border-radius:10px;
+  background:#fff;
+  box-shadow:0 2px 7px rgba(29,54,72,.035);
+  color:#718596;
+  transition:border-color .16s ease,box-shadow .16s ease;
+}
+.modal-table-search:focus-within{
+  border-color:#7897aa;
+  box-shadow:0 0 0 3px rgba(67,111,137,.08);
+}
+.modal-table-search i{font-size:13px;color:#638298}
+.modal-table-search input{
+  width:100%;
+  min-width:0;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:#29485f;
+  font:inherit;
+  font-size:10.5px;
+  font-weight:750;
+}
+.modal-table-search input::placeholder{color:#8a9aa5;font-weight:650}
+.modal-table-count{
+  flex:0 0 auto;
+  padding:6px 10px;
+  border-radius:999px;
+  background:#f0f4f7;
+  color:#607788;
+  font-size:9px;
+  font-weight:900;
+  white-space:nowrap;
+}
+.modal-table-empty{
+  min-height:170px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  color:#71818d;
+  font-size:11px;
+  font-weight:800;
+  text-align:center;
+}
+
+/* Situación de cartera: KPI del modal son filtros, con la misma lógica visual del resto. */
+.portfolio-modal__summary.portfolio-modal__filters{
+  gap:10px!important;
+  padding-top:10px!important;
+}
+.portfolio-modal__kpi{
+  min-width:0;
+  min-height:64px;
+  display:flex!important;
+  flex-direction:column;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  gap:2px;
+  padding:9px 12px!important;
+  border:1px solid #dce5ea!important;
+  border-radius:11px!important;
+  background:#fff!important;
+  color:#2f4e66;
+  text-align:left;
+  font:inherit;
+  cursor:pointer;
+  box-shadow:0 3px 10px rgba(28,54,73,.04);
+  transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease,background .16s ease;
+}
+.portfolio-modal__kpi:hover{transform:translateY(-1px);box-shadow:0 6px 14px rgba(28,54,73,.07)}
+.portfolio-modal__kpi span{
+  color:#687d8f!important;
+  font-size:9px!important;
+  line-height:1.05;
+  font-weight:900!important;
+  text-transform:uppercase;
+  letter-spacing:.02em;
+}
+.portfolio-modal__kpi strong{font-size:20px!important;line-height:1!important}
+.portfolio-modal__kpi small{color:#8998a3;font-size:8.4px;font-weight:750;line-height:1.1}
+.portfolio-modal__kpi.is-active{
+  border-color:#557f96!important;
+  background:#f7fafc!important;
+  box-shadow:inset 4px 0 0 #557f96,0 4px 12px rgba(47,78,102,.06)!important;
+}
+.portfolio-modal__kpi--good.is-active{
+  border-color:#5b9277!important;
+  background:#f6fbf8!important;
+  box-shadow:inset 4px 0 0 #5b9277,0 4px 12px rgba(57,115,92,.06)!important;
+}
+.portfolio-modal__kpi--risk.is-active{
+  border-color:#a52d4d!important;
+  background:#fff8fa!important;
+  box-shadow:inset 4px 0 0 #a52d4d,0 4px 12px rgba(165,45,77,.06)!important;
+}
+.portfolio-modal__table{margin-top:8px!important}
+
+/* El nombre de inversión se muestra completo: la fila crece solo cuando lo requiere. */
+.portfolio-table__row{
+  height:auto!important;
+  min-height:44px!important;
+  max-height:none!important;
+  align-items:stretch;
+}
+.portfolio-investment-name{
+  display:flex!important;
+  align-items:center;
+  max-height:none!important;
+  overflow:visible!important;
+  white-space:normal!important;
+  line-height:1.2!important;
+  -webkit-line-clamp:unset!important;
+  line-clamp:unset!important;
+  -webkit-box-orient:initial!important;
+  padding-top:6px!important;
+  padding-bottom:6px!important;
+}
+
+/* Filas de los modales: selección explícita para filtrar el dashboard. */
+.modal-selectable-row{
+  cursor:pointer;
+  outline:none;
+  transition:background .14s ease,box-shadow .14s ease;
+}
+.modal-selectable-row:hover,
+.modal-selectable-row:focus-visible{
+  background:#f3f8fb!important;
+  box-shadow:inset 3px 0 0 #557f96;
+}
+.canon-table__row.modal-selectable-row:hover,
+.canon-table__row.modal-selectable-row:focus-visible{
+  background:#f4faf7!important;
+  box-shadow:inset 3px 0 0 #4f8b72;
+}
+
+/* Canon: badge compacto, sin ocupar el alto/ancho completo de la celda. */
+.canon-status-cell{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:4px 6px!important;
+}
+.canon-status{
+  display:inline-flex!important;
+  width:auto!important;
+  min-width:0!important;
+  max-width:max-content!important;
+  min-height:0!important;
+  padding:2px 7px!important;
+  border-radius:999px!important;
+  font-size:8.1px!important;
+  line-height:1.15!important;
+  font-weight:900!important;
+  white-space:nowrap;
+}
+.canon-table__row{min-height:36px!important}
+.canon-modal__table{margin-top:8px!important}
+
+/* Déficit: buscador y filas seleccionables dentro del modal. */
+.modal-table-toolbar--financial{padding-top:8px}
+.financial-modal__table{margin-top:8px!important}
+.financial-modal__table .financial-row.modal-selectable-row:hover,
+.financial-modal__table .financial-row.modal-selectable-row:focus-visible{
+  background:#f3f8fb!important;
+  box-shadow:inset 3px 0 0 #557f96;
+}
+
+@media (max-width:900px){
+  .modal-table-search{width:100%}
+  .modal-table-toolbar{align-items:stretch;flex-direction:column}
+  .modal-table-count{align-self:flex-start}
+}
+
+/* ============================================================
+   2026-09-23 · Respiración visual + filtro global CUI / Pliego
+   ============================================================ */
+.filter-bar{
+  grid-template-columns:190px minmax(150px,1.08fr) repeat(3,minmax(125px,.92fr)) minmax(180px,1.18fr) 112px!important;
+  gap:10px!important;
+  min-height:68px!important;
+  padding:9px 12px!important;
+}
+.filter-field--search{min-width:0}
+.filter-search-box{
+  width:100%;
+  height:40px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:0 10px;
+  border:1px solid #dbe4eb;
+  border-radius:8px;
+  background:#fff;
+  color:#6c8191;
+  transition:border-color .16s ease,box-shadow .16s ease;
+}
+.filter-search-box:focus-within{
+  border-color:rgba(var(--scope-rgb),.38);
+  box-shadow:0 0 0 3px rgba(var(--scope-rgb),.06);
+}
+.filter-search-box i{font-size:13px;color:#7890a2;flex:0 0 auto}
+.filter-search-box input{
+  width:100%;
+  min-width:0;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:#26435a;
+  font:inherit;
+  font-size:11px;
+  font-weight:800;
+}
+.filter-search-box input::placeholder{color:#8b9aa6;font-weight:650}
+
+/* Dar aire entre bloques sin abandonar la composición ejecutiva. */
+body.inicio-page .inicio-main{padding:14px 16px 18px!important}
+.inicio-stage{gap:12px!important}
+.kpi-row,.main-grid,.bottom-grid,.financial-grid{gap:12px!important}
+
+@media (min-width:1261px){
+  .inicio-stage{
+    grid-template-rows:142px 68px 88px 334px 240px 204px!important;
+  }
+  .main-grid{min-height:334px!important;height:334px!important;max-height:334px!important}
+  .bottom-grid{min-height:240px!important;height:240px!important;max-height:240px!important}
+  .financial-grid{min-height:204px!important;height:204px!important;max-height:204px!important}
+  .financial-grid > .analytics-card{height:204px!important;min-height:204px!important;max-height:204px!important}
+}
+
+/* Unificar el encuadre visual de todas las tarjetas. */
+.exec-card,.analytics-card,.kpi-card,.filter-bar,.inicio-hero{
+  border-radius:14px!important;
+}
+.exec-card__head,.analytics-card__head{padding-left:12px!important;padding-right:12px!important}
+.main-grid .exec-card,.bottom-grid .analytics-card,.financial-grid .analytics-card{
+  box-shadow:0 9px 24px rgba(30,55,80,.075),0 2px 7px rgba(30,55,80,.035)!important;
+}
+
+/* En pantallas algo más estrechas el buscador pasa a una segunda línea limpia. */
+@media (max-width:1420px) and (min-width:901px){
+  .filter-bar{
+    grid-template-columns:180px repeat(4,minmax(120px,1fr)) 112px!important;
+  }
+  .filter-field--search{
+    grid-column:2/6;
+  }
+  .filter-reset{grid-column:6;grid-row:2}
+  .filter-bar{min-height:116px!important}
+  .inicio-stage{grid-template-rows:142px 116px 88px 334px 240px 204px!important}
+}
+
+@media (max-width:900px){
+  .filter-field--search{grid-column:auto}
+}
+
+/* ============================================================
+   2026-09-23 · Afinado fila principal + selector CUI / Pliego
+   ============================================================ */
+
+/* La primera fila recupera compacidad y usa toda su altura útil. */
+@media (min-width:1261px){
+  .inicio-stage{
+    grid-template-rows:142px 68px 88px 318px 240px 204px!important;
+  }
+  .main-grid{
+    min-height:318px!important;
+    height:318px!important;
+    max-height:318px!important;
+    gap:10px!important;
+  }
+  .main-grid .exec-card__head{
+    min-height:50px!important;
+    padding-top:6px!important;
+    padding-bottom:6px!important;
+  }
+
+  /* La ecuación conserva jerarquía, pero deja más viewport a la tabla. */
+  .card-financial-gap > .financial-summary-kpis{
+    flex:0 0 78px!important;
+    min-height:78px!important;
+    padding:6px 7px 4px!important;
+  }
+  .card-financial-gap .financial-summary-kpi{
+    min-height:64px!important;
+    grid-template-rows:24px auto!important;
+    gap:2px!important;
+    padding:4px 5px 5px!important;
+  }
+  .card-financial-gap .financial-summary-kpi > span{
+    width:24px!important;
+    height:24px!important;
+    font-size:10px!important;
+  }
+  .card-financial-gap .financial-summary-kpi small{
+    min-height:15px!important;
+    font-size:7px!important;
+    line-height:1.04!important;
+  }
+  .card-financial-gap .financial-summary-kpi strong{
+    font-size:12.6px!important;
+  }
+
+  /* El tbody ocupa TODO el espacio restante: no hay falso vacío bajo las filas. */
+  .card-financial-gap .financial-table-wrap{
+    flex:1 1 0!important;
+    height:0!important;
+    min-height:0!important;
+    padding:3px 7px 7px!important;
+  }
+  .card-financial-gap .financial-table{
+    height:100%!important;
+    min-height:0!important;
+  }
+  .card-financial-gap .financial-table__head{
+    flex:0 0 35px!important;
+    min-height:35px!important;
+  }
+  .card-financial-gap .financial-table__body{
+    flex:1 1 0!important;
+    height:0!important;
+    min-height:0!important;
+    max-height:none!important;
+    overflow-y:auto!important;
+  }
+  .card-financial-gap .financial-row{
+    min-height:23px!important;
+    height:23px!important;
+  }
+
+  /* Los laterales de la fila quedan más compactos y centrados, sin zonas muertas. */
+  .card-portfolio .portfolio-content{
+    padding:6px 10px 7px!important;
+    row-gap:3px!important;
+  }
+  .card-portfolio .portfolio-resource{
+    grid-template-columns:154px minmax(0,1fr)!important;
+    gap:10px!important;
+  }
+  .card-portfolio .donut--resource,
+  .card-portfolio .donut--resource svg{
+    width:150px!important;
+    height:150px!important;
+  }
+  .card-portfolio .resource-item{
+    min-height:55px!important;
+    padding-top:6px!important;
+    padding-bottom:6px!important;
+  }
+  .card-portfolio .investment-strip{
+    margin-top:3px!important;
+    padding-top:6px!important;
+  }
+
+  .card-agreements .agreements-content{
+    flex:1 1 auto!important;
+    align-content:center!important;
+    padding:6px 9px!important;
+    gap:9px!important;
+  }
+  .card-agreements .donut--agreement,
+  .card-agreements .donut--agreement svg{
+    width:124px!important;
+    height:124px!important;
+  }
+  .card-agreements .agreement-list{
+    gap:5px!important;
+  }
+  .card-agreements .agreement-list>div{
+    min-height:48px!important;
+    padding:6px 8px!important;
+  }
+}
+
+/* CUI / Pliego: campo híbrido con lista desplegable navegable. */
+.filter-field--search{
+  position:relative;
+  z-index:35;
+}
+.filter-search-combo{
+  position:relative;
+  min-width:0;
+}
+.filter-search-box{
+  position:relative;
+  padding-right:4px!important;
+}
+.filter-search-box input{
+  padding-right:2px;
+}
+.filter-search-toggle{
+  flex:0 0 28px;
+  width:28px;
+  height:28px;
+  display:grid;
+  place-items:center;
+  border:0;
+  border-left:1px solid #e4ebf0;
+  background:transparent;
+  color:#6d8293;
+  cursor:pointer;
+  font-size:11px;
+}
+.filter-search-toggle:hover{color:#294d66}
+.filter-search-toggle[aria-expanded="true"] i{transform:rotate(180deg)}
+.filter-search-toggle i{transition:transform .16s ease}
+
+.filter-search-dropdown{
+  position:absolute;
+  z-index:200;
+  top:calc(100% + 6px);
+  left:0;
+  right:0;
+  min-width:330px;
+  overflow:hidden;
+  border:1px solid #d8e3ea;
+  border-radius:11px;
+  background:#fff;
+  box-shadow:0 18px 44px rgba(30,52,72,.18),0 4px 12px rgba(30,52,72,.08);
+}
+.filter-search-dropdown[hidden]{display:none!important}
+.filter-search-dropdown__meta{
+  min-height:38px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:7px 10px;
+  border-bottom:1px solid #e7edf2;
+  background:#f8fafc;
+  color:#506a7e;
+}
+.filter-search-dropdown__meta span{
+  font-size:9.2px;
+  font-weight:900;
+}
+.filter-search-dropdown__meta small{
+  color:#8796a2;
+  font-size:8px;
+  font-weight:750;
+  white-space:nowrap;
+}
+.filter-search-list{
+  max-height:276px;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  scrollbar-width:thin;
+  scrollbar-color:#9db0bf #eef3f6;
+  padding:4px;
+}
+.filter-search-list::-webkit-scrollbar{width:7px}
+.filter-search-list::-webkit-scrollbar-track{background:#eef3f6}
+.filter-search-list::-webkit-scrollbar-thumb{background:#9db0bf;border-radius:7px}
+.filter-search-option{
+  width:100%;
+  min-height:42px;
+  display:grid;
+  grid-template-columns:48px minmax(0,1fr);
+  gap:8px;
+  align-items:center;
+  padding:5px 7px;
+  border:0;
+  border-radius:7px;
+  background:#fff;
+  color:#29455d;
+  text-align:left;
+  cursor:pointer;
+}
+.filter-search-option:hover,
+.filter-search-option.is-active{
+  background:#f2f7fa;
+}
+.filter-search-option__badge{
+  justify-self:start;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:42px;
+  min-height:21px;
+  padding:0 6px;
+  border-radius:999px;
+  font-size:7.2px;
+  font-weight:950;
+  letter-spacing:.035em;
+}
+.filter-search-option__badge--cui{background:#edf5fa;color:#326b8c}
+.filter-search-option__badge--pliego{background:#f7edf1;color:#922541}
+.filter-search-option__copy{
+  min-width:0;
+  display:grid;
+  gap:2px;
+}
+.filter-search-option__copy strong{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  color:#29455d;
+  font-size:10px;
+  line-height:1.05;
+  font-weight:900;
+}
+.filter-search-option__copy small{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  color:#7b8e9d;
+  font-size:8px;
+  line-height:1.05;
+  font-weight:700;
+}
+.filter-search-empty{
+  padding:18px 12px;
+  color:#7b8e9d;
+  font-size:9px;
+  font-weight:800;
+  text-align:center;
+}
+
+@media (max-width:1420px) and (min-width:901px){
+  .filter-search-dropdown{min-width:420px}
+}
+@media (max-width:900px){
+  .filter-search-dropdown{min-width:100%}
+}
+
+/* ============================================================
+   2026-09-23 · CUI/Pliego alineado a filtros + capa superior
+   ============================================================ */
+/* Los elementos reveal generan contextos de apilamiento por transform.
+   Elevamos la barra completa para que el combo nunca quede detrás de KPI/gráficos. */
+.filter-bar.reveal{
+  position:relative!important;
+  z-index:5000!important;
+  overflow:visible!important;
+}
+.filter-bar__lead,
+.filter-field,
+.filter-field--search,
+.filter-search-combo{
+  overflow:visible!important;
+}
+.filter-field--search{z-index:5010!important}
+.filter-search-dropdown{z-index:99999!important}
+
+/* Mantener los bloques posteriores en una capa inferior. */
+.kpi-row.reveal,
+.main-grid.reveal,
+.bottom-grid.reveal,
+.financial-grid.reveal{
+  position:relative;
+  z-index:1!important;
+}
+
+/* Evitar que el contenedor principal recorte el desplegable en escritorio. */
+body.inicio-page .inicio-main,
+body.inicio-page .inicio-stage{
+  overflow:visible!important;
+}
+
+/* El campo híbrido adopta exactamente la geometría de los <select>. */
+.filter-search-box{
+  height:40px!important;
+  gap:7px!important;
+  padding:0 5px 0 11px!important;
+  border:1px solid #dbe4eb!important;
+  border-radius:8px!important;
+  background:#fff!important;
+  box-shadow:none!important;
+}
+.filter-search-box:focus-within{
+  border-color:rgba(var(--scope-rgb),.38)!important;
+  box-shadow:0 0 0 3px rgba(var(--scope-rgb),.06)!important;
+}
+.filter-search-box i{
+  color:#70879a!important;
+  font-size:12px!important;
+}
+.filter-search-box input{
+  height:38px!important;
+  padding:0!important;
+  color:#26435a!important;
+  font-size:11.4px!important;
+  font-weight:850!important;
+}
+.filter-search-box input::placeholder{
+  color:#7f91a0!important;
+  font-weight:750!important;
+}
+.filter-search-toggle{
+  width:30px!important;
+  height:38px!important;
+  flex-basis:30px!important;
+  border-left:0!important;
+  border-radius:6px!important;
+  color:#49677e!important;
+}
+.filter-search-toggle:hover{background:#f4f7f9!important}
+
+/* Lista: misma lectura sobria de los filtros nativos, sin tarjetas/píldoras. */
+.filter-search-dropdown{
+  top:calc(100% + 4px)!important;
+  left:0!important;
+  right:auto!important;
+  width:max(100%,360px)!important;
+  min-width:0!important;
+  border:1px solid #dbe4eb!important;
+  border-radius:8px!important;
+  background:#fff!important;
+  box-shadow:0 10px 26px rgba(31,53,75,.15),0 2px 6px rgba(31,53,75,.06)!important;
+  overflow:hidden!important;
+}
+.filter-search-dropdown__meta{display:none!important}
+.filter-search-list{
+  max-height:270px!important;
+  padding:4px 0!important;
+  background:#fff!important;
+  scrollbar-width:thin;
+  scrollbar-color:#a8b7c2 #eef3f6;
+}
+.filter-search-option{
+  min-height:36px!important;
+  grid-template-columns:48px minmax(0,1fr)!important;
+  gap:7px!important;
+  padding:5px 10px!important;
+  border-radius:0!important;
+  border-bottom:1px solid #f0f3f5!important;
+  background:#fff!important;
+}
+.filter-search-option:last-child{border-bottom:0!important}
+.filter-search-option:hover,
+.filter-search-option.is-active{
+  background:#f3f6f9!important;
+}
+.filter-search-option.is-active{
+  box-shadow:inset 3px 0 0 var(--scope-color)!important;
+}
+.filter-search-option__badge,
+.filter-search-option__badge--cui,
+.filter-search-option__badge--pliego{
+  min-width:0!important;
+  min-height:0!important;
+  padding:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:#607588!important;
+  justify-content:flex-start!important;
+  font-size:8.2px!important;
+  font-weight:950!important;
+  letter-spacing:.045em!important;
+}
+.filter-search-option__copy{gap:1px!important}
+.filter-search-option__copy strong{
+  color:#26435a!important;
+  font-size:11.2px!important;
+  line-height:1.1!important;
+  font-weight:850!important;
+}
+.filter-search-option__copy small{
+  color:#7b8d9b!important;
+  font-size:8.4px!important;
+  line-height:1.08!important;
+  font-weight:700!important;
+}
+.filter-search-empty{
+  padding:14px 12px!important;
+  font-size:10px!important;
+  color:#6f8393!important;
+}
+
+@media (max-width:900px){
+  .filter-search-dropdown{width:100%!important}
+}
+
+/* ============================================================
+   2026-09-23 · Fila ejecutiva compacta y sin espacios muertos
+   - Reduce la altura real de la primera fila.
+   - Cartera y Convenios ocupan toda su altura útil.
+   - La tabla central muestra menos filas y conserva scroll.
+   - El donut de Convenios gana diámetro y grosor.
+   ============================================================ */
+@media (min-width:1261px){
+  /* La fila principal deja de estirarse: el espacio sobrante desaparece. */
+  .inicio-stage{
+    grid-template-rows:142px 68px 88px 260px 240px 204px!important;
+  }
+  .main-grid{
+    height:260px!important;
+    min-height:260px!important;
+    max-height:260px!important;
+    align-items:stretch!important;
+  }
+
+  .main-grid > .exec-card{
+    height:260px!important;
+    min-height:260px!important;
+    max-height:260px!important;
+  }
+
+  .main-grid .exec-card__head{
+    flex:0 0 48px!important;
+    min-height:48px!important;
+    max-height:48px!important;
+    padding-top:5px!important;
+    padding-bottom:5px!important;
+  }
+
+  /* ----------------------------------------------------------
+     Situación de la cartera: el bloque superior + resumen inferior
+     encajan prácticamente al ras dentro del cuerpo disponible.
+     ---------------------------------------------------------- */
+  .card-portfolio .portfolio-content{
+    flex:1 1 0!important;
+    min-height:0!important;
+    grid-template-rows:minmax(0,1fr) auto!important;
+    padding:4px 9px 5px!important;
+    row-gap:2px!important;
+  }
+  .card-portfolio .portfolio-resource{
+    grid-template-columns:146px minmax(0,1fr)!important;
+    gap:8px!important;
+    align-items:center!important;
+    min-height:0!important;
+  }
+  .card-portfolio .donut--resource,
+  .card-portfolio .donut--resource svg{
+    width:144px!important;
+    height:144px!important;
+  }
+  .card-portfolio .resource-legend{
+    gap:5px!important;
+  }
+  .card-portfolio .resource-item{
+    min-height:50px!important;
+    padding:5px 8px!important;
+  }
+  .card-portfolio .investment-strip{
+    min-height:47px!important;
+    margin-top:0!important;
+    padding-top:5px!important;
+    gap:10px!important;
+  }
+  .card-portfolio .investment-total strong{
+    line-height:.96!important;
+  }
+
+  /* ----------------------------------------------------------
+     Déficit: la ecuación se compacta y el viewport de tabla muestra
+     solo las filas que caben. El resto permanece accesible por scroll.
+     ---------------------------------------------------------- */
+  .card-financial-gap > .financial-summary-kpis{
+    flex:0 0 68px!important;
+    min-height:68px!important;
+    max-height:68px!important;
+    padding:4px 7px 3px!important;
+  }
+  .card-financial-gap .financial-summary-kpi{
+    min-height:58px!important;
+    height:58px!important;
+    grid-template-rows:21px auto!important;
+    gap:1px!important;
+    padding:3px 5px 4px!important;
+  }
+  .card-financial-gap .financial-summary-kpi > span{
+    width:22px!important;
+    height:22px!important;
+  }
+  .card-financial-gap .financial-summary-kpi small{
+    min-height:14px!important;
+    font-size:6.8px!important;
+    line-height:1.02!important;
+  }
+  .card-financial-gap .financial-summary-kpi strong{
+    font-size:12px!important;
+  }
+  .card-financial-gap .financial-table-wrap{
+    flex:1 1 0!important;
+    height:0!important;
+    min-height:0!important;
+    padding:2px 7px 6px!important;
+  }
+  .card-financial-gap .financial-table{
+    height:100%!important;
+  }
+  .card-financial-gap .financial-table__head{
+    flex:0 0 33px!important;
+    min-height:33px!important;
+    max-height:33px!important;
+  }
+  .card-financial-gap .financial-table__body{
+    flex:1 1 0!important;
+    height:0!important;
+    min-height:0!important;
+    max-height:none!important;
+    overflow-y:auto!important;
+  }
+  .card-financial-gap .financial-row{
+    min-height:22px!important;
+    height:22px!important;
+  }
+
+  /* ----------------------------------------------------------
+     Convenios: donut protagonista, aro más grueso y leyenda de igual
+     altura para eliminar los grandes vacíos superior e inferior.
+     ---------------------------------------------------------- */
+  .card-agreements .agreements-content{
+    flex:1 1 0!important;
+    min-height:0!important;
+    grid-template-columns:178px minmax(0,1fr)!important;
+    gap:7px!important;
+    align-items:center!important;
+    padding:2px 8px 3px!important;
+  }
+  .card-agreements .donut--agreement,
+  .card-agreements .donut--agreement svg{
+    width:176px!important;
+    height:176px!important;
+  }
+  .card-agreements .donut--agreement .donut-track,
+  .card-agreements .donut--agreement .donut-seg{
+    stroke-width:27!important;
+  }
+  .card-agreements .donut-label{
+    font-size:11.5px!important;
+    font-weight:950!important;
+  }
+  .card-agreements .donut-center strong{
+    font-size:36px!important;
+  }
+  .card-agreements .donut-center span{
+    font-size:9px!important;
+  }
+  .card-agreements .agreement-list{
+    gap:4px!important;
+  }
+  .card-agreements .agreement-list > div{
+    min-height:54px!important;
+    height:54px!important;
+    padding:5px 7px!important;
+  }
+  .card-agreements .agreement-list small{
+    font-size:8.8px!important;
+  }
+  .card-agreements .agreement-list strong{
+    font-size:18px!important;
+  }
+}
+
+/* En escritorio medio se conserva la misma idea sin forzar el donut. */
+@media (max-width:1420px) and (min-width:1261px){
+  .inicio-stage{
+    grid-template-rows:142px 116px 88px 260px 240px 204px!important;
+  }
+  .card-agreements .agreements-content{
+    grid-template-columns:160px minmax(0,1fr)!important;
+  }
+  .card-agreements .donut--agreement,
+  .card-agreements .donut--agreement svg{
+    width:158px!important;
+    height:158px!important;
+  }
+  .card-agreements .donut--agreement .donut-track,
+  .card-agreements .donut--agreement .donut-seg{
+    stroke-width:26!important;
+  }
+}

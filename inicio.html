@@ -84,8 +84,8 @@
               <div class="filter-bar__lead">
                 <span><i class="ri-filter-3-line"></i></span>
                 <div>
-                  <strong>Filtros territoriales</strong>
-                  <small>Seleccione el ámbito de análisis</small>
+                  <strong>Filtros de cartera</strong>
+                  <small>Combine ámbito, ubicación y búsqueda</small>
                 </div>
               </div>
 
@@ -116,6 +116,21 @@
                 <span>Distrito</span>
                 <select id="distritoSelect"><option value="">Todos</option></select>
               </label>
+
+              <div class="filter-field filter-field--search">
+                <span>CUI / Pliego</span>
+                <div class="filter-search-combo" id="globalSearchCombo">
+                  <div class="filter-search-box">
+                    <i class="bi bi-search" aria-hidden="true"></i>
+                    <input id="globalSearchInput" type="search" autocomplete="off" placeholder="Buscar CUI o pliego" aria-label="Buscar por CUI o pliego" aria-autocomplete="list" aria-controls="globalSearchList" aria-expanded="false">
+                    <button class="filter-search-toggle" id="globalSearchToggle" type="button" aria-label="Mostrar lista de CUI y pliegos" aria-controls="globalSearchList" aria-expanded="false"><i class="bi bi-chevron-down"></i></button>
+                  </div>
+                  <div class="filter-search-dropdown" id="globalSearchDropdown" hidden>
+                    <div class="filter-search-dropdown__meta"><span id="globalSearchMeta">CUI y pliegos disponibles</span><small>Escriba para filtrar</small></div>
+                    <div class="filter-search-list" id="globalSearchList" role="listbox" aria-label="CUI y pliegos disponibles"></div>
+                  </div>
+                </div>
+              </div>
 
               <button class="filter-reset" id="resetFilters" type="button">
                 <i class="bi bi-arrow-counterclockwise"></i><span>Restablecer</span>
@@ -512,10 +527,14 @@
         </div>
         <button class="financial-modal__close" id="closePortfolioModal" type="button" aria-label="Cerrar detalle de cartera"><i class="bi bi-x-lg"></i></button>
       </header>
-      <div class="portfolio-modal__summary">
-        <div class="portfolio-modal__kpi portfolio-modal__kpi--good"><span>Totalidad de recursos</span><strong id="portfolioModalSufficient">-</strong></div>
-        <div class="portfolio-modal__kpi portfolio-modal__kpi--risk"><span>Requieren recursos</span><strong id="portfolioModalRequires">-</strong></div>
-        <div class="portfolio-modal__kpi"><span>Total IOARR</span><strong id="portfolioModalTotal">-</strong></div>
+      <div class="portfolio-modal__summary portfolio-modal__filters" aria-label="Filtros del detalle de inversiones">
+        <button class="portfolio-modal__kpi portfolio-modal__kpi--good" type="button" data-portfolio-modal-filter="sufficient" aria-pressed="false"><span>Totalidad de recursos</span><strong id="portfolioModalSufficient">-</strong><small>Ver inversiones financiadas</small></button>
+        <button class="portfolio-modal__kpi portfolio-modal__kpi--risk" type="button" data-portfolio-modal-filter="requires" aria-pressed="false"><span>Requieren recursos</span><strong id="portfolioModalRequires">-</strong><small>Ver inversiones con déficit</small></button>
+        <button class="portfolio-modal__kpi is-active" type="button" data-portfolio-modal-filter="all" aria-pressed="true"><span>Total IOARR</span><strong id="portfolioModalTotal">-</strong><small>Ver cartera completa</small></button>
+      </div>
+      <div class="modal-table-toolbar">
+        <label class="modal-table-search" for="portfolioModalSearch"><i class="bi bi-search"></i><input id="portfolioModalSearch" type="search" autocomplete="off" placeholder="Buscar por CUI o pliego" aria-label="Buscar inversiones por CUI o pliego"></label>
+        <span class="modal-table-count" id="portfolioModalResultCount">-</span>
       </div>
       <div class="portfolio-modal__table" role="table" aria-label="Detalle de la cartera filtrada">
         <div class="portfolio-table__head" role="row">
@@ -558,6 +577,10 @@
           <p><small>Déficit</small><strong id="financialModalTotalDeficit">-</strong></p>
         </div>
       </div>
+      <div class="modal-table-toolbar modal-table-toolbar--financial">
+        <label class="modal-table-search" for="financialModalSearch"><i class="bi bi-search"></i><input id="financialModalSearch" type="search" autocomplete="off" placeholder="Buscar por CUI o pliego" aria-label="Buscar déficit por CUI o pliego"></label>
+        <span class="modal-table-count" id="financialModalResultCount">-</span>
+      </div>
       <div class="financial-modal__table financial-table" role="table" aria-label="Tabla financiera expandida">
         <div class="financial-table__head" role="row">
           <span role="columnheader">CUI</span>
@@ -597,6 +620,10 @@
           <span>Canon consolidado</span><strong id="canonModalTotal">-</strong><small>Sin duplicar por inversión</small>
         </div>
       </div>
+      <div class="modal-table-toolbar modal-table-toolbar--canon">
+        <label class="modal-table-search" for="canonModalSearch"><i class="bi bi-search"></i><input id="canonModalSearch" type="search" autocomplete="off" placeholder="Buscar por CUI o pliego" aria-label="Buscar canon por CUI o pliego"></label>
+        <span class="modal-table-count" id="canonModalResultCount">-</span>
+      </div>
       <div class="canon-modal__table" role="table" aria-label="Canon por pliego">
         <div class="canon-table__head" role="row"><span>Pliego</span><span>IOARR del filtro</span><span>Estado</span><span>Canon asignado (S/.)</span></div>
         <div class="canon-table__body" id="canonRowsModal"></div>
@@ -604,6 +631,6 @@
     </section>
   </div>
 
-  <script src="js/inicio.js?v=20260922-2"></script>
+  <script src="js/inicio.js?v=20260923-3"></script>
 </body>
 </html>
