@@ -471,6 +471,16 @@ function computeModel(rows) {
     row => normalizeText(row.estado_convenio) === "NO PRESENTÓ"
   );
 
+  // El gráfico general de convenios representa toda la cartera filtrada,
+  // no solamente las inversiones que requieren recursos.
+  const allWithAgreement = rows.filter(signedAgreement);
+  const allEnTramite = rows.filter(
+    row => normalizeText(row.estado_convenio) === "EN TRÁMITE"
+  );
+  const allNoPresento = rows.filter(
+    row => normalizeText(row.estado_convenio) === "NO PRESENTÓ"
+  );
+
   const allSeleccion = rows.filter(
     row => normalizeText(row.estado_situacional).includes("PROCESO DE SELECCIÓN")
   );
@@ -482,11 +492,14 @@ function computeModel(rows) {
   const known = new Set([...allSeleccion, ...allEett]);
   const allOther = rows.filter(row => !known.has(row));
 
-  const package1 = withAgreement.filter(
+  // El campo `paquete` es la fuente autoritativa de asignación.
+  // No se condiciona a estado_convenio porque ambas columnas pueden
+  // actualizarse en momentos distintos.
+  const package1 = rows.filter(
     row => normalizeText(row.paquete) === "GRUPO 01"
   );
 
-  const package2 = withAgreement.filter(
+  const package2 = rows.filter(
     row => normalizeText(row.paquete) === "GRUPO 02"
   );
 
@@ -557,7 +570,10 @@ function computeModel(rows) {
   const financialCost = sumField(requires, "costo_actualizado");
   const financialAccrued = sumField(requires, "devengado_acumulado");
   const financialPim = sumField(requires, "pim");
-  const financialDeficit = Math.max(financialCost - financialAccrued - financialPim, 0);
+  // El déficit se consolida por CUI y luego se suma. No se recalcula
+  // restando agregados, porque la base ya contiene el déficit validado
+  // de cada inversión y los valores negativos se tratan a nivel de CUI.
+  const financialDeficit = sumDeficit(requires);
 
   // La base convertida conserva los encabezados financieros originales.
   // Se aceptan también los alias normalizados de versiones anteriores.
@@ -641,6 +657,9 @@ function computeModel(rows) {
     withoutAgreement,
     enTramite,
     noPresento,
+    allWithAgreement,
+    allEnTramite,
+    allNoPresento,
     allSeleccion,
     allEett,
     allOther,
@@ -951,62 +970,67 @@ function renderStage(model) {
 }
 
 function renderAgreements(model) {
+  const agreementTotal = model.investments;
+  const signedCount = model.allWithAgreement.length;
+  const pendingCount = model.allEnTramite.length;
+  const noneCount = model.allNoPresento.length;
+
   setDonut(
     [
       {
         element: document.getElementById("agreementDonutSigned"),
-        value: model.withAgreement.length
+        value: signedCount
       },
       {
         element: document.getElementById("agreementDonutPending"),
-        value: model.enTramite.length
+        value: pendingCount
       },
       {
         element: document.getElementById("agreementDonutNone"),
-        value: model.noPresento.length
+        value: noneCount
       }
     ],
-    model.requires.length
+    agreementTotal
   );
 
   animateNumber(
     document.getElementById("agreementDonutTotal"),
-    model.requires.length
+    agreementTotal
   );
 
   animateNumber(
     document.getElementById("agreementSignedCount"),
-    model.withAgreement.length
+    signedCount
   );
 
   animateNumber(
     document.getElementById("agreementPendingCount"),
-    model.enTramite.length
+    pendingCount
   );
 
   animateNumber(
     document.getElementById("agreementNoneCount"),
-    model.noPresento.length
+    noneCount
   );
 
   document.getElementById("agreementSignedPct").textContent =
-    `${percent(model.withAgreement.length, model.requires.length)}%`;
+    `${percent(signedCount, agreementTotal)}%`;
 
   document.getElementById("agreementPendingPct").textContent =
-    `${percent(model.enTramite.length, model.requires.length)}%`;
+    `${percent(pendingCount, agreementTotal)}%`;
 
   document.getElementById("agreementNonePct").textContent =
-    `${percent(model.noPresento.length, model.requires.length)}%`;
+    `${percent(noneCount, agreementTotal)}%`;
 
   const agreementLabelItems = [
-    { id: "agreementSignedPctDonut", value: model.withAgreement.length },
-    { id: "agreementPendingPctDonut", value: model.enTramite.length },
-    { id: "agreementNonePctDonut", value: model.noPresento.length }
+    { id: "agreementSignedPctDonut", value: signedCount },
+    { id: "agreementPendingPctDonut", value: pendingCount },
+    { id: "agreementNonePctDonut", value: noneCount }
   ];
 
   agreementLabelItems.forEach(item => {
     const element = document.getElementById(item.id);
-    if (element) element.textContent = `${percent(item.value, model.requires.length)}%`;
+    if (element) element.textContent = `${percent(item.value, agreementTotal)}%`;
   });
 
   positionDonutLabels(
@@ -1014,9 +1038,8 @@ function renderAgreements(model) {
       element: document.getElementById(item.id),
       value: item.value
     })),
-    model.requires.length
+    agreementTotal
   );
-
 }
 
 function renderResourceManagement(model) {
@@ -2366,6 +2389,7 @@ function bindInicioCrossFilters() {
 
 function renderAll(state, baseRows) {
   const territoryFiltered = filteredRows(baseRows, state);
+  const territoryModel = computeModel(territoryFiltered);
   const model = computeModel(visualFilterRows(territoryFiltered));
 
   renderScope(state, model);
@@ -2374,7 +2398,14 @@ function renderAll(state, baseRows) {
   renderPortfolioDetails(model);
   renderFinancialGap(model);
   renderAgreements(model);
-  renderResourceManagement(model);
+
+  // Al seleccionar un estado de convenio, Paquete 1 y Paquete 2 deben
+  // conservar el conteo real definido por la columna `paquete`.
+  // Los demás indicadores siguen respondiendo al filtro activo.
+  const managementModel = INICIO_VISUAL_FILTER?.type === 'agreement'
+    ? { ...model, package1: territoryModel.package1, package2: territoryModel.package2 }
+    : model;
+  renderResourceManagement(managementModel);
   renderBudget(model);
   renderCanon(model);
   renderStage(model);
