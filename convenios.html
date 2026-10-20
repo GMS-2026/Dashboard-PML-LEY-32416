@@ -49,12 +49,12 @@
                   <span class="conv-header__icon"><i class="ri-file-list-3-line"></i></span>
                   <div>
                     <div class="conv-header__eyebrow">Gestión administrativa</div>
-                    <h1 id="pageTitle">Gestión de convenios - VRAEM</h1>
+                    <h1 id="pageTitle">Gestión de convenios - Ley N.° 32416</h1>
                     <p id="pageSubtitle">Seguimiento administrativo, avance del trámite y disponibilidad documental.</p>
                   </div>
                 </div>
 
-                <span class="territory-chip" id="territoryChip">VRAEM</span>
+                <span class="territory-chip" id="territoryChip">Ley N.° 32416</span>
               </div>
 
               <div class="conv-header__actions">
@@ -66,21 +66,25 @@
             </header>
 
             <!-- FILTROS -->
-            <section class="conv-filters reveal reveal--2" aria-label="Filtros territoriales">
+            <section class="conv-filters reveal reveal--2" aria-label="Filtros de cartera">
               <div class="conv-filters__lead">
                 <span><i class="ri-filter-3-line"></i></span>
                 <div>
-                  <strong>Segmentación territorial</strong>
-                  <small>Los filtros se conservan al navegar</small>
+                  <strong>Segmentación de cartera</strong>
+                  <small>Ámbito, asociación y ubicación</small>
                 </div>
               </div>
 
               <label class="conv-filter-field">
                 <span>Ámbito</span>
                 <select id="territorioSelect">
+                  <option value="GENERAL">Cartera general - Ley 32416</option>
                   <option value="VRAEM">VRAEM</option>
                   <option value="NORVRAEM">NORVRAEM</option>
                   <option value="AMUVRAEM">AMUVRAE</option>
+                  <option value="ALCALDESAS">Asociación de Alcaldesas</option>
+                  <option value="AMUDIP">AMUDIP</option>
+                  <option value="REMURPE">REMURPE</option>
                 </select>
               </label>
 
@@ -228,7 +232,7 @@
                 <div class="table-card__actions">
                   <div class="search-box">
                     <i class="ri-search-line"></i>
-                    <input id="searchInput" type="search" placeholder="Buscar CUI, municipio, provincia o distrito">
+                    <input id="searchInput" type="search" placeholder="Buscar CUI o pliego">
                   </div>
 
                   <button class="export-btn" id="exportCsv" type="button">

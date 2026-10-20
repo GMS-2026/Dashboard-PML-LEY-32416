@@ -503,9 +503,13 @@ function computeModel(rows) {
     row => normalizeText(row.paquete) === "GRUPO 02"
   );
 
+  const package3 = rows.filter(
+    row => normalizeText(row.paquete) === "GRUPO 03"
+  );
+
   const pendingRequest = withAgreement.filter(row => {
     const packageName = normalizeText(row.paquete);
-    return packageName !== "GRUPO 01" && packageName !== "GRUPO 02";
+    return !["GRUPO 01", "GRUPO 02", "GRUPO 03"].includes(packageName);
   });
 
   const conditioned = withoutAgreement;
@@ -665,6 +669,7 @@ function computeModel(rows) {
     allOther,
     package1,
     package2,
+    package3,
     pendingRequest,
     conditioned,
     provinceDeficit,
@@ -1046,6 +1051,7 @@ function renderResourceManagement(model) {
   const groups = [
     ["routeChartPackage1Count", "routeChartPackage1Bar", "routeChartPackage1Pct", model.package1.length],
     ["routeChartPackage2Count", "routeChartPackage2Bar", "routeChartPackage2Pct", model.package2.length],
+    ["routeChartPackage3Count", "routeChartPackage3Bar", "routeChartPackage3Pct", model.package3.length],
     ["routeChartPendingCount", "routeChartPendingBar", "routeChartPendingPct", model.pendingRequest.length],
     ["routeChartConditionedCount", "routeChartConditionedBar", "routeChartConditionedPct", model.conditioned.length]
   ];
@@ -2202,8 +2208,21 @@ async function initInicio() {
   bindFilters(data, currentState());
 }
 
+function bindDashboardPrint() {
+  const button = document.getElementById("printDashboard");
+  if (!button) return;
+  button.addEventListener("click", () => {
+    document.body.classList.add("is-printing-dashboard");
+    window.requestAnimationFrame(() => window.print());
+  });
+  window.addEventListener("afterprint", () => {
+    document.body.classList.remove("is-printing-dashboard");
+  });
+}
+
 window.addEventListener("DOMContentLoaded", () => {
   bindFinancialModal();
+  bindDashboardPrint();
   initInicio().catch(error => {
     console.error("[Inicio]", error);
     document.body.classList.remove("is-loading");
@@ -2244,9 +2263,10 @@ function rowMatchesVisualFilter(row, filter = INICIO_VISUAL_FILTER) {
   }
   if (filter.type === 'management') {
     if (!needsResources(row)) return false;
-    if (filter.value === 'package1') return signedAgreement(row) && packageName === 'GRUPO 01';
-    if (filter.value === 'package2') return signedAgreement(row) && packageName === 'GRUPO 02';
-    if (filter.value === 'pending') return signedAgreement(row) && packageName !== 'GRUPO 01' && packageName !== 'GRUPO 02';
+    if (filter.value === 'package1') return packageName === 'GRUPO 01';
+    if (filter.value === 'package2') return packageName === 'GRUPO 02';
+    if (filter.value === 'package3') return packageName === 'GRUPO 03';
+    if (filter.value === 'pending') return signedAgreement(row) && !['GRUPO 01', 'GRUPO 02', 'GRUPO 03'].includes(packageName);
     if (filter.value === 'conditioned') return !signedAgreement(row);
   }
   if (filter.type === 'stage') {
@@ -2370,6 +2390,7 @@ function bindInicioCrossFilters() {
   const managementFilters = [
     { type: 'management', value: 'package1', label: 'Paquete 1 · Grupo 01' },
     { type: 'management', value: 'package2', label: 'Paquete 2 · Grupo 02' },
+    { type: 'management', value: 'package3', label: 'Paquete 3 · Grupo 03' },
     { type: 'management', value: 'pending', label: 'Por solicitar recursos' },
     { type: 'management', value: 'conditioned', label: 'Pendientes de convenio' }
   ];
@@ -2399,11 +2420,16 @@ function renderAll(state, baseRows) {
   renderFinancialGap(model);
   renderAgreements(model);
 
-  // Al seleccionar un estado de convenio, Paquete 1 y Paquete 2 deben
+  // Al seleccionar un estado de convenio, los tres paquetes deben
   // conservar el conteo real definido por la columna `paquete`.
   // Los demás indicadores siguen respondiendo al filtro activo.
   const managementModel = INICIO_VISUAL_FILTER?.type === 'agreement'
-    ? { ...model, package1: territoryModel.package1, package2: territoryModel.package2 }
+    ? {
+        ...model,
+        package1: territoryModel.package1,
+        package2: territoryModel.package2,
+        package3: territoryModel.package3
+      }
     : model;
   renderResourceManagement(managementModel);
   renderBudget(model);

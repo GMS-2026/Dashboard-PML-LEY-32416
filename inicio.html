@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/dashboard.css?v=20260911-5">
-  <link rel="stylesheet" href="css/inicio.css?v=20260922-4">
+  <link rel="stylesheet" href="css/inicio.css?v=20261007-1">
 </head>
 <body class="inicio-page is-loading">
   <div class="page-accent"></div>
@@ -29,6 +29,7 @@
             <a class="menu__item" href="convenios.html" data-nav-page="convenios.html"><i class="bi bi-file-earmark-text"></i><span>Convenios</span></a>
             <a class="menu__item" href="puentes.html" data-nav-page="puentes.html"><i class="bi bi-list-ul"></i><span>Lista de puentes</span></a>
             <a class="menu__item" href="comparativo.html" data-nav-page="comparativo.html"><i class="bi bi-bar-chart"></i><span>Comparativo</span></a>
+            <a class="menu__item" href="escenarios.html" data-nav-page="escenarios.html"><i class="bi bi-diagram-3"></i><span>Escenarios de atención</span></a>
           </nav>
 
           <div class="sidebar__footer">
@@ -73,9 +74,14 @@
               <div class="inicio-hero__visual">
                 <div class="inicio-hero__photo"></div>
                 <div class="inicio-hero__shade"></div>
-                <a class="hero-back" href="territorio.html" id="volverTerritorio">
-                  <i class="bi bi-map"></i><span>Volver a territorio</span>
-                </a>
+                <div class="hero-actions" aria-label="Acciones del dashboard">
+                  <a class="hero-back" href="territorio.html" id="volverTerritorio">
+                    <i class="bi bi-map"></i><span>Volver a territorio</span>
+                  </a>
+                  <button class="hero-print" id="printDashboard" type="button">
+                    <i class="bi bi-printer"></i><span>Imprimir</span>
+                  </button>
+                </div>
               </div>
             </header>
 
@@ -366,6 +372,11 @@
                     <div class="prep-bar"><i id="routeChartPackage2Bar"></i><span id="routeChartPackage2Pct">-</span></div>
                     <small>Paquete 2</small><em>Grupo 02</em>
                   </div>
+                  <div class="prep-item prep-item--package3">
+                    <strong id="routeChartPackage3Count">-</strong>
+                    <div class="prep-bar"><i id="routeChartPackage3Bar"></i><span id="routeChartPackage3Pct">-</span></div>
+                    <small>Paquete 3</small><em>Grupo 03</em>
+                  </div>
                   <div class="prep-item prep-item--pending">
                     <strong id="routeChartPendingCount">-</strong>
                     <div class="prep-bar"><i id="routeChartPendingBar"></i><span id="routeChartPendingPct">-</span></div>
@@ -631,6 +642,6 @@
     </section>
   </div>
 
-  <script src="js/inicio.js?v=20260923-3"></script>
+  <script src="js/inicio.js?v=20261007-1"></script>
 </body>
 </html>

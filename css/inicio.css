@@ -5966,3 +5966,181 @@ body.inicio-page .inicio-stage{
     stroke-width:26!important;
   }
 }
+
+
+/* ============================================================
+   2026-10-07 · Inicio modular: Paquete 3 + impresión estable
+   ============================================================ */
+.hero-actions{
+  position:absolute;
+  top:11px;
+  right:12px;
+  z-index:6;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:7px;
+}
+.hero-actions .hero-back{
+  position:static!important;
+  top:auto!important;
+  right:auto!important;
+}
+.hero-print{
+  min-height:34px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  padding:0 12px;
+  border:1px solid rgba(255,255,255,.92);
+  border-radius:9px;
+  background:rgba(255,255,255,.96);
+  color:#25445d;
+  font-family:inherit;
+  font-size:10px;
+  font-weight:900;
+  box-shadow:0 7px 18px rgba(23,46,67,.13);
+  cursor:pointer;
+  transition:.2s ease;
+}
+.hero-print:hover{
+  transform:translateY(-2px);
+  border-color:rgba(var(--scope-rgb),.24);
+  color:var(--scope-color);
+}
+.hero-print i{font-size:13px}
+
+/* Gestión de recursos: cinco categorías sin cambiar el resto de la fila. */
+.prep-chart--management{
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:4px!important;
+}
+.prep-chart--management .prep-bar{
+  width:34px!important;
+}
+.prep-chart--management .prep-item>strong{
+  font-size:18px!important;
+}
+.prep-chart--management .prep-item small{
+  font-size:7.6px!important;
+  line-height:1.04!important;
+}
+.prep-chart--management .prep-item em{
+  font-size:6.3px!important;
+  line-height:1.02!important;
+}
+.prep-item--package3 .prep-bar>i{
+  background:linear-gradient(180deg,#5e9fbe,#2f78a1)!important;
+}
+.prep-item--package3>strong{
+  color:#2f78a1!important;
+}
+
+/* Impresión: composición fija, independiente del viewport del navegador. */
+@page{
+  size:A3 landscape;
+  margin:6mm;
+}
+@media print{
+  html,body{
+    margin:0!important;
+    padding:0!important;
+    background:#fff!important;
+  }
+  body.inicio-page{
+    width:auto!important;
+    min-width:0!important;
+    overflow:visible!important;
+    -webkit-print-color-adjust:exact!important;
+    print-color-adjust:exact!important;
+    zoom:.78;
+  }
+  .page-accent,
+  .sidebar,
+  .hero-actions,
+  .filter-reset,
+  .filter-search-toggle,
+  .filter-search-dropdown,
+  .modal-backdrop,
+  .expanded-modal,
+  [role="dialog"]{
+    display:none!important;
+  }
+  .app-shell,
+  .dashboard-frame,
+  .dashboard,
+  .main.inicio-main{
+    width:1900px!important;
+    max-width:none!important;
+    min-width:1900px!important;
+    height:auto!important;
+    min-height:0!important;
+    margin:0!important;
+    padding:0!important;
+    overflow:visible!important;
+    box-shadow:none!important;
+    background:#fff!important;
+  }
+  .dashboard{
+    display:block!important;
+  }
+  .inicio-main{
+    margin:0!important;
+  }
+  .inicio-stage{
+    width:1900px!important;
+    min-width:1900px!important;
+    grid-template-rows:142px 68px 88px 260px 240px 204px!important;
+    gap:10px!important;
+  }
+  .inicio-hero{
+    grid-template-columns:45% 55%!important;
+  }
+  .filter-bar{
+    grid-template-columns:205px repeat(4,minmax(0,1fr)) 250px!important;
+  }
+  .kpi-row{
+    grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  }
+  .main-grid{
+    grid-template-columns:1.05fr 1.38fr .9fr!important;
+    height:260px!important;
+    min-height:260px!important;
+    max-height:260px!important;
+  }
+  .bottom-grid{
+    grid-template-columns:1.05fr .86fr .95fr 1.14fr!important;
+    min-height:240px!important;
+    height:240px!important;
+    max-height:240px!important;
+  }
+  .financial-grid{
+    grid-template-columns:30% 34% 36%!important;
+  }
+  .reveal,
+  .reveal--1,
+  .reveal--2,
+  .reveal--3,
+  .reveal--4,
+  .reveal--5{
+    opacity:1!important;
+    transform:none!important;
+    animation:none!important;
+  }
+  .exec-card,
+  .analytics-card,
+  .inicio-hero,
+  .filter-bar,
+  .kpi-row{
+    break-inside:avoid!important;
+    page-break-inside:avoid!important;
+  }
+  .filter-search-box,
+  .filter-field select{
+    background:#fff!important;
+  }
+  *{
+    transition:none!important;
+  }
+}

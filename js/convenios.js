@@ -1,27 +1,57 @@
 const TERRITORY_CONFIG = {
+  GENERAL: {
+    label: "Ley N.° 32416",
+    longLabel: "Cartera general de puentes de menores luces de la Ley N.° 32416",
+    filterFields: [],
+    accent: "#8f2641",
+    rgb: "143, 38, 65"
+  },
   VRAEM: {
     label: "VRAEM",
     longLabel: "VRAEM y zonas de influencia",
-    filterField: "es_vraem",
-    filterValue: "SI",
+    filterFields: ["es_vraem"],
     accent: "#8f2641",
     rgb: "143, 38, 65"
   },
   NORVRAEM: {
     label: "NORVRAEM",
-    longLabel: "Ámbito territorial del norte",
-    filterField: "es_norvraem",
-    filterValue: "SI",
+    longLabel: "Ámbito territorial NORVRAEM",
+    filterFields: ["es_norvraem"],
     accent: "#315f78",
     rgb: "49, 95, 120"
   },
   AMUVRAEM: {
     label: "AMUVRAE",
-    longLabel: "Mancomunidad del VRAE",
-    filterField: "es_amuvraem",
-    filterValue: "SI",
+    longLabel: "Ámbito territorial AMUVRAE",
+    filterFields: ["es_amuvraem"],
     accent: "#4f8b78",
     rgb: "79, 139, 120"
+  },
+  ALCALDESAS: {
+    label: "Asociación de Alcaldesas",
+    longLabel: "Municipalidades identificadas como integrantes de la Asociación de Alcaldesas",
+    filterFields: [
+      "ES ASOCIACIÓN DE ALCALDESAS",
+      "es_asociacion_de_alcaldesas",
+      "es_asociacion_alcaldesas",
+      "es_alcaldesas"
+    ],
+    accent: "#9a4560",
+    rgb: "154, 69, 96"
+  },
+  AMUDIP: {
+    label: "AMUDIP",
+    longLabel: "Municipalidades identificadas como integrantes de AMUDIP",
+    filterFields: ["ES AMUDIP", "es_amudip"],
+    accent: "#315f78",
+    rgb: "49, 95, 120"
+  },
+  REMURPE: {
+    label: "REMURPE",
+    longLabel: "Municipalidades identificadas como integrantes de REMURPE",
+    filterFields: ["ES REMURPE", "es_remurpe"],
+    accent: "#4f7d6e",
+    rgb: "79, 125, 110"
   }
 };
 
@@ -436,7 +466,7 @@ function selectedTerritory() {
 
   const fromStorage = normalizeText(localStorage.getItem("territorio_dashboard"));
 
-  return TERRITORY_CONFIG[fromStorage] ? fromStorage : "VRAEM";
+  return TERRITORY_CONFIG[fromStorage] ? fromStorage : "GENERAL";
 }
 
 function currentState() {
@@ -461,7 +491,10 @@ function currentState() {
       (sameTerritory ? saved.provincia || "" : ""),
     distrito:
       params.get("distrito") ??
-      (sameTerritory ? saved.distrito || "" : "")
+      (sameTerritory ? saved.distrito || "" : ""),
+    buscar:
+      params.get("buscar") ??
+      (sameTerritory ? saved.buscar || "" : "")
   };
 }
 
@@ -478,6 +511,7 @@ function queryFromState(state, extra = {}) {
   if (state.departamento) params.set("departamento", state.departamento);
   if (state.provincia) params.set("provincia", state.provincia);
   if (state.distrito) params.set("distrito", state.distrito);
+  if (state.buscar) params.set("buscar", state.buscar);
 
   Object.entries(extra).forEach(([key, value]) => {
     if (value !== null && value !== undefined && String(value) !== "") {
@@ -498,13 +532,20 @@ function updateUrl(state) {
 
 function territoryRows(data, territory) {
   const config = TERRITORY_CONFIG[territory];
+  if (!config) return [];
 
-  return data.filter(
-    row => normalizeText(row[config.filterField]) === config.filterValue
+  if (territory === "GENERAL") return data.slice();
+
+  return data.filter(row =>
+    config.filterFields.some(field =>
+      ["SI", "SÍ", "1", "TRUE"].includes(normalizeText(row[field]))
+    )
   );
 }
 
 function geographicRows(rows, state) {
+  const search = normalizeText(state.buscar || "");
+
   return rows.filter(row => {
     if (
       state.departamento &&
@@ -525,6 +566,13 @@ function geographicRows(rows, state) {
       String(row.distrito || "") !== state.distrito
     ) {
       return false;
+    }
+
+    if (search) {
+      const haystack = [row.cui, row.pliego]
+        .map(normalizeText)
+        .join(" ");
+      if (!haystack.includes(search)) return false;
     }
 
     return true;
@@ -726,6 +774,11 @@ function renderHeader(state) {
 
   document.getElementById("pageTitle").textContent =
     `Gestión de convenios - ${config.label}`;
+
+  const subtitle = document.getElementById("pageSubtitle");
+  if (subtitle) {
+    subtitle.textContent = `Seguimiento administrativo de ${config.longLabel.toLowerCase()}.`;
+  }
 
   document.getElementById("territoryChip").textContent =
     config.label;
@@ -1511,6 +1564,9 @@ function bindFilters(data, initialState) {
   const resetButton =
     document.getElementById("resetFilters");
 
+  const searchInput =
+    document.getElementById("searchInput");
+
   let state = { ...initialState };
   let baseRows =
     territoryRows(data, state.territorio);
@@ -1527,6 +1583,11 @@ function bindFilters(data, initialState) {
 
     territorioSelect.value =
       state.territorio;
+
+    if (searchInput && searchInput.value !== (state.buscar || "")) {
+      searchInput.value = state.buscar || "";
+    }
+    CURRENT_SEARCH = "";
 
     refreshFilterOptions(
       baseRows,
@@ -1545,7 +1606,8 @@ function bindFilters(data, initialState) {
       territorio: territorioSelect.value,
       departamento: "",
       provincia: "",
-      distrito: ""
+      distrito: "",
+      buscar: state.buscar || ""
     })
   );
 
@@ -1582,7 +1644,8 @@ function bindFilters(data, initialState) {
       territorio: state.territorio,
       departamento: "",
       provincia: "",
-      distrito: ""
+      distrito: "",
+      buscar: ""
     })
   );
 
@@ -1600,15 +1663,12 @@ function bindFilters(data, initialState) {
       });
     });
 
-  document
-    .getElementById("searchInput")
-    .addEventListener("input", event => {
-      CURRENT_SEARCH =
-        event.target.value.trim();
-
-      CURRENT_PAGE = 1;
-      renderTable(CURRENT_ROWS);
+  searchInput.addEventListener("input", event => {
+    apply({
+      ...state,
+      buscar: event.target.value.trim()
     });
+  });
 
   document
     .getElementById("prevPage")

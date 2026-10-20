@@ -6,9 +6,41 @@ const DOCUMENT_CONFIG = {
 };
 
 const TERRITORY_CONFIG = {
-  VRAEM: { field: 'es_vraem', label: 'VRAEM' },
-  NORVRAEM: { field: 'es_norvraem', label: 'NORVRAEM' },
-  AMUVRAEM: { field: 'es_amuvraem', label: 'AMUVRAEM' }
+  GENERAL: {
+    label: 'Ley N.° 32416',
+    longLabel: 'Cartera general de puentes de menores luces de la Ley N.° 32416',
+    fields: []
+  },
+  VRAEM: {
+    label: 'VRAEM',
+    longLabel: 'VRAEM y zonas de influencia',
+    fields: ['es_vraem']
+  },
+  NORVRAEM: {
+    label: 'NORVRAEM',
+    longLabel: 'Ámbito territorial NORVRAEM',
+    fields: ['es_norvraem']
+  },
+  AMUVRAEM: {
+    label: 'AMUVRAE',
+    longLabel: 'Ámbito territorial AMUVRAE',
+    fields: ['es_amuvraem']
+  },
+  ALCALDESAS: {
+    label: 'Asociación de Alcaldesas',
+    longLabel: 'Municipalidades integrantes de la Asociación de Alcaldesas',
+    fields: ['ES ASOCIACIÓN DE ALCALDESAS', 'es_asociacion_de_alcaldesas', 'es_asociacion_alcaldesas', 'es_alcaldesas']
+  },
+  AMUDIP: {
+    label: 'AMUDIP',
+    longLabel: 'Municipalidades integrantes de AMUDIP',
+    fields: ['ES AMUDIP', 'es_amudip']
+  },
+  REMURPE: {
+    label: 'REMURPE',
+    longLabel: 'Municipalidades integrantes de REMURPE',
+    fields: ['ES REMURPE', 'es_remurpe']
+  }
 };
 
 const state = {
@@ -16,7 +48,7 @@ const state = {
   rows: [],
   currentIndex: 0,
   currentRow: null,
-  territory: 'VRAEM',
+  territory: 'GENERAL',
   filters: { departamento: '', provincia: '', distrito: '' },
   photoManifest: { rootFolder: '', apiUrl: '', items: {} },
   photos: [],
@@ -207,7 +239,7 @@ function getTerritory() {
   if (TERRITORY_CONFIG[fromUrl]) return fromUrl;
   const fromStorage = normalizeText(localStorage.getItem('territorio_dashboard'));
   if (TERRITORY_CONFIG[fromStorage]) return fromStorage;
-  return 'VRAEM';
+  return 'GENERAL';
 }
 
 function readFilters() {
@@ -215,19 +247,44 @@ function readFilters() {
   return {
     departamento: cleanText(p.get('departamento')),
     provincia: cleanText(p.get('provincia')),
-    distrito: cleanText(p.get('distrito'))
+    distrito: cleanText(p.get('distrito')),
+    buscar: cleanText(p.get('buscar'))
   };
 }
 
+function rowHasTerritory(row, territory) {
+  const cfg = TERRITORY_CONFIG[territory];
+  if (!cfg) return false;
+  if (territory === 'GENERAL') return true;
+
+  return cfg.fields.some(field =>
+    ['SI', 'SÍ', '1', 'TRUE'].includes(normalizeText(row?.[field]))
+  );
+}
+
 function rowMatchesTerritory(row) {
-  const cfg = TERRITORY_CONFIG[state.territory];
-  return normalizeText(row?.[cfg.field]) === 'SI';
+  return rowHasTerritory(row, state.territory);
+}
+
+function rowSegmentations(row) {
+  const memberships = ['VRAEM', 'NORVRAEM', 'AMUVRAEM', 'ALCALDESAS', 'AMUDIP', 'REMURPE']
+    .filter(key => rowHasTerritory(row, key))
+    .map(key => TERRITORY_CONFIG[key].label);
+
+  return memberships.length
+    ? memberships.join(' · ')
+    : 'Cartera general - Ley N.° 32416';
 }
 
 function rowMatchesFilters(row) {
   if (state.filters.departamento && normalizeText(row.region) !== normalizeText(state.filters.departamento)) return false;
   if (state.filters.provincia && normalizeText(row.provincia) !== normalizeText(state.filters.provincia)) return false;
   if (state.filters.distrito && normalizeText(row.distrito) !== normalizeText(state.filters.distrito)) return false;
+  if (state.filters.buscar) {
+    const query = normalizeText(state.filters.buscar);
+    const haystack = [row.cui, row.pliego].map(normalizeText).join(' ');
+    if (!haystack.includes(query)) return false;
+  }
   return true;
 }
 
@@ -304,6 +361,7 @@ function currentUrlParams(row = state.currentRow) {
   if (state.filters.departamento) p.set('departamento', state.filters.departamento);
   if (state.filters.provincia) p.set('provincia', state.filters.provincia);
   if (state.filters.distrito) p.set('distrito', state.filters.distrito);
+  if (state.filters.buscar) p.set('buscar', state.filters.buscar);
   return p;
 }
 
@@ -350,7 +408,7 @@ function renderTabsData(row) {
   setText('detailLat', numberValue(row.latitud) !== null ? Number(row.latitud).toFixed(7) : '-');
   setText('detailLon', numberValue(row['LONGITUD.1']) !== null ? Number(row['LONGITUD.1']).toFixed(7) : '-');
   setText('detailPliego', toTitleCase(row.pliego) || '-');
-  setText('detailScope', row.ambito_vraem ? toTitleCase(row.ambito_vraem) : '-');
+  setText('detailScope', rowSegmentations(row));
 
   setText('detailCost', formatMoney(row.costo_actualizado));
   setText('detailPim', formatMoney(row.pim));
@@ -376,6 +434,8 @@ function renderRecord(row) {
   updateHistory(row);
   preserveLinks();
 
+  const scopeConfig = TERRITORY_CONFIG[state.territory] || TERRITORY_CONFIG.GENERAL;
+  setText('bridgeScopeLabel', `Ficha de inversión · ${scopeConfig.label}`);
   setText('bridgeName', bridgeName(row));
   setText('bridgeSubtitle', `${toTitleCase(row.distrito)}, ${toTitleCase(row.provincia)} · ${toTitleCase(row.region)} · CUI ${row.cui}`);
 
@@ -884,7 +944,8 @@ function readFilters() {
   const filters = {
     departamento: cleanText(p.get('departamento')) || (sameTerritory ? cleanText(saved.departamento) : ''),
     provincia: cleanText(p.get('provincia')) || (sameTerritory ? cleanText(saved.provincia) : ''),
-    distrito: cleanText(p.get('distrito')) || (sameTerritory ? cleanText(saved.distrito) : '')
+    distrito: cleanText(p.get('distrito')) || (sameTerritory ? cleanText(saved.distrito) : ''),
+    buscar: cleanText(p.get('buscar')) || (sameTerritory ? cleanText(saved.buscar) : '')
   };
 
   try {
@@ -892,7 +953,8 @@ function readFilters() {
       territorio: territory,
       departamento: filters.departamento,
       provincia: filters.provincia,
-      distrito: filters.distrito
+      distrito: filters.distrito,
+      buscar: filters.buscar
     }));
   } catch (_) {}
 
@@ -912,5 +974,12 @@ function preserveLinks() {
   });
 
   const back = document.getElementById('backToMap');
-  if (back) back.href = `mapa.html?${baseParams.toString()}`;
+  if (back) {
+    const mapEnabled = ['VRAEM', 'NORVRAEM', 'AMUVRAEM'].includes(state.territory);
+    back.href = `${mapEnabled ? 'mapa.html' : 'inicio.html'}?${baseParams.toString()}`;
+    const label = back.querySelector('span');
+    if (label) label.textContent = mapEnabled ? 'Volver al mapa' : 'Volver a Inicio';
+    const icon = back.querySelector('i');
+    if (icon) icon.className = `bi ${mapEnabled ? 'bi-arrow-left' : 'bi-house-door'}`;
+  }
 }
