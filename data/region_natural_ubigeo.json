@@ -1,0 +1,2504 @@
+[
+  {
+    "ubigeo": "010109",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "010116",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "010120",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "010204",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "010206",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "010307",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "010501",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "010503",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "010514",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "010515",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "010519",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "010601",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "010603",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "010604",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "010605",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "010606",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "010607",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "010608",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "010701",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "010705",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "010707",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "020102",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "020106",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "020108",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "020109",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "020110",
+    "region_natural": "COSTA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "020112",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "020204",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "020301",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "020402",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "020509",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "020602",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "020605",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "020609",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "020701",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "020703",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "020802",
+    "region_natural": "COSTA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "020804",
+    "region_natural": "COSTA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "021004",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "021009",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "021011",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "021015",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "021201",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "021203",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "021207",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "021305",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "021401",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "021602",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "021603",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "021701",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "021703",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "021905",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "021906",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "021908",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "021909",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "022006",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "022008",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "030210",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "030214",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "030401",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "030602",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "030606",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "030610",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "030701",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "030702",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "030705",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "030706",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "030708",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "030709",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050102",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050105",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050108",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050201",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050203",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050206",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050301",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050304",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050401",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050403",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050404",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050405",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050406",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050408",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050410",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050412",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050413",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050501",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050507",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050608",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050611",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050612",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050617",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050618",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050701",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050704",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050708",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050801",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050802",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050807",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050901",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "050903",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "051012",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "051101",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "051104",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "051108",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060101",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060102",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060103",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060106",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060107",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060109",
+    "region_natural": "COSTA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060111",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060112",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060201",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060202",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060203",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060204",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060301",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060308",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060309",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060407",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060418",
+    "region_natural": "COSTA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060501",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060506",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060608",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060609",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060610",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060612",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060703",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060805",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060808",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060809",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060902",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060903",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060904",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060905",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060906",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "060907",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "061006",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "061007",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "061102",
+    "region_natural": "COSTA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "061103",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "061106",
+    "region_natural": "COSTA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "061107",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "061108",
+    "region_natural": "COSTA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "061109",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "061110",
+    "region_natural": "COSTA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "061111",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "061201",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "061204",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "061302",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "061304",
+    "region_natural": "COSTA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "061310",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "061311",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "080308",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "080403",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "080407",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "080408",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "080504",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "080508",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "080802",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "080805",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "080902",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "080906",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "080907",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "080918",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "081101",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "081104",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "090106",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "090113",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "090201",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "090208",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "090301",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "090304",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "090307",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "090309",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "090312",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "090407",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "090409",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "090411",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "090502",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "090503",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "090509",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "090510",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "090614",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "090615",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "090701",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "090704",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "090709",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "090714",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "090716",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "090717",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "090718",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "090721",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "090724",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "090725",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100103",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100105",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100106",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100108",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100109",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100110",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100111",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100113",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100201",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100203",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100204",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100206",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100207",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100208",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100301",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100307",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100401",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100402",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100404",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100501",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100504",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100601",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100602",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100603",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100604",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100605",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100607",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100608",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100610",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100701",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100702",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100704",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100705",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100801",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100803",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100901",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100902",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100903",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100904",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "100905",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "101001",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "101003",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "101006",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "101105",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "101106",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "110404",
+    "region_natural": "COSTA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "120124",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "120132",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "120133",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "120135",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "120201",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "120204",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "120205",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "120214",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "120215",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "120305",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "120404",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "120415",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "120601",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "120602",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "120603",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "120604",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "120605",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "120606",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "120607",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "120608",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "120609",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "120701",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "120706",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "120804",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "120807",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "120809",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "120909",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "130106",
+    "region_natural": "COSTA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "130108",
+    "region_natural": "COSTA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "130201",
+    "region_natural": "COSTA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "130202",
+    "region_natural": "COSTA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "130303",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "130401",
+    "region_natural": "COSTA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "130501",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "130601",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "130605",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "130608",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "130611",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "130613",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "130701",
+    "region_natural": "COSTA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "130705",
+    "region_natural": "COSTA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "130801",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "130802",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "130808",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "130810",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "130811",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "130902",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "130904",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "131001",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "131002",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "131004",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "131005",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "131007",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "131104",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "140111",
+    "region_natural": "COSTA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "140116",
+    "region_natural": "COSTA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "140117",
+    "region_natural": "COSTA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "140204",
+    "region_natural": "COSTA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "140308",
+    "region_natural": "COSTA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "150501",
+    "region_natural": "COSTA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "150510",
+    "region_natural": "COSTA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "150708",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "150721",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "150801",
+    "region_natural": "COSTA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "150808",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "150809",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "150811",
+    "region_natural": "COSTA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "150901",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "151001",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "151020",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "151030",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "151031",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "151032",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "160201",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "160202",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "160211",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "160601",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "160605",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "160606",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "170102",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "170103",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "170104",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "170302",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "170303",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "180204",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "190101",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "190102",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "190106",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "190110",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "190201",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "190207",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "190208",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "190301",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "190304",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "190305",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "190306",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "190307",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "190308",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "200101",
+    "region_natural": "COSTA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "200301",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "200307",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "200401",
+    "region_natural": "COSTA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "200403",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210104",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210109",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210113",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210114",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210115",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210201",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210203",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210204",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210206",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210208",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210209",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210211",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210212",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210214",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210301",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210405",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210501",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210505",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210603",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210702",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210708",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210709",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210710",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210801",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210803",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210804",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210805",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210806",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210807",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210808",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "210901",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "211001",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "211003",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "211005",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "211103",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "211104",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "211201",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "211202",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "211205",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "211208",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "211210",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "211301",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "211305",
+    "region_natural": "SIERRA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "220101",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "220104",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "220204",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "220301",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "220405",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "220506",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "220602",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "220708",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "220709",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "220801",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "220803",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "220804",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "220807",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "220808",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "220906",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "220911",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "220913",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "221001",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "221003",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "221005",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "221006",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "240102",
+    "region_natural": "COSTA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "250101",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "250104",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "250201",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "250202",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "250302",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "250305",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  },
+  {
+    "ubigeo": "250306",
+    "region_natural": "SELVA",
+    "fuente": "INEI UBIGEO 2022 (1891 distritos), copia tabular AcFallen/aws-ubigeo",
+    "estado": "clasificado por cruce distrital exacto"
+  }
+]
