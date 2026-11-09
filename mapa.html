@@ -8,15 +8,13 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
 <link href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet"/>
 <link crossorigin="" href="https://tile.openstreetmap.org" rel="preconnect"/>
-
 <link crossorigin="" href="https://lh3.googleusercontent.com" rel="preconnect"/>
 <link crossorigin="" href="https://drive.google.com" rel="preconnect"/>
 <link crossorigin="" href="https://script.google.com" rel="preconnect"/>
-
 <link href="css/base.css" rel="stylesheet"/>
 <link href="css/dashboard.css?v=20260911-4" rel="stylesheet"/>
 <link href="css/mapa.css?v=20260914-28" rel="stylesheet"/>
-<link crossorigin="" href="https://a.basemaps.cartocdn.com" rel="preconnect"/><link crossorigin="" href="https://server.arcgisonline.com" rel="preconnect"/><link crossorigin="" href="https://api.open-meteo.com" rel="preconnect"/></head>
+<link crossorigin="" href="https://a.basemaps.cartocdn.com" rel="preconnect"/><link crossorigin="" href="https://server.arcgisonline.com" rel="preconnect"/><link crossorigin="" href="https://api.open-meteo.com" rel="preconnect"/><link href="css/navegacion.css?v=20261106-unificado" rel="stylesheet"/></head>
 <body class="map-page">
 <div class="page-accent"></div>
 <div class="app-shell">
@@ -27,11 +25,12 @@
 <img alt="Provías Descentralizado" class="sidebar__logo" src="img/logos/logo-pvdes.png"/>
 </div>
 <nav class="menu">
-<a class="menu__item" data-preserve-territory="" href="inicio.html"><i class="bi bi-house-door"></i><span>Inicio</span></a>
-<a class="menu__item menu__item--active" data-preserve-territory="" href="mapa.html"><i class="bi bi-map"></i><span>Mapa</span></a>
-<a class="menu__item" data-preserve-territory="" href="convenios.html"><i class="bi bi-file-earmark-text"></i><span>Convenios</span></a>
-<a class="menu__item" data-preserve-territory="" href="puentes.html"><i class="bi bi-list-ul"></i><span>Lista de puentes</span></a>
-<a class="menu__item" data-preserve-territory="" href="comparativo.html"><i class="bi bi-bar-chart"></i><span>Comparativo</span></a>
+<a title="Inicio" class="menu__item" data-preserve-territory="" href="inicio.html"><i class="bi bi-house-door"></i><span>Inicio</span></a>
+<a title="Mapa" class="menu__item menu__item--active" data-preserve-territory="" href="mapa.html"><i class="bi bi-map"></i><span>Mapa</span></a>
+<a title="Convenios" class="menu__item" data-preserve-territory="" href="convenios.html"><i class="bi bi-file-earmark-text"></i><span>Convenios</span></a>
+<a title="Lista de puentes" class="menu__item" data-preserve-territory="" href="puentes.html"><i class="bi bi-list-ul"></i><span>Lista de puentes</span></a>
+<a title="Comparativo" class="menu__item" data-preserve-territory="" href="comparativo.html"><i class="bi bi-bar-chart"></i><span>Comparativo</span></a>
+<a title="Descargar datos" class="menu__item" href="descargas.html"><i class="bi bi-file-earmark-arrow-down"></i><span>Descargar datos</span></a>
 </nav>
 <div class="sidebar__footer">
 <p class="sidebar__footer-label">Unidad responsable</p>
@@ -54,6 +53,7 @@
 <div class="map-compact-field map-compact-field--scope" id="territorioField">
 <label for="territorioSelect">Ámbito</label>
 <select id="territorioSelect">
+<option value="PERU">Todo el Perú</option>
 <option value="VRAEM">VRAEM</option>
 <option value="NORVRAEM">NORVRAEM</option>
 <option value="AMUVRAEM">AMUVRAE</option>
@@ -127,10 +127,6 @@
 <strong id="mapAreaHoverName">Ubicación</strong>
 <small id="mapAreaHoverPath"></small>
 </div>
-
-
-
-
 <div class="map-basemap-credit" id="mapBasemapCredit">Mapa cartográfico detallado</div>
 </div>
 <div class="map-overlay-card map-overlay-card--territory">
@@ -268,7 +264,6 @@
 </div>
 </aside>
 </section>
-
 </main>
 </div>
 </div>

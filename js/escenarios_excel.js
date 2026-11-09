@@ -227,5 +227,39 @@
     link.download = config.filename; document.body.appendChild(link); link.click(); link.remove();
     setTimeout(() => URL.revokeObjectURL(url), 5000);
   }
-  window.ESCExcel = { download, build, buildDetailOnly };
+  // Exportación de consulta personalizada, independiente de Escenarios.
+  function buildCustom(config) {
+    strings.clear(); sharedValues.length = 0;
+    const heads = config.headers || [];
+    const lines = config.rows || [];
+    const maxCol = col(Math.max(0, heads.length - 1));
+    const title = config.title || 'Consulta de inversiones · Ley 32416';
+    const made = [row(1, [cell(1, 0, title, 1)], 34),
+      row(2, [cell(2, 0, `Registros: ${lines.length} · Fuente: Base maestra actualizada · Cálculo: Costo - PIM 2026 - Devengado acumulado 2025 - PIA 2027`)], 30),
+      row(4, heads.map((h, i) => cell(4, i, h, 3)), 30)];
+    for (let i = 0; i < lines.length; i++) {
+      made.push(row(5+i, heads.map((h,j) => cell(5+i,j,lines[i][j],0)), 24));
+    }
+    const ws = worksheet(`A1:${maxCol}${Math.max(5,4+lines.length)}`, views(1,4),
+      heads.map(h => Math.min(42,Math.max(13,String(h).length*.75+6))), made,
+      [`A1:${maxCol}1`,`A2:${maxCol}2`],
+      `<autoFilter ref="A4:${maxCol}${Math.max(5,4+lines.length)}"/>`);
+    const types = `<?xml version="1.0" encoding="UTF-8"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+      <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/>
+      <Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>
+      <Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>
+      <Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>
+      <Override PartName="/xl/sharedStrings.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml"/></Types>`;
+    const rels = `<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`;
+    const book = `<?xml version="1.0" encoding="UTF-8"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Inversiones consultadas" sheetId="1" r:id="rId1"/></sheets></workbook>`;
+    const links = `<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/sharedStrings" Target="sharedStrings.xml"/></Relationships>`;
+    return writeZip([['[Content_Types].xml',types],['_rels/.rels',rels],['xl/workbook.xml',book],['xl/_rels/workbook.xml.rels',links],['xl/styles.xml',styles],['xl/sharedStrings.xml',sharedXml()],['xl/worksheets/sheet1.xml',ws]]);
+  }
+  function downloadCustom(config) {
+    const blob = buildCustom(config), url = URL.createObjectURL(blob);
+    const a = document.createElement('a');a.href=url;a.download=config.filename||'inversiones_ley32416.xlsx';
+    document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),8000);
+  }
+
+  window.ESCExcel = { download, build, buildDetailOnly, buildCustom, downloadCustom };
 })();

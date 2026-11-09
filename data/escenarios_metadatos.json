@@ -1,0 +1,41 @@
+{
+  "version": "2026-11-05-v15",
+  "alcance": "Módulo Escenarios de atención · Ley 32416",
+  "observacion": "Los archivos entregados tienen nombres de indicadores, pero no consignan metadatos acreditados de fuente y año para cada serie. No se presume verificación oficial.",
+  "unidades_analisis": {
+    "cui": "Datos técnicos, presupuesto, costo y brecha de la inversión",
+    "ubigeo_intervencion": "Distrito donde se ubica la intervención, para pobreza, agricultura, riesgo y características distritales",
+    "ubigeo_ue": "Unidad ejecutora/pliego que administra el canon; la misma asignación no debe repetirse por CUI",
+    "provincia_intervencion": "Agregación y restricción de inversiones en el territorio"
+  },
+  "campos": [
+    {"campo":"RANKING POBREZA","unidad":"posición","nivel":"distrital","preferencia":"menor ranking = mayor pobreza","uso_ahp":"sí, una vez configurado por usuario","año":null,"fuente":"dato suministrado por el usuario, fuente primaria pendiente de acreditación"},
+    {"campo":"QUINTIL POBREZA","unidad":"categoría ordinal 1 a 5","nivel":"distrital","uso_ahp":"no, duplicaría la dimensión ranking","año":null,"fuente":"dato suministrado por el usuario"},
+    {"campo":"AREA AGRICOLA","unidad":"hectáreas (por validar)","nivel":"distrital","uso_ahp":"sí, por elección expresa; normalización logarítmica exploratoria","año":null,"fuente":"dato suministrado por el usuario, verificación MIDAGRI pendiente"},
+    {"campo":"PORCENTAJE AREA AGRICOLA CON RESPECTO A LA PROVINCIA","unidad":"proporción 0–1","nivel":"distrital","uso_ahp":"no simultáneamente con área agrícola","año":null,"fuente":"dato suministrado por el usuario"},
+    {"campo":"NIVEL DE RIESGO POR INUNDACIONES","unidad":"bajo/medio/alto/muy alto","nivel":"distrital","uso_ahp":"opcional y explícito","año":null,"fuente":"indicador CENEPRED contenido en el JSON, metodología/año pendientes de adjuntar"},
+    {"campo":"NIVEL DE RIESGO POR MOVIMIENTOS DE MASA","unidad":"bajo/medio/alto/muy alto","nivel":"distrital","uso_ahp":"opcional y explícito","año":null,"fuente":"indicador CENEPRED contenido en el JSON, metodología/año pendientes de adjuntar"},
+    {"campo":"DECLARATORIA DE EMERGENCIA PCM","unidad":"sí/no","nivel":"CUI vinculado a distrito","uso_ahp":"no, condición normativa independiente","año":null,"fuente":"indicador suministrado por el usuario; norma/fecha/vigencia no embebidas en el JSON"},
+    {"campo":"POBLACION DISTRITAL","unidad":"personas","nivel":"distrital","uso_ahp":"no, contexto","año":null,"fuente":"dato suministrado por el usuario"},
+    {"campo":"VIVIENDAS DISTRITALES","unidad":"viviendas","nivel":"distrital","uso_ahp":"no, contexto","año":null,"fuente":"dato suministrado por el usuario"},
+    {"campo":"INFRAESTRUCTURA VIAL DISTRITAL","unidad":"pendiente de confirmar, posiblemente kilómetros","nivel":"distrital","uso_ahp":"no, contexto","año":null,"fuente":"dato suministrado por el usuario"},
+    {"campo":"CANON","unidad":"soles","nivel":"pliego identificado por UBIGEO UE + nombre","uso_ahp":"no, recurso financiero y filtro separado","año":null,"fuente":"dato suministrado por el usuario; disponibilidad presupuestal no acreditada"},
+    {"campo":"deficit","unidad":"soles","nivel":"CUI","uso_ahp":"no, restricción financiera","año":null,"fuente":"dato suministrado por el usuario"},
+    {"campo":"PIA 2027","unidad":"soles","nivel":"CUI","uso_ahp":"no, visible en ficha; no se descuenta automáticamente del déficit","año":2027,"fuente":"dato suministrado por el usuario"}
+  ],
+  "metodologia_ahp_exploratoria": {
+    "jerarquia":"Pobreza / Potencial agrícola / Riesgo CENEPRED, con inundación y movimientos en masa como subcriterios de una sola dimensión de riesgo",
+    "normalizacion_pobreza":"1 - (ranking - minimo_fijo) / (maximo_fijo - minimo_fijo)",
+    "normalizacion_agricultura":"ln(1 + hectareas) / ln(1 + maximo_fijo)",
+    "normalizacion_riesgo":"Bajo=0; Medio=0.5; Alto=0.85; Muy alto=1; valores heurísticos no institucionales",
+    "consistencia":"Cálculo de razón de consistencia (RC); alerta si RC > 0.10",
+    "agregacion_juicios":"media geométrica de las matrices de comparación de especialistas registrados",
+    "cautela":"Riesgo territorial CENEPRED puede incorporar variables sociales; evitar doble ponderación sin sustento"
+  },
+  "modelo_presupuestal": {
+    "descripcion":"Heurística de ganancia marginal por sol, NO un solucionador MILP ni un óptimo global garantizado",
+    "restricciones":"déficit residual, presupuesto global, agrupaciones por pliego, provincia o distrito, PCM, canon y controles territoriales/costos activados",
+    "sin_faccionamiento":true,
+    "canon":"máximo importe registrado por pliego, limitado al déficit, con reparto compartido entre CUI y porcentaje decidido por el usuario"
+  }
+}

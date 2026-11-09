@@ -7,6 +7,7 @@
    ========================================================= */
 
 const TERRITORY_CONFIG = {
+  PERU: { label: 'Todo el Perú', field: null, color: '#991735' },
   VRAEM: { label: 'VRAEM', field: 'es_vraem', color: '#991735' },
   NORVRAEM: { label: 'NORVRAEM', field: 'es_norvraem', color: '#153f5b' },
   AMUVRAEM: { label: 'AMUVRAE', field: 'es_amuvraem', color: '#0c8a60' }
@@ -139,7 +140,8 @@ function sumDeficit(rows) {
 }
 
 function rowHasCoordinates(row) {
-  return numberValue(row.latitud) !== null && numberValue(row['LONGITUD.1']) !== null;
+  const lat=numberValue(row.latitud), lon=numberValue(row['LONGITUD.1']);
+  return lat!==null && lon!==null && lat>-19 && lat<1 && lon>-83 && lon<-67;
 }
 
 function rowLatLng(row) {
@@ -149,6 +151,7 @@ function rowLatLng(row) {
 function normalizeTerritoryKey(value) {
   const key = normalizeText(value);
   if (key === 'AMUVRAE') return 'AMUVRAEM';
+  if (key === 'GENERAL' || key === 'TODO EL PERU') return 'PERU';
   return TERRITORY_CONFIG[key] ? key : '';
 }
 
@@ -159,6 +162,7 @@ function territoryLabel(key = app.territory) {
 
 function territoryRows(data, territory = app.territory) {
   const config = TERRITORY_CONFIG[territory];
+  if (!config || !config.field) return data;
   return data.filter(row => normalizeText(row[config.field]) === 'SI');
 }
 
@@ -230,7 +234,7 @@ function selectedTerritory() {
   if (shared) return shared;
 
   const fallback = normalizeTerritoryKey(localStorage.getItem('territorio_dashboard'));
-  return fallback || 'VRAEM';
+  return fallback || 'PERU';
 }
 
 function initialHierarchy() {
@@ -1756,11 +1760,12 @@ async function initMapPage() {
     loadJson('data/territorio-provincias.geojson', { cache: 'force-cache' }).catch(() => null),
     loadJson(PHOTO_MANIFEST_URL, { cache: 'force-cache' }).catch(() => ({ rootFolder: '', apiUrl: '', items: {} }))
   ]);
-  app.data = data;
+  app.data = data.map(row => ({...row,region:row.region||row.REGION||'',denominacion_inversion:row.denominacion_inversion||row['DENOMINACION DE LA INVERSION']||''}));
   app.localDistrictGeo = await loadCompleteDistrictGeo(app.data, districtGeo);
   app.localProvinceGeo = provinceGeo;
   app.photoManifest = photoManifest || { rootFolder: '', apiUrl: '', items: {} };
   app.territoryRows = territoryRows(app.data, app.territory);
+  console.info('[Mapa general] Puntos georreferenciados válidos:', app.territoryRows.filter(rowHasCoordinates).length, 'de', app.territoryRows.length);
   rebuildIndexes();
   rebuildFeatureIndex();
   applyTerritoryTheme();
